@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplicationProject.Controllers
 {
-    public class Event : Controller
+    public class EventController : Controller
     {
         // GET: Event
         public ActionResult Index()
