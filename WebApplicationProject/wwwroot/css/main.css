@@ -1,5 +1,5 @@
-* {
-    margin: 0 ;
+﻿* {
+    margin: 0 auto;
     padding: 0;
     border: 0;
     outline: 0;
@@ -17,13 +17,11 @@ html {
     background-size: cover;
     display: table;
 }
-main{
-    overflow-x:hidden;
-}
-    .box:nth-child(1) {
 
-        background-image: url('https://img.hotimg.com/halfpic.jpeg');
-        background-position: 0 50%;
+    .box:nth-child(1) {
+        background-color: rgba(102, 102, 102, 0.5);
+        background-image: url('https://img.hotimg.com/halfpic.jpeg'),url('https://img.hotimg.com/Frame-16.png');
+        background-position: 0 50%,100% 50%;
         background-size: 50% 100%;
         background-repeat: no-repeat;
         align-items: center;
@@ -33,9 +31,9 @@ main{
     }
 
     .box:nth-child(2) {
-        background-image: url('https://img.hotimg.com/Rectangle-8.jpeg');
+        background-image: url('https://img.hotimg.com/Rectangle-8.jpeg'),url('https://img.hotimg.com/Frame-16.png');
         position: relative;
-        background-position: 0 50%;
+        background-position: 0 50%,100% 50%;
         background-size: 50% 100%;
         background-repeat: no-repeat;
         align-items: center;
@@ -44,10 +42,15 @@ main{
     }
 
     .box:nth-child(3) {
+        background-image: url('https://img.hotimg.com/Frame-16.png');
         position: relative;
+        background-position: 100% 50%;
+        background-size: 60% 100%;
+        background-repeat: no-repeat;
+        align-items: center;
+        justify-content: center;
         overflow: hidden;
     }
-
 
 .first-text-container {
     position: relative;
@@ -65,7 +68,8 @@ img {
     height: 100%;
     margin-top: 0;
     margin-left: 51%;
-
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
 }
 
 .button-section1 {
@@ -212,27 +216,19 @@ a:link {
 }
 
 .section3-container {
-    position: absolute;
-    background-color:white;
-    width:40%;
-    height:100%;
-    
+    position: relative;
+    top: 20vh;
+    left: 5vw;
 }
 
-.section3-content{
-    position:absolute;
-    margin-top:160px;
-    margin-left:70px;
-    
-}
-.section3-container p {
-    position: absolute;
-    width: 30vw;
-    padding-top: 2vh;
-    font-size: 1.2vw;
-    text-align: justify;
-    text-indent: 50px;
-}
+    .section3-container p {
+        position: absolute;
+        width: 30vw;
+        padding-top: 2vh;
+        font-size: 1.2vw;
+        text-align: justify;
+        text-indent: 50px;
+    }
 
 .header3 {
     font-size: 6vw;
@@ -436,13 +432,13 @@ a:link {
 
     .paragraph2 {
         width: 60vw;
-        left: 20vw;
+        left: 3vw;
         font-size: 2vw;
     }
 
     .flex-container {
         width: 60vw;
-        left: 20vw;
+        left: 7vw;
         justify-content: center;
         align-items: center;
         background-color: rgba(0,0,0,0.2);
