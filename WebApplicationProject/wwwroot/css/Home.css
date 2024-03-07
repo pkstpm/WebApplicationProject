@@ -17,7 +17,7 @@ html {
     background-size: cover;
     display: table;
 }
-main{
+body {
     overflow-x:hidden;
 }
     .box:nth-child(1) {
