@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model WebApplicationProject.Models.Event
+
+<head>
+    <title>Event Details</title>
+</head>
+    <h1>@Model.Title</h1>
+    <p>Activity Time: @Model.ActivityTime</p>
+    <p>Expire Time: @Model.ExpireTime</p>
+    <p>Location: @Model.Location</p>
+    <p>Detail: @Model.Detail</p>
+    <p>Contact: @Model.Contact</p>
+    <p>Is Open: @Model.IsOpen</p>
+    <p>Capacity: @Model.Capacity</p>
+    <p>Amount: @Model.Amount</p>
+    <p>Owner: @Model.User.UserName</p>
+<h2>Attendees:</h2>
+@if (Model.UserEvents != null)
+{
+    <ul>
+        @foreach (var userEvent in Model.UserEvents)
+        {
+            @if (userEvent.IsJoin == true)
+            {
+                <li>@userEvent.User.UserName</li>
+            }
+        }
+    </ul>
+}
+else
+{
+    <p>No user events found for this event.</p>
+}

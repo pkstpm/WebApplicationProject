@@ -32,7 +32,7 @@
         @foreach (var item in Model.MyEvents)
         {
             <tr>
-                <td>@item.Title</td>
+                <td><a asp-controller="Event" asp-action="Index" asp-route-id="@item.Id">@item.Title</a></td>
                 <td>@item.Category</td>
                 <td>@item.ActivityTime</td>
                 <td>@item.ExpireTime</td>
@@ -81,7 +81,7 @@
         @foreach (var item in Model.JoinedEvents)
         {
             <tr>
-                <td>@item.Title</td>
+                <td><a asp-controller="Event" asp-action="Index" asp-route-id="@item.Id">@item.Title</a></td>
                 <td>@item.Category</td>
                 <td>@item.ActivityTime</td>
                 <td>@item.ExpireTime</td>
@@ -94,7 +94,12 @@
                 <td>@item.UserID</td>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <td></td>
+                    <td>
+                        <form asp-action="Quit" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-primary">Quit</button>
+                        </form>
+                    </td>
                 }
                 else
                 {
@@ -127,7 +132,7 @@
         @foreach (var item in Model.OtherEvents)
         {
             <tr>
-                <td>@item.Title</td>
+                <td><a asp-controller="Event" asp-action="Index" asp-route-id="@item.Id">@item.Title</a></td>
                 <td>@item.Category</td>
                 <td>@item.ActivityTime</td>
                 <td>@item.ExpireTime</td>

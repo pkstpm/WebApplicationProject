@@ -60,6 +60,11 @@
     <button type="submit" class="btn btn-primary">Edit</button>
 </form>
 
+<form asp-action="Close" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-primary">Close</button>
+</form>
+
 <form asp-action="Delete" method="post">
     <input type="hidden" name="id" value="@Model.Id" />
     <button type="submit" class="btn btn-primary">Delete</button>
