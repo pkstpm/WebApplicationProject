@@ -1,0 +1,104 @@
+.login-container {
+    position: relative;
+    display: flex;
+    .basketball-pic
+
+{
+    position: absolute;
+    height: 100vh;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    color: white;
+    opacity: 1;
+    cursor: pointer;
+    position: absolute;
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem; /* 32px */
+    padding-left: 36px;
+    font-weight: 500;
+    transition: 1s;
+}
+
+    .back-button:hover {
+        transform: scale(1.1)
+    }
+
+.arrow {
+    padding-right: 10px
+}
+
+.form-container {
+    padding-left: 870px;
+    padding-top: 100px;
+
+       .pad-b{
+                 padding-bottom : 4px;
+             }
+
+    h1
+{
+    font-weight: 700;
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem; /* 40px */
+}
+p {
+    color: rgb(107 114 128);
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+}
+
+.inp-container {
+    display: flex;
+    flex-direction: column;
+    padding-right: 2rem;
+    height: fit-content;
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+    font-weight: 400;
+}
+input {
+    width: 200px;
+    height: 30px;
+    border-radius: 0.375rem; /* 6px */
+    border-color: none;
+    border: none;
+}
+
+.first-row{
+    display : flex;
+    padding-bottom : 4px;
+    
+}
+
+.sec-row{
+    padding-bottom : 1rem;
+}
+
+#password{
+    width : 99%;
+}
+#confirm {
+    width: 99%;
+}
+
+.sub-button {
+    border-radius: 0.375rem; /* 6px */
+    width: 93%;
+    height: 50px;
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+    cursor: pointer;
+    color: rgb(255 255 255);
+    background-color: rgba(110, 190, 186, 1);
+    border : none;
+}
+    .sub-button:hover {
+        background-color: rgb(156 163 175);
+    }
+}
+}
