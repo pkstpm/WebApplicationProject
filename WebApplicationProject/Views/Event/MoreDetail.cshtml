@@ -1,0 +1,50 @@
+﻿@model WebApplicationProject.Models.Event
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="card px-4 py-3 ra">
+    <h1 class="card-title">@Model.Title</h1>
+    <div class="card-text my-4">
+        <p>@Model.ActivityTime</p>
+        <p>@Model.ExpireTime</p>
+        <p>@Model.Location</p>
+        <p>@Model.Contact</p>
+    </div>
+    <h2>Detail</h2>
+    <p class="mx-5 my-3">@Model.Detail</p>
+    
+    <!-- Display Comments -->
+    <h2 class="my-2">Comments</h2>
+    @if (Model.Comments != null && Model.Comments.Any())
+    {
+        <ul>
+            @foreach (var comment in Model.Comments)
+            {
+                <li>
+                    <div>
+                        <strong>@comment.User.UserName</strong> - @comment.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
+                    </div>
+                    <div>
+                        @comment.Detail
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No comments yet.</p>
+    }
+
+    <!-- Comment Form -->
+    <form method="post" asp-controller="Event" asp-action="AddComment">
+        @Html.AntiForgeryToken() 
+        <input type="hidden" name="eventId" value="@Model.Id" /> 
+        <input type="text" class="my-2" name="detail" placeholder="Enter your comment here" />
+        <button type="submit" class="btn btn-primary">Submit Comment</button>
+    </form>
+</div>
+

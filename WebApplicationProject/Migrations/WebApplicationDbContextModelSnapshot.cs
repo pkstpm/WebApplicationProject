@@ -241,6 +241,9 @@ namespace WebApplicationProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Detail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -258,7 +261,7 @@ namespace WebApplicationProject.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("WebApplicationProject.Models.Event", b =>
@@ -309,7 +312,7 @@ namespace WebApplicationProject.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Event");
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("WebApplicationProject.Models.UserEvent", b =>
@@ -336,7 +339,7 @@ namespace WebApplicationProject.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("UserEvent");
+                    b.ToTable("UserEvents");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -392,7 +395,7 @@ namespace WebApplicationProject.Migrations
 
             modelBuilder.Entity("WebApplicationProject.Models.Comment", b =>
                 {
-                    b.HasOne("WebApplicationProject.Models.Event", null)
+                    b.HasOne("WebApplicationProject.Models.Event", "Event")
                         .WithMany("Comments")
                         .HasForeignKey("EventId");
 
@@ -401,6 +404,8 @@ namespace WebApplicationProject.Migrations
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Event");
 
                     b.Navigation("User");
                 });

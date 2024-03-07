@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using WebApplicationProject.Areas.Identity.Data;
 using WebApplicationProject.Models;
 
@@ -12,6 +13,12 @@ public class WebApplicationDbContext : IdentityDbContext<ApplicationUser>
         : base(options)
     {
     }
+
+    public DbSet<Event> Events { get; set; }
+
+    public DbSet<UserEvent> UserEvents { get; set; }
+
+    public DbSet<Comment> Comments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -28,8 +35,12 @@ public class WebApplicationDbContext : IdentityDbContext<ApplicationUser>
 
         modelBuilder.Entity<UserEvent>()
             .HasOne(ue => ue.Event)
-            .WithMany(e => e.UserEvents)
+           .WithMany(e => e.UserEvents)
             .HasForeignKey(ue => ue.EventID)
             .OnDelete(DeleteBehavior.Restrict);
+
+
+
+
     }
 }
