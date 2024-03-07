@@ -92,14 +92,15 @@
                 <td>@item.Capacity</td>
                 <td>@item.Amount</td>
                 <td>@item.UserID</td>
-                @if (SignInManager.IsSignedIn(User))
-                {
+                    @if (SignInManager.IsSignedIn(User))
+                    {
                     <td></td>
-                }
-                else
-                {
+                    }
+                    else
+                    {
                     <td></td>
-                }
+                    }
+                <td><a class="card text-decoration-none m-4" asp-controller="Event" asp-action="MoreDetail" asp-route-id="@item.Id">Link @item.Id</a></td>
             </tr>
         }
     </tbody>

@@ -9,6 +9,7 @@ using WebApplicationProject.Data;
 using WebApplicationProject.Models;
 using WebApplicationProject.ViewModel;
 
+
 namespace WebApplicationProject.Controllers
 {
     public class EventController : Controller
@@ -178,7 +179,60 @@ namespace WebApplicationProject.Controllers
 
         }
 
+        // GET: Event/MoreDetail
+        public async Task<IActionResult> MoreDetail(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var @event = await _context.Events
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            // Load comments associated with the event
+            @event.Comments = await _context.Comments
+                .Where(c => c.EventId == id)
+                .Include(c => c.User)
+                .OrderByDescending(c => c.CreatedAt)
+                .ToListAsync();
+
+            return View(@event);
+        }
+
+        // POST: Event/AddComment
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddComment(Guid eventId, string detail)
+        {
+            if (string.IsNullOrEmpty(detail))
+            {
+                return RedirectToAction("MoreDetail", new { id = eventId });
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound(); // Or redirect to login page if user is not authenticated
+            }
+
+            var comment = new Comment
+            {
+                UserID = user.Id,
+                EventId = eventId,
+                Detail = detail,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.Comments.Add(comment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("MoreDetail", new { id = eventId });
+        }
     }
-
-
 }
