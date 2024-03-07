@@ -1,0 +1,162 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Microsoft.AspNetCore.Identity
+@using WebApplicationProject.Areas.Identity.Data
+
+@model WebApplicationProject.ViewModel.AllEventViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<h2>My Event</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Activity Time</th>
+            <th>Expire Time</th>
+            <th>Location</th>
+            <th>Detail</th>
+            <th>Contact</th>
+            <th>Is Open</th>
+            <th>Capacity</th>
+            <th>Amount</th>
+            <th>User ID</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MyEvents)
+        {
+            <tr>
+                <td><a asp-controller="Event" asp-action="Index" asp-route-id="@item.Id">@item.Title</a></td>
+                <td>@item.Category</td>
+                <td>@item.ActivityTime</td>
+                <td>@item.ExpireTime</td>
+                <td>@item.Location</td>
+                <td>@item.Detail</td>
+                <td>@item.Contact</td>
+                <td>@item.IsOpen</td>
+                <td>@item.Capacity</td>
+                <td>@item.Amount</td>
+                <td>@item.UserID</td>
+                @if (SignInManager.IsSignedIn(User) && UserManager.GetUserId(User) == item.UserID)
+                {
+                    <td>
+                        <a asp-controller="Event" asp-action="Edit" asp-route-id="@item.Id">
+                            Edit
+                        </a>
+                    </td>
+                }
+                else {
+                    <td></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Join Event</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Activity Time</th>
+            <th>Expire Time</th>
+            <th>Location</th>
+            <th>Detail</th>
+            <th>Contact</th>
+            <th>Is Open</th>
+            <th>Capacity</th>
+            <th>Amount</th>
+            <th>User ID</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.JoinedEvents)
+        {
+            <tr>
+                <td><a asp-controller="Event" asp-action="Index" asp-route-id="@item.Id">@item.Title</a></td>
+                <td>@item.Category</td>
+                <td>@item.ActivityTime</td>
+                <td>@item.ExpireTime</td>
+                <td>@item.Location</td>
+                <td>@item.Detail</td>
+                <td>@item.Contact</td>
+                <td>@item.IsOpen</td>
+                <td>@item.Capacity</td>
+                <td>@item.Amount</td>
+                <td>@item.UserID</td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <td>
+                        <form asp-action="Quit" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-primary">Quit</button>
+                        </form>
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Other</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Activity Time</th>
+            <th>Expire Time</th>
+            <th>Location</th>
+            <th>Detail</th>
+            <th>Contact</th>
+            <th>Is Open</th>
+            <th>Capacity</th>
+            <th>Amount</th>
+            <th>User ID</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OtherEvents)
+        {
+            <tr>
+                <td><a asp-controller="Event" asp-action="Index" asp-route-id="@item.Id">@item.Title</a></td>
+                <td>@item.Category</td>
+                <td>@item.ActivityTime</td>
+                <td>@item.ExpireTime</td>
+                <td>@item.Location</td>
+                <td>@item.Detail</td>
+                <td>@item.Contact</td>
+                <td>@item.IsOpen</td>
+                <td>@item.Capacity</td>
+                <td>@item.Amount</td>
+                <td>@item.UserID</td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <td>
+                        <form asp-action="Join" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-primary">Join</button>
+                        </form>
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

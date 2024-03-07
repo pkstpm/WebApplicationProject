@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationProject.Areas.Identity.Data;
 using WebApplicationProject.Data;
+using WebApplicationProject.Service;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("WebApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'WebApplicationDbContextConnection' not found.");
 
@@ -18,6 +19,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
 });
+
+builder.Services.AddHostedService<ExpiredEventChecker>();
 
 var app = builder.Build();
 
