@@ -64,7 +64,7 @@ namespace WebApplicationProject.Controllers
                 .Include(c => c.User)
                 .OrderByDescending(c => c.CreatedAt)
                 .ToListAsync();
-
+                
                 return View("Event", @event);
             }
             throw new Exception("Can't find Event");
@@ -145,7 +145,6 @@ namespace WebApplicationProject.Controllers
                         ActivityTime = @event.ActivityTime,
                         ExpireTime = @event.ExpireTime,
                         Capacity = @event.Capacity,
-                        IsOpen = @event.IsOpen
                     };
                     return View(model);
                 }
@@ -258,7 +257,6 @@ namespace WebApplicationProject.Controllers
                         IsJoin = true
                     };
 
-
                     _context.UserEvents.Add(userevent); 
                     await _context.SaveChangesAsync();
 
@@ -272,7 +270,6 @@ namespace WebApplicationProject.Controllers
                 }
                 throw new Exception("This Event is full");
             }
-
             throw new Exception("This Event is close");
         }
 
