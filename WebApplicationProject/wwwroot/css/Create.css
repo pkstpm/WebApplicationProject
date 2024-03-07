@@ -146,6 +146,13 @@ i {
     display: flex;
     font-size: 30px;
     outline: none;
+
+}
+
+.show-box::-webkit-outer-spin-button,
+.show-box::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .btn-num {
