@@ -8,7 +8,7 @@ namespace WebApplicationProject.ViewModel
     {
 
         [Required(ErrorMessage = "Title is required.")]
-        public string Title { get; set; }
+        public required string Title { get; set; }
 
         [Required(ErrorMessage = "Category is required.")]
         public Category Category { get; set; }
@@ -23,18 +23,14 @@ namespace WebApplicationProject.ViewModel
         public DateTime ExpireTime { get; set; }
 
         [Required(ErrorMessage = "Location is required.")]
-        public string Location { get; set; }
+        public required string Location { get; set; }
 
         [Required(ErrorMessage = "Detail is required.")]
-        public string Detail { get; set; }
+        public required string Detail { get; set; }
 
-        public string Contact { get; set; }
+        public required string Contact { get; set; }
 
         public int Capacity { get; set; }
-
-        public ICollection<UserEvent> UserEvents { get; set; } = new List<UserEvent>();
-
-        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 
     public class FutureDateAttribute : ValidationAttribute
