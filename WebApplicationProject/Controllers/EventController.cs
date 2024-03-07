@@ -137,7 +137,6 @@ namespace WebApplicationProject.Controllers
                         ActivityTime = @event.ActivityTime,
                         ExpireTime = @event.ExpireTime,
                         Capacity = @event.Capacity,
-                        IsOpen = @event.IsOpen
                     };
                     return View(model);
                 }
