@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using WebApplicationProject.Areas.Identity.Data;
 using WebApplicationProject.Data;
 using WebApplicationProject.Models;
 using WebApplicationProject.ViewModel;
+
 
 namespace WebApplicationProject.Controllers
 {
@@ -56,7 +58,13 @@ namespace WebApplicationProject.Controllers
             var @event = await _context.Events.Include(e => e.User).Include(e => e.UserEvents).ThenInclude(ue => ue.User).FirstOrDefaultAsync(e => e.Id == Id);
 
             if (@event != null)
-            { 
+            {
+                @event.Comments = await _context.Comments
+                .Where(c => c.EventId == Id)
+                .Include(c => c.User)
+                .OrderByDescending(c => c.CreatedAt)
+                .ToListAsync();
+                
                 return View("Event", @event);
             }
             throw new Exception("Can't find Event");
@@ -137,7 +145,6 @@ namespace WebApplicationProject.Controllers
                         ActivityTime = @event.ActivityTime,
                         ExpireTime = @event.ExpireTime,
                         Capacity = @event.Capacity,
-                        IsOpen = @event.IsOpen
                     };
                     return View(model);
                 }
@@ -250,7 +257,6 @@ namespace WebApplicationProject.Controllers
                         IsJoin = true
                     };
 
-
                     _context.UserEvents.Add(userevent); 
                     await _context.SaveChangesAsync();
 
@@ -264,7 +270,6 @@ namespace WebApplicationProject.Controllers
                 }
                 throw new Exception("This Event is full");
             }
-
             throw new Exception("This Event is close");
         }
 
@@ -302,8 +307,10 @@ namespace WebApplicationProject.Controllers
                 _context.Events.Remove(@event);
                 var userevents = await _context.UserEvents.Where(ue => ue.EventID == @event.Id).ToListAsync();
                 _context.UserEvents.RemoveRange(userevents);
+                var comments = await _context.Comments.Where(c => c.EventId == Id).ToListAsync();
+                _context.Comments.RemoveRange(comments);
                 await _context.SaveChangesAsync();
-                
+
                 return RedirectToAction("Index", "Home");
             }
 
@@ -311,7 +318,36 @@ namespace WebApplicationProject.Controllers
 
         }
 
+        // POST: Event/AddComment
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddComment(Guid eventId, string detail)
+        {
+            var @event = await _context.Events.Include(e => e.User).Include(e => e.UserEvents).ThenInclude(ue => ue.User).FirstOrDefaultAsync(e => e.Id == eventId);
+            var user = await _userManager.GetUserAsync(User);
+
+            if (@event == null || user == null)
+            {
+                return NotFound();
+            }
+
+            if (string.IsNullOrEmpty(detail))
+            {
+                return RedirectToAction("Index", "Event", new { id = eventId });
+            }
+
+            var comment = new Comment
+            {
+                UserID = user.Id,
+                EventId = eventId,
+                Detail = detail,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.Comments.Add(comment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Event", new { id = eventId });
+        }
     }
-
-
 }

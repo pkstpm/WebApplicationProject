@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "Signup";
+}
+
+<link rel="stylesheet" href="~/css/signup.css" asp-append-version="true" />
+<link href="~/font-awesome/css/all.css" rel="stylesheet" />
+<link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
+
+<div class="login-container">
+    <div>
+        <div>
+            <img src="~/images/basketball.png" class="basketball-pic" />
+        </div>
+        
+            <button class="back-button">
+                <i class="fa-solid fa-chevron-left arrow"></i>
+                <p>BACK</p>
+            </button>
+        
+    </div>
+    <div class="form-container">
+        <h1>Get Started Now</h1>
+        <p>Create your account, wish you have great time.</p>
+        <div>
+            <form>
+                <div class="first-row">
+                    <div class="inp-container">
+                        <label for="fname">First name</label>
+                        <input type="text" id="fname" name="fname" maxlength="20">
+                    </div>
+                    <div class="inp-container">
+                        <label for="lname">Last name</label>
+                        <input type="text" id="lname" name="lname" maxlength="20">
+                    </div>
+                </div>
+                <div class="first-row">
+                    <div class="inp-container">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" maxlength="20">
+                    </div>
+                    <div class="inp-container">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" maxlength="20">
+                    </div>
+                </div>
+                <div class ="sec-row">
+                    <div class="pad-b">
+                        <div class="inp-container">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" maxlength="20">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="inp-container">
+                            <label for="confirm">Confirm Password</label>
+                            <input type="password" id="confirm" name="confirm" maxlength="20">
+                        </div>
+                    </div>
+                </div>
+                
+                   
+                
+                <div>
+                    <button class="sub-button">
+                        Sign up
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+

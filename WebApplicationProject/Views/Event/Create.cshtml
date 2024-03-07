@@ -10,68 +10,53 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create Event</h1>
+<link rel="stylesheet" href="~/css/Create.css" asp-append-version="true" />
 
 <form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="Title" class="control-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
+<div class="almarai-bold wrapper">
+    <div class="back-page">
+        <i class="fa-solid fa-chevron-left fa-2xl"></i>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Category" class="control-label"></label>
-        <select asp-for="Category" class="form-control">
-            <option value="Aerobic">Aerobic</option>
-            <option value="Badminton">Badminton</option>
-            <option value="Basketball">Basketball</option>
-            <option value="Bicycle">Bicycle</option>
-            <option value="Football">Football</option>
-            <option value="Futsal">Futsal</option>
-            <option value="Skateboard">Skateboard</option>
-            <option value="Swimming">Swimming</option>
-            <option value="Volleyball">Volleyball</option>
-            <option value="Other">Other</option>
-        </select>
-        <span asp-validation-for="Category" class="text-danger"></span>
+    <h1>Create Your Event</h1>
+    <div class="text-container">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" type="text" class="text-box" required>
+        <label class="custom-select" asp-for="Category">
+            Category
+            <select asp-for="Category" required>
+                <option value="Aerobic">Aerobic</option>
+                <option value="Badminton">Badminton</option>
+                <option value="Basketball">Basketball</option>
+                <option value="Bicycle">Bicycle</option>
+                <option value="Football">Football</option>
+                <option value="Futsal">Futsal</option>
+                <option value="Skateboard">Skateboard</option>
+                <option value="Swimming">Swimming</option>
+                <option value="Volleyball">Volleyball</option>
+                <option value="Other">Other</option>
+            </select>
+        </label>
+        <div class="time-container">
+            <label class="label-time" asp-for="ActivityTime">Activity Time</label>
+            <input type="datetime-local" class="time-box" asp-for="ActivityTime" required />
+        </div>
+        <div class="time-container">
+            <label class="label-time" asp-for="ExpireTime">Expire Time</label>
+            <input type="datetime-local" class="time-box" asp-for="ExpireTime" required />
+        </div>
+        <label asp-for="Location" class="location-label">Location</label>
+        <input type="text" class="text-box" asp-for="Location" required />
+        <label asp-for="Detail">Detail</label>
+        <input type="text" class="text-box" asp-for="Detail" required />
+        <label asp-for="Contact">Contact</label>
+        <input type="text" class="text-box" asp-for="Contact" required />
     </div>
-
-    <div class="form-group">
-        <label asp-for="ActivityTime" class="control-label"></label>
-        <input asp-for="ActivityTime" class="form-control" />
-        <span asp-validation-for="ActivityTime" class="text-danger"></span>
+    <div class="almarain-bold footer">
+        <p>Number of Opening</p>
+        <input asp-for="Capacity" class="show-box" id="people-count" value="1"/>
+        <input type="button" class="btn-num" id="btn-down" value="-" />
+        <input type="button" class="btn-num" id="btn-up" value="+" />
+        <button type="submit" id="create-submit" name="submit" value="SUBMIT">SUBMIT</button>
     </div>
-
-    <div class="form-group">
-        <label asp-for="ExpireTime" class="control-label"></label>
-        <input asp-for="ExpireTime" class="form-control" />
-        <span asp-validation-for="ExpireTime" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Location" class="control-label"></label>
-        <input asp-for="Location" class="form-control" />
-        <span asp-validation-for="Location" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Detail" class="control-label"></label>
-        <input asp-for="Detail" class="form-control" />
-        <span asp-validation-for="Detail" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Contact" class="control-label"></label>
-        <input asp-for="Contact" class="form-control" />
-        <span asp-validation-for="Contact" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Capacity" class="control-label"></label>
-        <input asp-for="Capacity" class="form-control" />
-        <span asp-validation-for="Capacity" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Create</button>
+</div>
 </form>
-

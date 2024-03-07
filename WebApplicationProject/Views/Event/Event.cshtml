@@ -36,3 +36,34 @@ else
 {
     <p>No user events found for this event.</p>
 }
+
+<!-- Display Comments -->
+<h2 class="my-2">Comments</h2>
+@if (Model.Comments != null && Model.Comments.Any())
+{
+    <ul>
+        @foreach (var comment in Model.Comments)
+        {
+            <li>
+                <div>
+                    <strong>@comment.User.UserName</strong> - @comment.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
+                </div>
+                <div>
+                    @comment.Detail
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No comments yet.</p>
+}
+
+<!-- Comment Form -->
+<form method="post" asp-controller="Event" asp-action="AddComment">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="eventId" value="@Model.Id" />
+    <input type="text" class="my-2" name="detail" placeholder="Enter your comment here" />
+    <button type="submit" class="btn btn-primary">Submit Comment</button>
+</form>
