@@ -9,14 +9,6 @@ body {
     position: relative;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
-    color: black;
-}
-
 header {
     display: flex;
     justify-content: space-between;

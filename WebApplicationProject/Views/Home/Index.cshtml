@@ -1,103 +1,103 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Home Page";
 }
 
 <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
 
-<main>
-        <section class="section1 box">
-            <img id="img-firstPage" src="https://img.hotimg.com/371418579_240735351767786_5158566336021747775_n-1-removebg-preview-1.png"/>
-            <div class="first-text-container">
-                <div class="almarai-bold header"> 
-                    <p>Do you have a group</p>
-                    <p>of friends to play</p>
-                    <p>sports with?</p>
-                </div>
-                <div class="almarai-bold paragraph">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-                <button class="almarai-bold button-section1"  onclick="msg()">Get started</button>
+    <main>
+    <section class="section1 box">
+        <img id="img-firstPage" src="https://img.hotimg.com/371418579_240735351767786_5158566336021747775_n-1-removebg-preview-1.png"/>
+        <div class="first-text-container">
+            <div class="almarai-bold header"> 
+                <p>Do you have a group</p>
+                <p>of friends to play</p>
+                <p>sports with?</p>
             </div>
-        </section>
-        <section class="section2 box">
-            <img id="img-section2" src="https://img.hotimg.com/fbplayer.png"/>
-            <div class="almarai-extrabold text-behind">
-                <p class="lineUp" id="text-behind1">FOOTBALL</p>
-                <p class="lineUp" id="text-behind2">FOOTBALL</p>
-                <p class="lineUp" id="text-behind3">FOOTBALL</p> 
-                <p class="lineUp" id="text-behind4">FOOTBALL</p>
-                <p class="lineUp" id="text-behind5">FOOTBALL</p>
-                <p class="lineUp" id="text-behind6">FOOTBALL</p>
+            <div class="almarai-bold paragraph">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
-            <div class="section2-container">
-                <div class="almarai-extrabold header2">
-                    <p>What would you like to play?</p>
+            <button class="almarai-bold button-section1"  onclick="msg()">Get started</button>
+        </div>
+    </section>
+    <section class="section2 box">
+        <img id="img-section2" src="https://img.hotimg.com/fbplayer.png"/>
+        <div class="almarai-extrabold text-behind">
+            <p class="lineUp" id="text-behind1">FOOTBALL</p>
+            <p class="lineUp" id="text-behind2">FOOTBALL</p>
+            <p class="lineUp" id="text-behind3">FOOTBALL</p> 
+            <p class="lineUp" id="text-behind4">FOOTBALL</p>
+            <p class="lineUp" id="text-behind5">FOOTBALL</p>
+            <p class="lineUp" id="text-behind6">FOOTBALL</p>
+        </div>
+        <div class="section2-container">
+            <div class="almarai-extrabold header2">
+                <p>What would you like to play?</p>
+            </div>
+            <div class="almarai-bold paragraph2">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="flex-container">
+                <div class="img-catagory-box" onmouseover="changeImage(1)"> 
+                    <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools.png" alt="aerobic-pic"/><p class="almarai-bold">Aerobic</p></a>
                 </div>
-                <div class="almarai-bold paragraph2">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div class="img-catagory-box" onmouseover="changeImage(3)">
+                    <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-5.png" alt="badminton-pic"/><p class="almarai-bold">Badminton</p></a>
                 </div>
-                <div class="flex-container">
-                    <div class="img-catagory-box" onmouseover="changeImage(1)"> 
-                        <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools.png" alt="aerobic-pic"/><p class="almarai-bold">Aerobic</p></a>
-                    </div>
-                    <div class="img-catagory-box" onmouseover="changeImage(3)">
-                        <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-5.png" alt="badminton-pic"/><p class="almarai-bold">Badminton</p></a>
-                    </div>
-                    <div class="img-catagory-box" onmouseover="changeImage(2)">
-                        <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-2.png" alt="basketball-pic"/><p class="almarai-bold">Basketball</p></a>
-                    </div>
-                    <div class="img-catagory-box" onmouseover="changeImage(4)">
-                        <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-3.png" alt="bicycle-pic"/><p class="almarai-bold">Bicycle</p></a>
-                    </div>
-                    <div class="img-catagory-box" onmouseover="changeImage(5)">
-                        <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-4.png" alt="football-pic"/><p class="almarai-bold">Football</p></a>
-                    </div>
-                    <div class="img-catagory-box" onmouseover="changeImage(7)">
-                        <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-8.png" alt="futsal-pic"/><p class="almarai-bold">Futsal</p></a>
-                    </div>
-                    <div class="img-catagory-box" onmouseover="changeImage(8)">
-                        <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-7.png" alt="skateboard-pic"/><p class="almarai-bold">Skateboard</p></a>
-                    </div>
-                    <div class="img-catagory-box" onmouseover="changeImage(9)" >
-                        <a href="#"><img class="img-catagory" src="https://img.hotimg.com/output-onlinepngtools-6.png" alt="swimming-pic"/><p class="almarai-bold">Swimming</p></a>
-                    </div>
-                    <div class="img-catagory-box" onmouseover="changeImage(6)">
-                        <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-1.png" alt="volleyball-pic"/><p class="almarai-bold">Volleyball</p></a>
-                    </div>
-                    <div class="img-catagory-box" onmouseover="changeImage(10)">
-                        <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-9.png" alt="other-pic"/><p class="almarai-bold" style="left:15px">Other</p></a>
-                    </div>
+                <div class="img-catagory-box" onmouseover="changeImage(2)">
+                    <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-2.png" alt="basketball-pic"/><p class="almarai-bold">Basketball</p></a>
+                </div>
+                <div class="img-catagory-box" onmouseover="changeImage(4)">
+                    <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-3.png" alt="bicycle-pic"/><p class="almarai-bold">Bicycle</p></a>
+                </div>
+                <div class="img-catagory-box" onmouseover="changeImage(5)">
+                    <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-4.png" alt="football-pic"/><p class="almarai-bold">Football</p></a>
+                </div>
+                <div class="img-catagory-box" onmouseover="changeImage(7)">
+                    <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-8.png" alt="futsal-pic"/><p class="almarai-bold">Futsal</p></a>
+                </div>
+                <div class="img-catagory-box" onmouseover="changeImage(8)">
+                    <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-7.png" alt="skateboard-pic"/><p class="almarai-bold">Skateboard</p></a>
+                </div>
+                <div class="img-catagory-box" onmouseover="changeImage(9)" >
+                    <a href="#"><img class="img-catagory" src="https://img.hotimg.com/output-onlinepngtools-6.png" alt="swimming-pic"/><p class="almarai-bold">Swimming</p></a>
+                </div>
+                <div class="img-catagory-box" onmouseover="changeImage(6)">
+                    <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-1.png" alt="volleyball-pic"/><p class="almarai-bold">Volleyball</p></a>
+                </div>
+                <div class="img-catagory-box" onmouseover="changeImage(10)">
+                    <a href="#"><img class="img-catagory"  src="https://img.hotimg.com/output-onlinepngtools-9.png" alt="other-pic"/><p class="almarai-bold" style="left:15px">Other</p></a>
                 </div>
             </div>
+        </div>
 
-        </section>
-        <section class="section3 box">
-            <div class="section3-container">
-                <div class="almarai-bold section3-content">
-                    <h2>About us | Our team</h2>
-                    <h1 class="header3">Made for</h1>
-                    <h1 class="header3 gradient-word">what?</h1>
-                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-                </div>
+    </section>
+    <section class="section3 box">
+        <div class="section3-container">
+            <div class="almarai-bold section3-content">
+                <h2>About us | Our team</h2>
+                <h1 class="header3">Made for</h1>
+                <h1 class="header3 gradient-word">what?</h1>
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
             </div>
-            <div class="profile-flex-container">
-                <div class="box-profile">
-                     <p class="almarai-bold">Pongsapat <br />Kiatthamarat<br />65010660</p>
-                </div>
-                <div class="box-profile">
-                    <p class="almarai-bold">Phitchayut <br />Jansom<br />65010740</p>
-                 </div>
-                <div class="box-profile">
-                    <p class="almarai-bold">Pon <br />Chuenjitsiri<br />65010794</p>
-                </div>
-                <div class="box-profile">
-                    <p class="almarai-bold">Pattarachai <br />Wannasuntad<br />65010815</p>
-                </div>
-                <div class="box-profile">
-                    <p class="almarai-bold">Phuwapat <br />Jaisin<br />65010869</p>
-                </div>
+        </div>
+        <div class="profile-flex-container">
+            <div class="box-profile">
+                    <p class="almarai-bold">Pongsapat <br />Kiatthamarat<br />65010660</p>
             </div>
+            <div class="box-profile">
+                <p class="almarai-bold">Phitchayut <br />Jansom<br />65010740</p>
+                </div>
+            <div class="box-profile">
+                <p class="almarai-bold">Pon <br />Chuenjitsiri<br />65010794</p>
+            </div>
+            <div class="box-profile">
+                <p class="almarai-bold">Pattarachai <br />Wannasuntad<br />65010815</p>
+            </div>
+            <div class="box-profile">
+                <p class="almarai-bold">Phuwapat <br />Jaisin<br />65010869</p>
+            </div>
+        </div>
 
 
-        </section>
-    </main>
+    </section>
+</main>
