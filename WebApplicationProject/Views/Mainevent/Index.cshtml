@@ -1,0 +1,345 @@
+﻿
+@{
+    ViewData["Title"] = "Mainevent";
+}
+
+<link rel="stylesheet" href="~/css/mainevent.css" asp-append-version="true" />
+<link href="~/font-awesome/css/all.css" rel="stylesheet" />
+<link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
+
+
+
+<div>
+    <div class="mainevent-container">
+        <div class="filter-container" id="filter-container">
+            <button id="filter-button">
+                    FILTER
+                </button>
+                <div id="filter-content">
+                <button>
+                    Latest
+                </button>
+                <button>
+                    Oldest
+                </button>
+                <button>
+                    Maximum
+                </button>
+                <button>
+                    Minimum
+                </button>
+                <button>
+                    Date
+                </button>
+                </div>
+               
+                
+            
+        </div>
+        <div class="card-container">
+            <h1>
+                EVENTS
+            </h1>
+            <div class="card" >
+                <div class="card-content">
+                    <div class="subject">
+                        <button id="openmodal">
+                            Football Stadium2
+                        </button>
+                        <i class="fa-solid fa-user"></i>
+                        <p>7/21</p>
+                        <i class="fa-solid fa-address-card pad"></i>
+                    </div>
+                    <div class="detail-container">
+                        <div class="detail-content">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <p>Feb 24,2023</p>
+                        </div>
+                        <div class="detail-content">
+                            <i class="fa-solid fa-house-chimney"></i>
+                            <p>Staduim 2</p>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="detail-content pad-10">
+                        <i class="fa-solid fa-clock"></i>
+                        <p>19.00 - 21.00</p>
+                    </div>
+                    <div class="join-button">
+                        <button>JOIN</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="subject">
+                        <button id="openmodal">
+                            Football Stadium2
+                        </button>
+                        <i class="fa-solid fa-user"></i>
+                        <p>7/21</p>
+                        <i class="fa-solid fa-address-card pad"></i>
+                    </div>
+                    <div class="detail-container">
+                        <div class="detail-content">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <p>Feb 24,2023</p>
+                        </div>
+                        <div class="detail-content">
+                            <i class="fa-solid fa-house-chimney"></i>
+                            <p>Staduim 2</p>
+                        </div>
+
+
+                    </div>
+                    <div class="detail-content pad-10">
+                        <i class="fa-solid fa-clock"></i>
+                        <p>19.00 - 21.00</p>
+                    </div>
+                    <div class="join-button">
+                        <button>JOIN</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="subject">
+                        <button >
+                            Football Stadium2
+                        </button>
+                        <i class="fa-solid fa-user"></i>
+                        <p>7/21</p>
+                        <i class="fa-solid fa-address-card pad"></i>
+                    </div>
+                    <div class="detail-container">
+                        <div class="detail-content">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <p>Feb 24,2023</p>
+                        </div>
+                        <div class="detail-content">
+                            <i class="fa-solid fa-house-chimney"></i>
+                            <p>Staduim 2</p>
+                        </div>
+
+
+                    </div>
+                    <div class="detail-content pad-10">
+                        <i class="fa-solid fa-clock"></i>
+                        <p>19.00 - 21.00</p>
+                    </div>
+                    <div class="join-button">
+                        <button>JOIN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+         <div class="userevent-container">
+                <div class="userevent-content">
+                <h1 class="sticky">My Event(s)</h1>
+                    <div class="userevent-card">
+                        <div class="userevent-card-content">
+                            <div class="userevent-card-subject">
+                                <div>
+                                    <p>Baseball Stadium1</p>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+
+                            </div>
+                            <div class="userevent-card-detail">
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <p>Feb 24,2023</p>
+                                </div>
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-house-chimney"></i>
+                                    <p>Staduim 2</p>
+                                </div>
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <p>19.00 - 21.00</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="userevent-card">
+                        <div class="userevent-card-content">
+                            <div class="userevent-card-subject">
+                                <div>
+                                    <p>Baseball Stadium1</p>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+
+                            </div>
+                            <div class="userevent-card-detail">
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <p>Feb 24,2023</p>
+                                </div>
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-house-chimney"></i>
+                                    <p>Staduim 2</p>
+                                </div>
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <p>19.00 - 21.00</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="userevent-content">
+                    <h1>Joined Event(s)</h1>
+                    <div class="userevent-card">
+                        <div class="userevent-card-content">
+                            <div class="userevent-card-subject">
+                                <div>
+                                    <p>Baseball Stadium1</p>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+
+                            </div>
+                            <div class="userevent-card-detail">
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <p>Feb 24,2023</p>
+                                </div>
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-house-chimney"></i>
+                                    <p>Staduim 2</p>
+                                </div>
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <p>19.00 - 21.00</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="userevent-card">
+                        <div class="userevent-card-content">
+                            <div class="userevent-card-subject">
+                                <div>
+                                    <p>Baseball Stadium1</p>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+
+                            </div>
+                            <div class="userevent-card-detail">
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <p>Feb 24,2023</p>
+                                </div>
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-house-chimney"></i>
+                                    <p>Staduim 2</p>
+                                </div>
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <p>19.00 - 21.00</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+        <div class="modal" id="myModal">
+            <div  class="overlay" id="close-by-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-subject pad-b-15">
+                    <div class="flex items-center">
+                        <h2>
+                            Football Stadium2
+                        </h2>
+                        <i class="fa-solid fa-user"></i>
+                        <p id="amount">7/21</p>
+                    </div>
+                    <div class="flex items-center">
+                        <button>
+                            JOIN
+                        </button>
+                        <p>Create by username</p>
+                    </div>
+                    
+                    
+                </div>
+                <div class="modal-card-detail">
+                    <div class="flex justify-between">
+                        <div>
+                            <div class="detail-content pad-b-15">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <p>Feb 24,2023</p>
+                            </div>
+                            <div class="detail-content pad-b-15">
+                                <i class="fa-solid fa-house-chimney"></i>
+                                <p>Staduim 2</p>
+                            </div>
+                            <div class="detail-content pad-b-15">
+                                <i class="fa-solid fa-clock"></i>
+                                <p>19.00 - 21.00</p>
+                            </div>
+                            <div class="detail-content pad-b-15 pad-b-50">
+                                <i class="fa-solid fa-phone"></i>
+                                <p>086-xxx-xxxx</p>
+                            </div>
+                        </div>
+                        <div class="pad-b-15 "><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.8110131521726!2d100.77565737485553!3d13.72988888665966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d664988a1bedf%3A0xcc678f180e221cd0!2z4Liq4LiW4Liy4Lia4Lix4LiZ4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14Lie4Lij4Liw4LiI4Lit4Lih4LmA4LiB4Lil4LmJ4Liy4LmA4LiI4LmJ4Liy4LiE4Li44LiT4LiX4Lir4Liy4Lij4Lil4Liy4LiU4LiB4Lij4Liw4Lia4Lix4LiH!5e0!3m2!1sth!2sth!4v1709573033701!5m2!1sth!2sth" width="600" height="132" style="border-width: 2px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); border-radius: 0.75rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                    </div>
+                   
+                   
+                    <div class="pad-b-15 ">
+                        <h2> Detail </h2>
+                        <p>ขอเชิญชวนให้มาร่วมเตะบอลวันนี้ เป็นการเตะกับชมรมฟุตบอลภาคคอมมหาลัยชื่อดังสีส้มย่านลาดกระบัง เตะไม่เป็นเน้นเล่นคน</p>
+                    </div>
+                    <div class="comment pad-b-15">
+                        <h2> Comments </h2>
+                        <input placeholder="Add your comment here..."/>
+                    </div>
+                </div>
+                <button class="close-modal" id="closeModalButton">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+    <script>
+        document.getElementById('openmodal').addEventListener('click', function () {
+            document.getElementById('myModal').style.display = 'block';
+        });
+
+        document.getElementById('closeModalButton').addEventListener('click', function () {
+            document.getElementById('myModal').style.display = 'none';
+        });
+
+    document.getElementById('close-by-overlay').addEventListener('click', function () {
+        document.getElementById('myModal').style.display = 'none';
+    });
+
+    document.getElementById('filter-container').addEventListener('mouseover', function () {
+        document.getElementById('filter-content').style.display = 'flex';
+    });
+
+    document.getElementById('filter-container').addEventListener('mouseleave', function () {
+        document.getElementById('filter-content').style.display = 'none';
+    });
+    </script>
+
+
+
