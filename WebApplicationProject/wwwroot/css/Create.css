@@ -1,0 +1,223 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: fit-content;
+    background-image: url("https://img.hotimg.com/Frame-16.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 1200px;
+}
+
+.wrapper {
+    position: relative;
+    width: 800px;
+    height: 1200px;
+    bottom: 100px;
+    margin-top: 200px;
+    background-color: white;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+h1 {
+    position: relative;
+    text-align: center;
+    top: 30px;
+}
+
+i {
+    position: absolute;
+    top: 25px;
+    left: 15px;
+    color: white;
+}
+
+.back-page {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 30px;
+    left: 30px;
+    border-radius: 100px;
+    background-color: black;
+}
+
+.text-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 500px;
+    height: 10px;
+    outline: none;
+    border-radius: 15px;
+    border: 1px solid #C4C4C4;
+    margin-top: 70px;
+    padding: 12px 12px 12px 12px;
+}
+
+.time-box {
+    position: relative;
+    left: 18px;
+    display: inline-block;
+    width: 230px;
+    height: 10px;
+    outline: none;
+    border-radius: 15px;
+    border: 1px solid #C4C4C4;
+    margin-top: 50px;
+    margin-right: -90px;
+    padding: 12px;
+}
+
+.time-container {
+    position: relative;
+    display: inline-block;
+    left: 120px;
+    margin-right: 100px;
+}
+
+.label-time {
+    position: relative;
+    display: flex;
+    left: 50px;
+    margin-bottom: 20px;
+}
+
+.text-container label {
+    font-weight: 500;
+    font-size: 21px;
+    position: relative;
+    left: 19%;
+    top: 70px;
+}
+
+.location-label {
+    margin-left: -535px;
+}
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 60px;
+    width: 100%;
+}
+
+    .custom-select select {
+        position: relative;
+        display: flex;
+        width: 530px;
+        height: 35px;
+        left: -150px;
+        border: 1px solid #C4C4C4;
+        border-radius: 15px;
+        padding: 0 12px;
+        outline: none;
+    }
+
+.footer {
+    position: relative;
+    display: flex;
+    font-size: 21px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.show-box {
+    position: absolute;
+    right: 44%;
+    top: 60px;
+    display: flex;
+    width: 100px;
+    height: 70px;
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid #C4C4C4;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 30px;
+    outline: none;
+
+}
+
+.show-box::-webkit-outer-spin-button,
+.show-box::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.btn-num {
+    position: relative;
+    top: 80px;
+    margin-left: 150px;
+    left: -200px;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    background-color: black;
+    color: white;
+    outline: none;
+    cursor: pointer
+}
+
+    .btn-num:hover {
+        transform: scale(1.2);
+    }
+
+.footer p {
+    position: relative;
+    left: 250px;
+}
+
+#create-submit {
+    position: absolute;
+    top: 170px;
+    left: 270px;
+    width: 250px;
+    height: 70px;
+    border-radius: 30px;
+    border: 0px;
+    background-color: black;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+    outline: none;
+}
+
+    #create-submit:hover {
+        background-color: forestgreen;
+    }
+
+.almarai-light {
+    font-family: "Almarai", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.almarai-regular {
+    font-family: "Almarai", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.almarai-bold {
+    font-family: "Almarai", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.almarai-extrabold {
+    font-family: "Almarai", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}

@@ -241,6 +241,9 @@ namespace WebApplicationProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Detail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -392,7 +395,7 @@ namespace WebApplicationProject.Migrations
 
             modelBuilder.Entity("WebApplicationProject.Models.Comment", b =>
                 {
-                    b.HasOne("WebApplicationProject.Models.Event", null)
+                    b.HasOne("WebApplicationProject.Models.Event", "Event")
                         .WithMany("Comments")
                         .HasForeignKey("EventId");
 
@@ -401,6 +404,8 @@ namespace WebApplicationProject.Migrations
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Event");
 
                     b.Navigation("User");
                 });
