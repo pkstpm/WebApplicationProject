@@ -5,62 +5,51 @@
 }
 @model WebApplicationProject.ViewModel.EditEventViewModel
 
-<form asp-action="Edit" method="post">
-    @Html.HiddenFor(model => model.Id)
-    <div class="form-group">
-        <label asp-for="Title" class="control-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
+<link rel="stylesheet" href="~/css/editEvent.css" asp-append-version="true" />
+<div class="almarai-bold wrapper">
+        <form asp-action="Edit" method="post">
+        @Html.HiddenFor(model => model.Id)
+        
+            <button class="back-page">
+                <i class="fa-solid fa-chevron-left fa-2xl"></i>
+            </button>
+            <h1>Edit Your Event</h1>
+            <div class="text-container">
+                <label asp-for="Title" for="Title">Title</label>
+                <input asp-for="Title" type="text" class="text-box" name="Title" required>
+                <div class="time-container">
+                    <label asp-for="ActivityTime" class="label-time" for="Activity Time">Activity Time</label>
+                    <input asp-for="ActivityTime" type="datetime-local" class="time-box" name="Activity Time" required />
+                </div>
+                <div class="time-container">
+                    <label asp-for="ExpireTime" class="label-time" for="Expire Time">Expire Time</label>
+                    <input asp-for="ExpireTime" type="datetime-local" class="time-box" name="Expire Time" required />
+                </div>
+                <label asp-for="Location" for="Location" class="location-label">Location</label>
+                <input asp-for="Location" type="text" class="text-box" name="Location" required />
+                <label asp-for="Detail"  for="Detail">Detail</label>
+                <input asp-for="Detail" type="text" class="text-box" name="Detail" required />
+                <label asp-for="Contact" for="Contact">Contact</label>
+                <input asp-for="Contact" type="text" class="text-box" name="Contact" required />
+            </div>
+            <div class="almarain-bold footer">
+                <p>Number of Opening</p>
+                <input asp-for="Capacity" class="show-box" id="people-count" value="1" />
+                <input type="button" class="btn-num" id="btn-down" value="-" />
+                <input type="button" class="btn-num" id="btn-up" value="+" />
 
+                <button type="submit" class="btn" id="btn-submit" name="submit" value="submit" >Submit</button>
+            <form asp-action="Close" method="post">
+                <input type="hidden" name="id" value="@Model.Id"></input>
+                <button type="submit" class="btn" id="btn-close" name="close" value="close">Close this Event</button>
+            </form>
+            <form asp-action="Delete" method="post">
+                <input type="hidden" name="id" value="@Model.Id"></input>
+                <button type="submit" class="btn" id="btn-delete" name="delete" value="delete">Delete this Event</button>
+            </form>
 
-    <div class="form-group">
-        <label asp-for="ActivityTime" class="control-label"></label>
-        <input asp-for="ActivityTime" class="form-control" />
-        <span asp-validation-for="ActivityTime" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ExpireTime" class="control-label"></label>
-        <input asp-for="ExpireTime" class="form-control" />
-        <span asp-validation-for="ExpireTime" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Location" class="control-label"></label>
-        <input asp-for="Location" class="form-control" />
-        <span asp-validation-for="Location" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Detail" class="control-label"></label>
-        <input asp-for="Detail" class="form-control" />
-        <span asp-validation-for="Detail" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Contact" class="control-label"></label>
-        <input asp-for="Contact" class="form-control" />
-        <span asp-validation-for="Contact" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Capacity" class="control-label"></label>
-        <input asp-for="Capacity" class="form-control" />
-        <span asp-validation-for="Capacity" class="text-danger"></span>
-    </div>
-
-
-
-    <button type="submit" class="btn btn-primary">Edit</button>
-</form>
-
-<form asp-action="Close" method="post">
-    <input type="hidden" name="id" value="@Model.Id" />
-    <button type="submit" class="btn btn-primary">Close</button>
-</form>
-
-<form asp-action="Delete" method="post">
-    <input type="hidden" name="id" value="@Model.Id" />
-    <button type="submit" class="btn btn-primary">Delete</button>
-</form>
+            </div>
+        
+        </form>
+       
+        </div>

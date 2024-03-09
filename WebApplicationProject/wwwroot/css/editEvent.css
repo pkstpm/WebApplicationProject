@@ -1,4 +1,4 @@
-* {
+﻿* {
     margin: 0 auto;
     padding: 0;
 }
@@ -9,26 +9,19 @@ body {
     background-image: url("https://img.hotimg.com/Frame-16.png");
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: 1200px;
+    min-height: 1100px;
 }
 
 .wrapper {
     position: relative;
     width: 800px;
-    height: 1200px;
+    height: 1100px;
     bottom: 100px;
     margin-top: 200px;
-    background-color: white;
+    background-color: white; 
     border-radius: 25px;
     background: rgba(255, 255, 255, 0.3);
 }
-
-h1 {
-    position: relative;
-    text-align: center;
-    top: 30px;
-}
-
 i {
     position: absolute;
     top: 25px;
@@ -44,8 +37,14 @@ i {
     left: 30px;
     border-radius: 100px;
     background-color: black;
-}
+    cursor:pointer;
 
+}
+h1 {
+    position: relative;
+    text-align: center;
+    top: 30px;
+}
 .text-box {
     position: relative;
     display: flex;
@@ -60,7 +59,6 @@ i {
     margin-top: 70px;
     padding: 12px 12px 12px 12px;
 }
-
 .time-box {
     position: relative;
     left: 18px;
@@ -74,21 +72,20 @@ i {
     margin-right: -90px;
     padding: 12px;
 }
-
 .time-container {
     position: relative;
     display: inline-block;
     left: 120px;
     margin-right: 100px;
 }
-
+.location-label {
+    margin-left: -535px;
+}
 .label-time {
     position: relative;
     display: flex;
-    left: 50px;
     margin-bottom: 20px;
 }
-
 .text-container label {
     font-weight: 500;
     font-size: 21px;
@@ -96,30 +93,6 @@ i {
     left: 19%;
     top: 70px;
 }
-
-.location-label {
-    margin-left: -535px;
-}
-
-.custom-select {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 60px;
-    width: 100%;
-}
-
-    .custom-select select {
-        position: relative;
-        display: flex;
-        width: 530px;
-        height: 35px;
-        left: -150px;
-        border: 1px solid #C4C4C4;
-        border-radius: 15px;
-        padding: 0 12px;
-        outline: none;
-    }
-
 .footer {
     position: relative;
     display: flex;
@@ -146,20 +119,13 @@ i {
     display: flex;
     font-size: 30px;
     outline: none;
-
-}
-
-.show-box::-webkit-outer-spin-button,
-.show-box::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
 }
 
 .btn-num {
     position: relative;
     top: 80px;
     margin-left: 150px;
-    left: -200px;
+    left: -155px;
     font-size: 20px;
     width: 40px;
     height: 40px;
@@ -170,34 +136,47 @@ i {
     cursor: pointer
 }
 
-    .btn-num:hover {
-        transform: scale(1.2);
-    }
+.btn-num:hover {
+    transform: scale(1.2);
+}
 
 .footer p {
     position: relative;
-    left: 250px;
+    left: 260px;
 }
 
-#create-submit {
+.btn {
     position: absolute;
     top: 170px;
-    left: 270px;
-    width: 250px;
-    height: 70px;
+    left: 170px;
+    width: 450px;
+    height: 40px;
     border-radius: 30px;
     border: 0px;
-    background-color: black;
     color: white;
-    font-size: 35px;
+    font-size: 28px;
     cursor: pointer;
     outline: none;
 }
 
-    #create-submit:hover {
-        background-color: forestgreen;
-    }
-
+#btn-submit {
+    position:absolute;
+    background-color: black;
+    top:160px;
+}
+#btn-close {
+    position: absolute;
+    background-color: #2D9596;
+    top: 220px;
+}
+#btn-delete {
+    position: absolute;
+    background-color: #7A000E;
+    top: 280px;
+}
+.btn:hover {
+    background-color: forestgreen;
+}
 .almarai-light {
     font-family: "Almarai", sans-serif;
     font-weight: 300;
@@ -221,3 +200,50 @@ i {
     font-weight: 800;
     font-style: normal;
 }
+/*@media screen and (max-width: 960px) {
+    .wrapper{
+        width:100vw;
+    }
+
+    .time-container {
+        flex-direction: column;
+    }
+
+    .time-box {
+      width:auto;
+    }
+    .text-box{
+        width:50vw;
+    }
+    .show-box {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    .btn-num{
+        display:inline-block;
+    }
+    .location-label {
+        margin-top: -50px;
+
+    }
+
+    .text-container label {
+        left: 25vw;
+    }
+
+    .time-container label {
+        margin-left: -22vw;
+        display:flex;
+        flex-direction:row;
+    }
+
+    .time-container {
+        position: relative;
+        left: 22vw;
+        margin-right: 11vw;
+    }
+
+    .time-box {
+        width: 23vw;
+    }
+}*/
