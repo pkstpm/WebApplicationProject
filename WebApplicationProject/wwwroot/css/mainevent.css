@@ -41,6 +41,11 @@
 .card-container {
     padding-left: 100px;
     padding-top: 40px;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    scrollbar-color: #6969dd #e0e0e0;
+    scroll-margin-left: 5rem; /* 2px */
+    overflow-y: scroll;
 }
 
 .card-container h1 {
@@ -50,6 +55,7 @@
 
 .card {
     width: fit-content;
+    
     height: fit-content;
     border-radius: 0.75rem; /* 12px */
     background-color: white;
@@ -62,6 +68,7 @@
 
 .card-content{
     padding-left : 20px;
+    padding-bottom : 20px;
 }
 
 .subject {
@@ -136,10 +143,9 @@
     height: 100vh;
     background-color: rgba(148, 163, 184, 0.3);
     width: 60vh;
-    position : sticky;
-    top : 0px;
-    overflow-y : scroll;
-    
+    position: sticky;
+    top: 0px;
+    overflow-y: scroll;
     
 }
 
@@ -178,6 +184,8 @@
     padding-left: 40px;
     padding-top: 15px;
     padding-bottom: 15px;
+    padding-right : 15px;
+    justify-content : space-between;
 }
 
     .userevent-card-subject p {
@@ -302,7 +310,6 @@
 .sticky {
     position:sticky;
     top : 0px;
-    height : fit-content;
 }
 
 .right-0{
@@ -315,3 +322,6 @@
     top : 0%;
 }
 
+.overflow-x-hidden {
+    overflow-x: hidden;
+}

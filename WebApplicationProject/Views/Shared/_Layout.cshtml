@@ -16,9 +16,11 @@
         <nav>
             <div class="logo">
                 <a href=""><img src="~/images/logo.png" alt="Logo"> BESTON </a>
+                <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="Logo"> BESTON </a>
             </div>
             <ul>
                 <li><a asp-controller="Mainevent" asp-action="Index">event</a></li>
+                <li><a asp-controller="Event" asp-action="Index">event</a></li>
                 <li>
                     <a href="">
                         Category
@@ -26,12 +28,7 @@
                     </a>
                 </li>
                 <li><a href="">about us</a></li>
-                <li><a href="">log in</a></li>
-                <li>
-                    <button asp-controller="Login" asp-action="Index">
-                        Get Started
-                    </button>
-                </li>
+                <partial name="_LoginPartial.cshtml" />
             </ul>
         </nav>
 

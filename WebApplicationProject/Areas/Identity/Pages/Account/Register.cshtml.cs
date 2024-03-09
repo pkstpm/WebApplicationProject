@@ -83,7 +83,10 @@ namespace WebApplicationProject.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Lastt Name")]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
+
+            
 
             [Required]
             [EmailAddress]
