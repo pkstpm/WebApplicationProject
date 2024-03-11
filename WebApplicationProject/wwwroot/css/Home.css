@@ -17,7 +17,7 @@ html {
     background-size: cover;
     display: table;
 }
-body {
+main {
     overflow-x:hidden;
 }
     .box:nth-child(1) {
@@ -377,7 +377,11 @@ a:link {
     font-style: normal;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 768px) {
+    html,main {
+        overflow-x: hidden;
+        max-width:100%;
+    }
     .box:nth-child(1) {
         width: 100vw;
         background-image: url('https://img.hotimg.com/halfpic.jpeg');
@@ -385,6 +389,7 @@ a:link {
     }
 
     .button-section1 {
+        margin-top:-2vh;
         font-size: 3vw;
     }
 
@@ -417,10 +422,9 @@ a:link {
 
     .box:nth-child(2) {
         width: 100vw;
-        background-image: url('https://img.hotimg.com/Frame-16.png');
         background-size: cover;
+        background-position-x:100%;
     }
-
     #img-section2 {
         display: none;
     }
@@ -463,4 +467,51 @@ a:link {
         justify-content: center;
         text-align: center;
     }
+    .section3-container{
+        height:50%;
+        width:100%;
+        
+    }
+    .section3-content{
+        margin-top:10vh;
+     
+    }
+    .section3-content p{
+        position:absolute;
+        margin-left:5px;
+        width:620px;
+        font-size:13px;
+    }
+    .gradient-word{
+        position:absolute;
+        margin-top:-12vh;
+        margin-left:200px;
+    }
+
+
+    .box-profile{
+        width:14vw;
+        height:23vh;
+    }
+        .box-profile:nth-child(1) {
+            margin-top:41.5vh;
+            margin-left:-260px;
+        }
+        .box-profile:nth-child(2) {
+            margin-top: 41.5vh;
+            margin-left: -270px;
+        }
+        .box-profile:nth-child(3) {
+            margin-top: 41.5vh;
+            margin-left: -280px;
+        }
+        .box-profile:nth-child(4) {
+            margin-top: 6.5vh;
+            margin-left: 47px;
+        }
+        .box-profile:nth-child(5) {
+            margin-top: 6.5vh;
+            margin-left: 46px;
+        }
+
 }
