@@ -9,6 +9,7 @@
     <link rel ="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -17,14 +18,9 @@
                 <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="Logo"> BESTON </a>
             </div>
             <ul>
-                <li><a asp-controller="Event" asp-action="Index">event</a></li>
-                <li>
-                    <a href="">
-                        Category
-
-                    </a>
-                </li>
-                <li><a href="">about us</a></li>
+                <li><a href="#" id="event-link">Event</a></li>
+                <li><a href="#" id="category-link">Category</a></li>
+                <li><a href="#" id="aboutus-link">About Us</a></li>
                 <partial name="_LoginPartial.cshtml" />
             </ul>
         </nav>
@@ -35,8 +31,48 @@
             @RenderBody()
         </main>
     </div>
+    <script>
+        $(document).ready(function () {
+            // Handle navigation links click event
+            $("nav ul li a").click(function (e) {
+                e.preventDefault(); // Prevent default link behavior
+
+                var linkId = $(this).attr('id'); // Get the ID of the clicked link
+
+                // Load content based on the clicked link
+                switch (linkId) {
+                    case 'event-link':
+                        loadNavigationBar('/Event/Index');
+                        break;
+                    case 'category-link':
+                        loadNavigationBar('/Category/Index');
+                        break;
+                    case 'aboutus-link':
+                        loadNavigationBar('/About/Index');
+                        break;
+                    // Add more cases for other links as needed
+                }
+            });
+
+            // Function to load navigation bar
+            function loadNavigationBar(url) {
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+                        $("body").html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+    </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
