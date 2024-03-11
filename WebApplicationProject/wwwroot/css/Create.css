@@ -221,3 +221,10 @@ i {
     font-weight: 800;
     font-style: normal;
 }
+@media screen and (max-width: 768px) {
+    html{
+        overflow-x:hidden;
+        max-width:100%;
+    }
+
+}

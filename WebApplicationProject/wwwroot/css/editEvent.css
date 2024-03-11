@@ -177,6 +177,11 @@ h1 {
 .btn:hover {
     background-color: forestgreen;
 }
+.show-box::-webkit-outer-spin-button,
+.show-box::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 .almarai-light {
     font-family: "Almarai", sans-serif;
     font-weight: 300;
@@ -200,50 +205,9 @@ h1 {
     font-weight: 800;
     font-style: normal;
 }
-/*@media screen and (max-width: 960px) {
-    .wrapper{
-        width:100vw;
+@media screen and (max-width: 768px) {
+    html {
+        overflow-x: hidden;
+        max-width: 100%;
     }
-
-    .time-container {
-        flex-direction: column;
-    }
-
-    .time-box {
-      width:auto;
-    }
-    .text-box{
-        width:50vw;
-    }
-    .show-box {
-        margin-right: 0;
-        margin-bottom: 1rem;
-    }
-    .btn-num{
-        display:inline-block;
-    }
-    .location-label {
-        margin-top: -50px;
-
-    }
-
-    .text-container label {
-        left: 25vw;
-    }
-
-    .time-container label {
-        margin-left: -22vw;
-        display:flex;
-        flex-direction:row;
-    }
-
-    .time-container {
-        position: relative;
-        left: 22vw;
-        margin-right: 11vw;
-    }
-
-    .time-box {
-        width: 23vw;
-    }
-}*/
+}

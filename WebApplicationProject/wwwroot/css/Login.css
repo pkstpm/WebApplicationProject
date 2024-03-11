@@ -28,7 +28,7 @@
     align-items: center;
     display: flex;
     width: 65vw;
-    height: 550px;
+    height: 65vh;
     border-radius: 15px;
 }
 
@@ -38,7 +38,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     width: 25vw;
-    height: 65vh;
+    height: 60vh;
     margin-left: 37vw;
     border-radius: 15px;
 }
@@ -64,11 +64,11 @@ header {
     color: #676666;
     font-size: 1.2vw;
     position: relative;
-    letter-spacing: 0.14vw;
+    letter-spacing: 0.12vw;
 }
 
 .text-box {
-    width: 33.5vw;
+    width: 35.5vw;
     /*height: 4.5vh;*/
     border: 1px solid #C4C4C4;
     border-radius: 5px;
@@ -89,7 +89,7 @@ header {
 }
 
 #login-submit {
-    width: 35.2vw;
+    width: 35.5vw;
     height: 4.5vh;
     border: 1px solid #C4C4C4;
     border-radius: 5px;
@@ -115,16 +115,18 @@ header {
     position: absolute;
     top: 30px;
     left: 30px;
-    color: white;
+    color:white;
     display: inline-flex;
     align-items: center;
     cursor: pointer;
 }
 
-    .back-page p {
-        font-size: 20px;
-        position: absolute;
-        margin-left: 25px;
+    .back-page a {
+        font-size: 25px;
+        margin-top: -1px;
+        margin-left: 5px;
+        color:white;
+        text-decoration-line:none;
     }
 
     .back-page:hover {
@@ -134,7 +136,13 @@ header {
 .content input {
     padding: 5px 10px 10px 10px;
 }
-
+.link-register {
+    font-size: 1.2vw;
+    color: #C4C4C4;
+}
+.form-check-input{
+    margin-top:10px;
+}
 .almarai-light {
     font-family: "Almarai", sans-serif;
     font-weight: 300;
@@ -159,7 +167,7 @@ header {
     font-style: normal;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 768px) {
     .inside-box {
         display: none;
     }
@@ -175,8 +183,8 @@ header {
     }
 
     .text-box {
-        width: 59.5vw;
-        height: 25px;
+        width: 62vw;
+        height: 45px;
         font-size: 2vw;
     }
 
@@ -187,10 +195,14 @@ header {
     #login-submit {
         width: 61.8vw;
         height: 45px;
-        font-size: 2vw;
+        font-size: 2.5vw;
     }
 
     #eye-icon {
         font-size: 2vw;
+    }
+    .link-register {
+        font-size: 2vw;
+        color: #C4C4C4;
     }
 }
