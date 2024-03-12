@@ -52,8 +52,8 @@ namespace WebApplicationProject.Controllers
 
             return View(viewModels);
         }
-        [HttpGet("Index/{id}")]
-        public async Task<IActionResult> Index(Guid Id)
+
+        public async Task<IActionResult> Detail(Guid Id)
         {
             var @event = await _context.Events.Include(e => e.User).Include(e => e.UserEvents).ThenInclude(ue => ue.User).FirstOrDefaultAsync(e => e.Id == Id);
 
@@ -65,7 +65,7 @@ namespace WebApplicationProject.Controllers
                 .OrderByDescending(c => c.CreatedAt)
                 .ToListAsync();
                 
-                return View("Event", @event);
+                return View(@event);
             }
             throw new Exception("Can't find Event");
         }
@@ -145,6 +145,7 @@ namespace WebApplicationProject.Controllers
                         ActivityTime = @event.ActivityTime,
                         ExpireTime = @event.ExpireTime,
                         Capacity = @event.Capacity,
+                        IsOpen = @event.IsOpen
                     };
                     return View(model);
                 }
