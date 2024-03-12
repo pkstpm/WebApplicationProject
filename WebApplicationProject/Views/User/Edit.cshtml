@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "EditProfile";
+}
+
+<link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
+<link href="~/font-awesome/css/all.css" rel="stylesheet" />
+<link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
+
+@model WebApplicationProject.ViewModel.EditProfileViewModel
+<div class="profile-container">
+    <div class="profile-content">
+
+        <div class="flex  align-item-center  pad-b-15 ">
+            <div class="img-container">
+                <img src="~/images/pon.jpg" />
+            </div>
+            <div class="flex-col ">
+                <div class="username flex justify-between align-item-center">
+                    <h2 class="pad-b-5 ">Ponza</h2>
+
+                    <button class="pad-b-5">
+                        Edit
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+
+
+                </div>
+
+
+                <form method="post" asp-action="Edit">
+                    <div class="flex justify-between w-100 ">
+                        <div class="flex flex-col justify-between pad-t-15 pad-r-15">
+                            <div class=" ">
+                                <h2>First name</h2>
+                                <input asp-for="FirstName" placeholder="@Model.FirstName" />
+                            </div>
+                            <div class="">
+                                <h2>Tel</h2>
+                                <input asp-for="PhoneNumber" placeholder="@Model.PhoneNumber" />
+                            </div>
+
+                        </div>
+                        <div class="flex flex-col pad-t-15 justify-between">
+                            <div class=" ">
+                                <h2>Last name</h2>
+
+                                <input asp-for="LastName" placeholder="@Model.LastName" />
+                            </div>
+                            <div class=" ">
+                                <h2>Email</h2>
+
+                                <input asp-for="Email" placeholder="@Model.Email" />
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+                
+
+
+
+
+            </div>
+        </div>
+        
+
+
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('joinevent').addEventListener('click', function () {
+        document.getElementById('myevent').style.color = 'dimgrey';
+        document.getElementById('joinevent').style.color = 'black';
+        document.getElementById('joineventcard').style.display = 'grid';
+        document.getElementById('myeventcard').style.display = 'none';
+    });
+    document.getElementById('myevent').addEventListener('click', function () {
+        document.getElementById('joinevent').style.color = 'dimgrey';
+        document.getElementById('myevent').style.color = 'black';
+        document.getElementById('joineventcard').style.display = 'none';
+        document.getElementById('myeventcard').style.display = 'grid';
+    });
+</script>
