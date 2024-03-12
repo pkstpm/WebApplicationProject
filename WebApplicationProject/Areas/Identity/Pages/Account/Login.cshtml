@@ -29,7 +29,7 @@
 
                     <div id="box-content2">
                         <label asp-for="Input.Password">Password</label><br />
-                        <i class="fa-solid fa-eye" id="eye-icon" onmouseover="showPassword()" onmouseout="hidePassword()"></i>
+                        <i class="fa-solid fa-eye" id="eye-icon"></i>
                         <input asp-for="Input.Password" type="password" autocomplete="current-password" aria-required="true" placeholder="password" class="text-box" id="input-password" required /><br />
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
@@ -52,17 +52,23 @@
 </div>
 
 
-    <script>
-        function showPassword() {
-            let x = document.getElementById("input-password");
-            console.dir(x);
-            x.type = "text";
+<script>
+    const eyeicon = document.getElementById("eye-icon");
+    const password = document.getElementById("input-password");
+
+    eyeicon.addEventListener("click", function () {
+        if (password.type === "password") {
+            password.type = "text";
+            eyeicon.classList.remove("fa-solid", "fa-eye-slash");
+            eyeicon.classList.add("fa-solid", "fa-eye");
+        } else {
+            password.type = "password";
+            eyeicon.classList.remove("fa-solid", "fa-eye");
+            eyeicon.classList.add("fa-solid", "fa-eye-slash");
         }
-        function hidePassword() {
-            let x = document.getElementById("input-password");
-            x.type = "password";
-        }
-    </script>
+    });
+</script>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
