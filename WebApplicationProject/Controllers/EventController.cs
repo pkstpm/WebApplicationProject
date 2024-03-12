@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection.Metadata;
@@ -45,6 +46,7 @@ namespace WebApplicationProject.Controllers
                 return BadRequest("User not found");
             }
 
+            ViewBag.AlertMessage = TempData["JoinAlert"];
             var myEventsQuery = _context.Events.Where(e => e.UserID == user.Id).OrderByDescending(e => e.IsOpen);
             var joinedEventsQuery = _context.Events.Where(e => e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin)).OrderByDescending(e => e.IsOpen);
             var otherEventsQuery = _context.Events.Where(e => e.UserID != user.Id && !e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin)).OrderByDescending(e => e.IsOpen);
@@ -95,6 +97,16 @@ namespace WebApplicationProject.Controllers
 
         public async Task<IActionResult> Detail(Guid Id)
         {
+            if (TempData["CreateAlert"] != null)
+            {
+                ViewBag.AlertMessage = TempData["CreateAlert"];
+
+            }
+            if (TempData["JoinAlert"] != null)
+            {
+                ViewBag.AlertMessage = TempData["JoinAlert"];
+            }
+
             var @event = await _context.Events.Include(e => e.User).Include(e => e.UserEvents).ThenInclude(ue => ue.User).FirstOrDefaultAsync(e => e.Id == Id);
 
             if (@event != null)
@@ -150,6 +162,7 @@ namespace WebApplicationProject.Controllers
 
                         _context.Events.Add(@event);
                         await _context.SaveChangesAsync();
+                        TempData["CreateAlert"] = "Success "+ @event.Title +" Create!!";
 
                         return RedirectToAction(nameof(Detail), new { id = @event.Id });
                     }
@@ -298,6 +311,10 @@ namespace WebApplicationProject.Controllers
                         IsJoin = true
                     };
 
+                    if (@event.Capacity == @event.Amount) {
+                        @event.IsOpen = false;
+                    }
+
                     _context.UserEvents.Add(userevent); 
                     await _context.SaveChangesAsync();
 
@@ -306,6 +323,7 @@ namespace WebApplicationProject.Controllers
 
                     user.UserEvents.Add(userevent);
                     await _userManager.UpdateAsync(user);
+                    TempData["JoinAlert"] = "Join "+ @event.Title +" Success!!" ;
 
                     return RedirectToAction(nameof(Index));
                 }
