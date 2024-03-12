@@ -60,3 +60,24 @@
     </div>
 </div>
 </form>
+<script>
+        //createEvent part
+const add = document.getElementById("btn-up");
+const minus = document.getElementById("btn-down");
+const count = document.getElementById("people-count");
+
+if (add != null) {
+    add.addEventListener("click", function () {
+        count.value = parseInt(count.value) + 1; // Increment the value of the input field
+    });
+}
+
+if (minus != null) {
+    minus.addEventListener("click", function () {
+        const currentValue = parseInt(count.value);
+        if (currentValue > 1) {
+            count.value = currentValue - 1; // Decrement the value of the input field, ensuring it never goes below 1
+        }
+    });
+}
+</script>
