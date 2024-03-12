@@ -35,13 +35,13 @@
                     </div>
                     <div>
                     <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                            <input class="almarai-bold form-check-input" asp-for="Input.RememberMe" />
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
                     </label>
                     </div>          
                     <button type="submit" id="login-submit" name="signin" value="Sign In">Sign In</button>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="almarai-regular link-register">Register as a new user</a>
                     </p>
                 </form>
             </header>
@@ -52,6 +52,17 @@
 </div>
 
 
+    <script>
+        function showPassword() {
+            let x = document.getElementById("input-password");
+            console.dir(x);
+            x.type = "text";
+        }
+        function hidePassword() {
+            let x = document.getElementById("input-password");
+            x.type = "password";
+        }
+    </script>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
