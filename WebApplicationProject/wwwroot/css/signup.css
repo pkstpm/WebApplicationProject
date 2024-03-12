@@ -50,11 +50,16 @@
 
 
 .form-container {
-    position : absolute;
-    right : 12%;
-    top : 25%;
+    position: absolute;
+    right: 10.5%;
+    top: 15%;
+    padding:clamp(1rem, 4vw, 5rem);
+    width: 400px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 1rem;
 
-       .pad-b{
+    .pad-b{
                  padding-bottom : 4px;
              }
 
@@ -135,12 +140,8 @@ input {
     }
     .form-container {
         position: absolute;
-        left: 21%;
-        top: -25%;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-top: 10px;
-        padding-bottom: 15px;
+        left: 20%;
+        margin-top:10%;
         width: 400px;
         height: fit-content;
         background-color: white;
