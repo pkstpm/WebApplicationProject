@@ -34,7 +34,6 @@
     width: 100vw;
     position: relative;
     display: flex;
-    height: 200vh;
     height: max-content;
     justify-content: space-between;
 }
@@ -46,7 +45,6 @@
     scrollbar-gutter: stable;
     scrollbar-color: #6969dd #e0e0e0;
     scroll-margin-left: 5rem; /* 2px */
-    overflow-y: scroll;
     
 }
 
