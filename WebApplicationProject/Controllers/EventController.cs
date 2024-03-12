@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection.Metadata;
 using WebApplicationProject.Areas.Identity.Data;
 using WebApplicationProject.Data;
 using WebApplicationProject.Models;
@@ -28,6 +29,45 @@ namespace WebApplicationProject.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                var viewModels = new AllEventViewModel
+                {
+                    OtherEvents = await _context.Events.OrderByDescending(e => e.IsOpen).ToListAsync()
+                };
+
+                return View(viewModels);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return BadRequest("User not found");
+            }
+
+            var myEventsQuery = _context.Events.Where(e => e.UserID == user.Id).OrderByDescending(e => e.IsOpen);
+            var joinedEventsQuery = _context.Events.Where(e => e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin)).OrderByDescending(e => e.IsOpen);
+            var otherEventsQuery = _context.Events.Where(e => e.UserID != user.Id && !e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin)).OrderByDescending(e => e.IsOpen);
+
+            var viewModel = new AllEventViewModel
+            {
+                MyEvents = await myEventsQuery.ToListAsync(),
+                JoinedEvents = await joinedEventsQuery.ToListAsync(),
+                OtherEvents = await otherEventsQuery.ToListAsync()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpGet("/event/category/{categoryName}")]
+        public async Task<IActionResult> Category(string categoryName)
+        {
+            Category category;
+            if (!Enum.TryParse(categoryName, true, out category))
+            {
+
+                return BadRequest("Invalid category name");
+            }
             if (_signInManager.IsSignedIn(User))
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -35,22 +75,22 @@ namespace WebApplicationProject.Controllers
                 {
                     var viewModel = new AllEventViewModel
                     {
-                        MyEvents = [.. _context.Events.Where(e => e.UserID == user.Id).OrderByDescending(e => e.IsOpen)],
-                        JoinedEvents = [.. _context.Events.Where(e => e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin == true)).OrderByDescending(e => e.IsOpen)],
-                        OtherEvents = [.. _context.Events.Where(e => e.UserID != user.Id && !e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin == true)).OrderByDescending(e => e.IsOpen)]
+                        MyEvents = [.. _context.Events.Where(e => e.Category == category).Where(e => e.UserID == user.Id).OrderByDescending(e => e.IsOpen)],
+                        JoinedEvents = [.. _context.Events.Where(e => e.Category == category).Where(e => e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin == true)).OrderByDescending(e => e.IsOpen)],
+                        OtherEvents = [.. _context.Events.Where(e => e.Category == category).Where(e => e.UserID != user.Id && !e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin == true)).OrderByDescending(e => e.IsOpen)]
                     };
 
-                    return View(viewModel);
+                    return View("Index", viewModel);
                 }
                 throw new Exception("Can't find User");
             }
 
             var viewModels = new AllEventViewModel
             {
-                OtherEvents = [.. _context.Events.OrderByDescending(e => e.IsOpen)]
+                OtherEvents = [.. _context.Events.Where(e => e.Category == category).OrderByDescending(e => e.IsOpen)]
             };
 
-            return View(viewModels);
+            return View("Index", viewModels);
         }
 
         public async Task<IActionResult> Detail(Guid Id)
@@ -64,7 +104,7 @@ namespace WebApplicationProject.Controllers
                 .Include(c => c.User)
                 .OrderByDescending(c => c.CreatedAt)
                 .ToListAsync();
-                
+
                 return View(@event);
             }
             throw new Exception("Can't find Event");
@@ -111,7 +151,7 @@ namespace WebApplicationProject.Controllers
                         _context.Events.Add(@event);
                         await _context.SaveChangesAsync();
 
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction(nameof(Detail), new { id = @event.Id });
                     }
                     throw new Exception("Can't find User");
                 }

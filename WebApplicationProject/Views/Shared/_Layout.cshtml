@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
@@ -19,7 +20,7 @@
             </div>
             <ul>
                 <li><a href="#" id="event-link">Event</a></li>
-                <li><a href="#" id="category-link">Category</a></li>
+                <li><a href="#" id="category-link" >Category</a></li>
                 <li><a href="#" id="aboutus-link">About Us</a></li>
                 <partial name="_LoginPartial.cshtml" />
             </ul>
@@ -34,7 +35,7 @@
     <script>
         $(document).ready(function () {
             // Handle navigation links click event
-            $("nav ul li a").click(function (e) {
+            $("").click(function (e) {
                 e.preventDefault(); // Prevent default link behavior
 
                 var linkId = $(this).attr('id'); // Get the ID of the clicked link
