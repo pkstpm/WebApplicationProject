@@ -78,11 +78,12 @@ function changeImage(num) {
 
 //login part
 function showPassword() {
-    let x = document.getElementById("input-password");
+    let x = document.getElementById("eye-icon");
+    console.dir(x);
     x.type = "text";
 }
 function hidePassword() {
-    let x = document.getElementById("input-password");
+    let x = document.getElementById("eye-icon");
     x.type = "password";
 }
 
