@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Eventdetail";
 }
 
@@ -9,12 +8,19 @@
 <link href="~/font-awesome/css/all.css" rel="stylesheet" />
 <link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
 
+@if (ViewBag.AlertMessage != null)
+{
+    <div id="alertMessage" style="display: none;">
+        @ViewBag.AlertMessage
+    </div>
+}
+
 <div class="modal" id="myModal">
     <div class="modal-content">
         <div class="modal-subject pad-b-15">
             <div class="flex items-center">
                 <h2>
-                   @Model.Title
+                    @Model.Title
                 </h2>
                 <i class="fa-solid fa-user"></i>
                 <p id="amount">@Model.Amount/@Model.Capacity</p>
@@ -65,27 +71,43 @@
                     <button type="submit" class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i></button>
                 </form>
 
-                
+
             </div>
             <div>
                 @if (Model.Comments != null && Model.Comments.Any())
                 {
-                <ul>
-                    @foreach (var comment in Model.Comments)
-                    {
-                        <li>
-                            <div>
-                                <strong>@comment.User.UserName</strong> - @comment.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
-                            </div>
-                            <div>
-                                @comment.Detail
-                            </div>
-                        </li>
-                    }
-                </ul>
+                    <ul>
+                        @foreach (var comment in Model.Comments)
+                        {
+                            <li>
+                                <div>
+                                    <strong>@comment.User.UserName</strong> - @comment.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
+                                </div>
+                                <div>
+                                    @comment.Detail
+                                </div>
+                            </li>
+                        }
+                    </ul>
                 }
             </div>
         </div>
-        
     </div>
 </div>
+
+<script>
+    // Wait for the document to be fully loaded
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the iframe element
+        var iframe = document.querySelector('iframe');
+
+        // Add event listener for the iframe load event
+        iframe.onload = function () {
+            // Show the alert message after the iframe has loaded
+            var alertMessage = document.getElementById('alertMessage');
+            if (alertMessage != null) {
+                alert(alertMessage.innerText);
+            }
+        };
+    });
+</script>
