@@ -1,8 +1,10 @@
 ﻿@{
 ViewData["Title"] = "Home Page";
 }
+@section Styles {
+    <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
+}
 
-<link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
 
     <main>
     <section class="section1 box">
@@ -102,7 +104,7 @@ ViewData["Title"] = "Home Page";
     </section>
 </main>
 
-<scipt>
+<script>
     function changeImage(num) {
     const image = document.getElementById("img-section2");
     const texts = ["AEROBIC", "BASKETBALL", "BADMINTON", "BICYCLE", "FOOTBALL", "VOLLEYBALL", "FUTSAL", "SKATEBOARD", "SWIMMING", "OTHER"];
@@ -174,4 +176,4 @@ ViewData["Title"] = "Home Page";
     }
 
     }
-</scipt>
+</script>
