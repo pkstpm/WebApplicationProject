@@ -3,10 +3,12 @@ body {
     background-image: url("../images/background.png");
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment : fixed;
     margin: 0px;
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     flex-shrink: 0;
     position: relative;
+    
     overflow-x: hidden;
     
 }
@@ -17,7 +19,6 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100vw;
-    
     
 }
 
@@ -99,4 +100,4 @@ nav {
         cursor: pointer;
     }
 
-    
+   

@@ -40,9 +40,6 @@
                     Date
                 </button>
             </div>
-
-
-
         </div>
         <div class="card-container">
             <h1 >
@@ -78,7 +75,7 @@
                         <i class="fa-solid fa-clock"></i>
                         <p>19.00 - 21.00</p>
                     </div>
-                        @if (SignInManager.IsSignedIn(User))
+                        @if (SignInManager.IsSignedIn(User) && item.IsOpen)
                         {
                            <div class="join-button">
                                 <form asp-action="Join" method="post">
@@ -86,11 +83,16 @@
                                     <button type="submit">JOIN</button>
                                </form>
                         
-                    </div> 
+                            </div> 
                         }
-                        else
+                            else if (SignInManager.IsSignedIn(User) && !item.IsOpen)
                         {
-                            <div></div>
+                                <div class="outofdate">
+                                    
+                                        <button >OUT OF DATE</button>
+                                    
+
+                                </div>
                         }
                         
                 </div>
@@ -108,7 +110,9 @@
         <div class="userevent-container">
             <div class="userevent-content">
                 <h1 class="sticky">My Event(s)</h1>
-                 @foreach (var item in Model.MyEvents)
+                @if (Model.MyEvents != null)
+                {
+                    @foreach (var item in Model.MyEvents)
                 {
                     <div class="userevent-card">
                         <div class="userevent-card-content">
@@ -139,7 +143,13 @@
 
                     </div>
                 </div>
+                    }
                 }
+                else
+                {
+                    <p>No items!</p>
+                }
+
                 
             </div>
             <div class="userevent-content">
