@@ -1,0 +1,171 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+}
+
+@model WebApplicationProject.ViewModel.ViewProfileViewModel
+
+<link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
+<link href="~/font-awesome/css/all.css" rel="stylesheet" />
+<link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
+
+
+<div class="profile-container">
+    <div class="profile-content">
+       
+        <div class="flex  align-item-center  pad-b-15 ">
+            <div class="img-container">
+                <img src="~/images/pon.jpg" />
+            </div>
+            <div class="flex-col ">
+                <div class="username flex justify-between align-item-center">
+                    <h2 class="pad-b-5 ">Ponza</h2>
+                    
+                        <button class="pad-b-5">
+                            Edit
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                    
+                    
+                </div>
+                    
+                    
+                
+                <div class="flex justify-between w-100">
+                    <div class="flex flex-col justify-between pad-t-15 pad-r-15">
+                        <div class=" ">
+                            <h2>First name</h2>
+                            <p>@Model.User.FirstName</p>
+                        </div>
+                        <div class=" ">
+                            <h2>Tel</h2>
+                            @if (@Model.User.PhoneNumber != null)
+                            { 
+                                <p>@Model.User.PhoneNumber</p>
+                            }
+                            else{
+                                <p>-</p>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="flex flex-col pad-t-15 justify-between">
+                        <div class=" ">
+                            <h2>Last name</h2>
+                            <p>@Model.User.LastName</p>
+                        </div>
+                        <div class=" ">
+                            <h2>Email</h2>
+                            <p>@Model.User.Email</p>
+                        </div>
+                    </div>
+                </div>
+                
+                   
+                
+                
+                
+            </div>
+        </div>
+        <div class="profile-myevent-container">
+            <div class="profile-myevent-selector">
+                <button class="pad-r-15" id="myevent">
+                    My event
+                </button>
+                <button class="color-gray" id="joinevent">
+                    Joined event
+                </button>
+            </div>
+            <div class="profile-myevent-content" id="myeventcard">
+                @foreach (var item in Model.JoinedEvents){
+                
+                    <div class="userevent-card">
+                        <div class="userevent-card-content">
+                            <div class="userevent-card-subject">
+                                <div>
+                                    <a asp-action="Detail" asp-controller="Event" asp-route-Id="@item.Id">
+                                    <p>@item.Title</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a asp-action="Edit" asp-controller="Event" asp-route-Id="@item.Id">
+                                    <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="userevent-card-detail">
+                                <div class="detail-content ">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <p>@item.ActivityTime</p>
+                                </div>
+                                <div class="detail-content ">
+                                    <i class="fa-solid fa-house-chimney"></i>
+                                    <p>@item.Location</p>
+                                </div>
+                                <div class="detail-content ">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <p>@item.ExpireTime</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="profile-myevent-content" id="joineventcard">
+                @foreach (var item in Model.MyEvents)
+                {
+                    <div class="userevent-card">
+                        <div class="userevent-card-content">
+                            <div class="userevent-card-subject">
+                                <div>
+                                    <a asp-action="Detail" asp-controller="Event" asp-route-Id="@item.Id">
+                                    <p>@item.Title</p>
+                                    </a>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+
+                            </div>
+                            <div class="userevent-card-detail">
+                                <div class="detail-content ">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <p>@item.ActivityTime</p>
+                                </div>
+                                <div class="detail-content ">
+                                    <i class="fa-solid fa-house-chimney"></i>
+                                    <p>@item.Location</p>
+                                </div>
+                                <div class="detail-content ">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <p>@item.ExpireTime</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+            
+        </div>
+        
+        
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('joinevent').addEventListener('click', function () {
+        document.getElementById('myevent').style.color = 'dimgrey';
+        document.getElementById('joinevent').style.color = 'black';
+        document.getElementById('joineventcard').style.display = 'grid';
+        document.getElementById('myeventcard').style.display = 'none';
+    });
+    document.getElementById('myevent').addEventListener('click', function () {
+        document.getElementById('joinevent').style.color = 'dimgrey';
+        document.getElementById('myevent').style.color = 'black';
+        document.getElementById('joineventcard').style.display = 'none';
+        document.getElementById('myeventcard').style.display = 'grid';
+    });
+</script>
