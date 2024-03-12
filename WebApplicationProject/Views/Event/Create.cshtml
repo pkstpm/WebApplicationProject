@@ -35,19 +35,22 @@
                 <option value="Volleyball">Volleyball</option>
                 <option value="Other">Other</option>
             </select>
+            
         </label>
         <div class="time-container">
             <label class="label-time" asp-for="ActivityTime">Activity Time</label>
             <input type="datetime-local" class="time-box" asp-for="ActivityTime" required />
         </div>
         <div class="time-container">
-            <label class="label-time" asp-for="ExpireTime">Expire Time</label>
+                <label class="label-time" asp-for="ExpireTime">Expire Time</label><link href="~/css/mainevent.css" rel="stylesheet" />
             <input type="datetime-local" class="time-box" asp-for="ExpireTime" required />
         </div>
         <label asp-for="Location" class="location-label">Location</label>
-        <input type="text" class="text-box" asp-for="Location" required />
+        <input type="text" class="text-box" asp-for="Location" required/>
+
         <label asp-for="Detail">Detail</label>
         <input type="text" class="text-box" asp-for="Detail" required />
+ 
         <label asp-for="Contact">Contact</label>
         <input type="text" class="text-box" asp-for="Contact" required />
     </div>
