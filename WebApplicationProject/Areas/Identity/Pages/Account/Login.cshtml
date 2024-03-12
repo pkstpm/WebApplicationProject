@@ -52,6 +52,17 @@
 </div>
 
 
+    <script>
+        function showPassword() {
+            let x = document.getElementById("input-password");
+            console.dir(x);
+            x.type = "text";
+        }
+        function hidePassword() {
+            let x = document.getElementById("input-password");
+            x.type = "password";
+        }
+    </script>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
