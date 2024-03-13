@@ -49,7 +49,6 @@ namespace WebApplicationProject.Controllers
                 return BadRequest("User not found");
             }
 
-            ViewBag.AlertMessage = TempData["JoinAlert"];
             var myevents = events.Where(e => e.UserID == user.Id).OrderByDescending(e => e.IsOpen).ThenBy(e => e.ActivityTime).ToList();
             var joinedevents = events.Where(e => e.UserEvents?.Any(ue => ue.UserID == user.Id && ue.IsJoin == true) == true).OrderByDescending(e => e.IsOpen).ThenBy(e => e.ActivityTime).ToList();
 
@@ -114,7 +113,7 @@ namespace WebApplicationProject.Controllers
                 ViewBag.AlertMessage = TempData["CreateAlert"];
 
             }
-            if (TempData["JoinAlert"] != null)
+            else if (TempData["JoinAlert"] != null)
             {
                 ViewBag.AlertMessage = TempData["JoinAlert"];
             }
@@ -180,8 +179,7 @@ namespace WebApplicationProject.Controllers
                     }
                     throw new Exception("Can't find User");
                 }
-
-                throw new Exception("Model is wrong");
+                return View(model);
             }
 
             return RedirectToPage("/Account/Login", new { area = "Identity" });
@@ -245,6 +243,7 @@ namespace WebApplicationProject.Controllers
                             @event.Capacity = viewmodel.Capacity;
 
                             await _context.SaveChangesAsync();
+                            TempData["EditAlert"] = "Edit " + @event.Title + " Success!!";
 
                             return RedirectToAction(nameof(Detail), new { id = @event.Id });
                         }
@@ -414,6 +413,7 @@ namespace WebApplicationProject.Controllers
             var @event = await _context.Events.FindAsync(Id);
             if (user.Id == @event.UserID)
             {
+                TempData["DeleteAlert"] = "Delete " + @event.Title + " Success!!";
                 _context.Events.Remove(@event);
                 var userevents = await _context.UserEvents.Where(ue => ue.EventID == @event.Id).ToListAsync();
                 _context.UserEvents.RemoveRange(userevents);
