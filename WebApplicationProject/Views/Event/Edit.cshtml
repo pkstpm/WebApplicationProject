@@ -20,11 +20,11 @@
                 <input asp-for="Title" type="text" class="text-box" name="Title" required>
                 <div class="time-container">
                     <label asp-for="ActivityTime" class="label-time" for="Activity Time">Activity Time</label>
-                    <input asp-for="ActivityTime" type="datetime-local" class="time-box" name="Activity Time" required />
+                <input asp-for="ActivityTime" type="datetime-local" class="time-box" name="ActivityTime" value="@Model.ActivityTime.ToString("yyyy-MM-ddTHH:mm")" required />
                 </div>
                 <div class="time-container">
                     <label asp-for="ExpireTime" class="label-time" for="Expire Time">Expire Time</label>
-                    <input asp-for="ExpireTime" type="datetime-local" class="time-box" name="Expire Time" required />
+                    <input asp-for="ExpireTime" type="datetime-local" class="time-box" name="ExpireTime" value="@Model.ExpireTime.ToString("yyyy-MM-ddTHH:mm")" required />
                 </div>
                 <label asp-for="Location" for="Location" class="location-label">Location</label>
                 <input asp-for="Location" type="text" class="text-box" name="Location" required />
@@ -39,7 +39,7 @@
                 <input type="button" class="btn-num" id="btn-down" value="-" />
                 <input type="button" class="btn-num" id="btn-up" value="+" />
 
-           
+            
 
                 <button type="submit" class="btn" id="btn-submit" name="submit" value="submit" >Submit</button>
             
@@ -49,27 +49,29 @@
         
         </form>
 
-        @if (Model.IsOpen == true)
-        {
-            <form asp-action="Close" method="post">
-                <input type="hidden" name="id" value="@Model.Id">
-                <input type="hidden" name="isOpen" value="false">
-                <button type="submit" class="btn" id="btn-close" name="close" value="close">Close this Event</button>
-            </form>
-        }
-        else
-        {
-            <form asp-action="Open" method="post">
-                <input type="hidden" name="id" value="@Model.Id">
-                <input type="hidden" name="isOpen" value="true">
-                <button type="submit" class="btn" id="btn-close" name="open" value="open">Open this Event</button>
-            </form>
-        }
-
-        <form asp-action="Delete" method="post">
+    @if (Model.IsOpen == true)
+    {
+        <form asp-action="Close" method="post">
             <input type="hidden" name="id" value="@Model.Id">
-            <button type="submit" class="btn" id="btn-delete" name="delete" value="delete">Delete this Event</button>
+            <input type="hidden" name="isOpen" value="false">
+            <button type="submit" class="btn" id="btn-close" name="close" value="close">Close this Event</button>
         </form>
+    }
+    else
+    {
+        <form asp-action="Open" method="post">
+            <input type="hidden" name="id" value="@Model.Id">
+            <input type="hidden" name="isOpen" value="true">
+            <button type="submit" class="btn" id="btn-close" name="open" value="open">Open this Event</button>
+        </form>
+    }
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" name="id" value="@Model.Id">
+        <button type="submit" class="btn" id="btn-delete" name="delete" value="delete">Delete this Event</button>
+    </form>
+
+       
         </div>
 
 
