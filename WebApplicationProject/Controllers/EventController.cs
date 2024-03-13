@@ -486,10 +486,14 @@ namespace WebApplicationProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddComment(Guid eventId, string detail)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             var @event = await _context.Events.Include(e => e.User).Include(e => e.UserEvents).ThenInclude(ue => ue.User).FirstOrDefaultAsync(e => e.Id == eventId);
             var user = await _userManager.GetUserAsync(User);
 
-            if (@event == null || user == null)
+            if (@event == null)
             {
                 return NotFound();
             }
@@ -499,18 +503,20 @@ namespace WebApplicationProject.Controllers
                 return RedirectToAction("Index", "Event", new { id = eventId });
             }
 
-            var comment = new Comment
-            {
-                UserID = user.Id,
-                EventId = eventId,
-                Detail = detail,
-                CreatedAt = DateTime.UtcNow
-            };
+            
+                var comment = new Comment
+                {
+                    UserID = user.Id,
+                    EventId = eventId,
+                    Detail = detail,
+                    CreatedAt = DateTime.UtcNow
+                };
+                _context.Comments.Add(comment);
+                await _context.SaveChangesAsync();
 
-            _context.Comments.Add(comment);
-            await _context.SaveChangesAsync();
+                return RedirectToAction("Detail", "Event", new { id = eventId });
+            
 
-            return RedirectToAction("Detail", "Event", new { id = eventId });
         }
     }
 }
