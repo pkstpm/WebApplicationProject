@@ -198,6 +198,7 @@ namespace WebApplicationProject.Controllers
                     {
                         throw new Exception("Dont found Event or this is not your event");
                     }
+                    
                     var model = new EditEventViewModel
                     {
                         Id = @event.Id,
@@ -205,8 +206,8 @@ namespace WebApplicationProject.Controllers
                         Detail = @event.Detail,
                         Contact = @event.Contact,
                         Location = @event.Location,
-                        ActivityTime = @event.ActivityTime,
-                        ExpireTime = @event.ExpireTime,
+                        ActivityTime = @event.ActivityTime.ToLocalTime(),
+                        ExpireTime = @event.ExpireTime.ToLocalTime(),
                         Capacity = @event.Capacity,
                         Amount = @event.Amount,
                         IsOpen = @event.IsOpen
@@ -240,7 +241,14 @@ namespace WebApplicationProject.Controllers
                             @event.Location = viewmodel.Location;
                             @event.ActivityTime = viewmodel.ActivityTime;
                             @event.ExpireTime = viewmodel.ExpireTime;
+
+                            if (@event.Capacity < viewmodel.Capacity)
+                            {
+                                @event.IsOpen = true;
+                            }
+
                             @event.Capacity = viewmodel.Capacity;
+
 
                             await _context.SaveChangesAsync();
                             TempData["EditAlert"] = "Edit " + @event.Title + " Success!!";
@@ -281,6 +289,11 @@ namespace WebApplicationProject.Controllers
             if (@event.IsOpen == true)
             {
                 return BadRequest("This event is already Opened");
+            }
+
+            if (@event.Capacity == @event.Amount)
+            {
+                return BadRequest("This event is already full");
             }
 
             if (@event.ExpireTime > DateTime.UtcNow)
@@ -338,46 +351,58 @@ namespace WebApplicationProject.Controllers
             var user = await _userManager.GetUserAsync(User);
             var @event = await _context.Events.FindAsync(Id);
 
-            var userEvent = _context.UserEvents.FirstOrDefault(ue => ue.UserID == user.Id && ue.EventID == @event.Id);
-
-            if (userEvent != null && userEvent.EventID == @event.Id && @event.Capacity > @event.Amount)
+            if (@event.ExpireTime > DateTime.Now)
             {
-                userEvent.IsJoin = true;
+                var userEvent = _context.UserEvents.FirstOrDefault(ue => ue.UserID == user.Id && ue.EventID == @event.Id);
 
-                _context.SaveChanges();
-
-                return RedirectToAction(nameof(Index));
-            }
-
-            if (@event.IsOpen != false)
-            {
-                if (@event.Amount < @event.Capacity)
+                if (userEvent != null && userEvent.EventID == @event.Id && @event.Capacity > @event.Amount)
                 {
-                    @event.Amount += 1;
-                    var userevent = new UserEvent
+                    if (userEvent.IsJoin == false)
                     {
-                        UserID = user.Id,
-                        EventID = @event.Id,
-                        IsJoin = true
-                    };
+                        userEvent.IsJoin = true;
 
-                    if (@event.Capacity == @event.Amount) {
-                        @event.IsOpen = false;
+                        @event.Amount += 1;
+
+                        _context.SaveChanges();
+
+                        return RedirectToAction(nameof(Index));
                     }
-
-                    _context.UserEvents.Add(userevent); 
-                    await _context.SaveChangesAsync();
-
-                    @event.UserEvents.Add(userevent);
-                    _context.Update(@event);
-
-                    user.UserEvents.Add(userevent);
-                    await _userManager.UpdateAsync(user);
-                    TempData["JoinAlert"] = "Join "+ @event.Title +" Success!!" ;
-
-                    return RedirectToAction(nameof(Index));
+                    return BadRequest("You already Join");
                 }
-                throw new Exception("This Event is full");
+
+                if (@event.IsOpen == true)
+                {
+                    if (@event.Amount < @event.Capacity)
+                    {
+                        
+                        var userevent = new UserEvent
+                        {
+                            UserID = user.Id,
+                            EventID = @event.Id,
+                            IsJoin = true
+                        };
+
+                        @event.Amount += 1;
+
+                        if (@event.Capacity == @event.Amount)
+                        {
+                            @event.IsOpen = false;
+                        }
+
+                        _context.UserEvents.Add(userevent);
+                        await _context.SaveChangesAsync();
+
+                        @event.UserEvents.Add(userevent);
+                        _context.Update(@event);
+
+                        user.UserEvents.Add(userevent);
+                        await _userManager.UpdateAsync(user);
+                        TempData["JoinAlert"] = "Join " + @event.Title + " Success!!";
+
+                        return RedirectToAction(nameof(Index));
+                    }
+                    throw new Exception("This Event is full");
+                }
             }
             throw new Exception("This Event is close");
         }
@@ -396,6 +421,11 @@ namespace WebApplicationProject.Controllers
                 userEvent.IsJoin = false;
 
                 @event.Amount -= 1;
+
+                if (@event.Amount < @event.Capacity && @event.ExpireTime > DateTime.UtcNow)
+                {
+                    @event.IsOpen = true;
+                }
 
                 _context.SaveChanges();
 
