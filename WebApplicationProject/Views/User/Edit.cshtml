@@ -67,24 +67,14 @@
                     </div>
                     <button type="submit" class="detail-submit">Submit</button>
                 </form>
-                <form method="post" asp-action="ChangePassword">
-                    <div class="w-100">
-                        <div class="flex pad-t-15 w-100">
-                            <div class="detail-input">
-                                <h2>Old Password</h2>
-                                <input type="password" name="OldPassword" />
-
-                            </div>
-                            <div class="detail-input pad-r-15">
-                                <h2>New Password</h2>
-                                <input type="password" name="NewPassword" />
-                               
-                            </div>
-                           
-                        </div>
-                    </div>
-                    <button type="submit" class="password-submit">Submit</button>
-                </form>
+                <div method="post" asp-action="ChangePassword">
+                    
+                    <button  class="password-submit">
+                        <a asp-area="Identity" asp-page="/Account/Manage/ChangePassword">
+                            Change Password
+                        </a>
+                        </button>
+                </div>
 
 
 
