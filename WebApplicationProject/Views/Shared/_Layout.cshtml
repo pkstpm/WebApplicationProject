@@ -19,9 +19,9 @@
                 <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="Logo"> BESTON </a>
             </div>
             <ul>
-                <li><a href="#" class="aj" id="event-link">Event</a></li>
-                <li><a href="#" class="aj" id="category-link">Category</a></li>
-                <li><a href="#" class="aj" id="aboutus-link">About Us</a></li>
+                <li><a asp-controller="Event" asp-action="Index">Event</a></li>
+                <li><a asp-controller="" asp-action="">Category</a></li>
+                <li><a asp-controller="Home" asp-action="Index">About Us</a></li>
                 <partial name="_LoginPartial.cshtml" />
             </ul>
             
@@ -34,7 +34,7 @@
         </main>
     </div>
     <script>
-        $(document).ready(function () {
+        /* $(document).ready(function () {
             // Handle navigation links click event
             $("nav ul li .aj").click(function (e) {
                 e.preventDefault(); // Prevent default link behavior
@@ -79,7 +79,7 @@
                     }
                 });
             }
-        });
+        }); */
     </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
