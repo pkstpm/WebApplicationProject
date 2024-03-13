@@ -123,8 +123,12 @@
                     <div class="userevent-card">
                         <div class="userevent-card-content">
                             <div class="userevent-card-subject">
-                                <div>
+                                <div class="flex gap-8">
                                     <p><a asp-action="Detail" asp-controller="Event" asp-route-Id="@item.Id">@item.Title</a></p>
+                                        <div class="flex items-center">
+                                            <i class="fa-solid fa-user pad"></i>
+                                            <p>@item.Amount / @item.Capacity</p>
+                                        </div>
                                 </div>
                                 <a asp-controller="Event" asp-action="Edit" asp-route-id="@item.Id">
                                 
