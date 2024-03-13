@@ -119,6 +119,7 @@ header {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+    transition: 1s;
 }
 
     .back-page a {

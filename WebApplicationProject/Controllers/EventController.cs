@@ -311,6 +311,10 @@ namespace WebApplicationProject.Controllers
                         IsJoin = true
                     };
 
+                    if (@event.Capacity == @event.Amount) {
+                        @event.IsOpen = false;
+                    }
+
                     _context.UserEvents.Add(userevent); 
                     await _context.SaveChangesAsync();
 
