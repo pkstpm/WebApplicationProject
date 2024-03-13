@@ -23,10 +23,6 @@ namespace WebApplicationProject.Controllers
             {
                 ViewBag.AlertMessage = TempData["DeleteAlert"];
             }
-            else if (TempData["EditAlert"] != null)
-            {
-                ViewBag.AlertMessage = TempData["EditAlert"];
-            }
             return View();
         }
 

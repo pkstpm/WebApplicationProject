@@ -42,6 +42,7 @@ i {
     border-radius: 100px;
     background-color: black;
     cursor:pointer;
+    z-index: 3;
 
 }
 h1 {
