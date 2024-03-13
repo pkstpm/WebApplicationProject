@@ -15,15 +15,55 @@
 <body>
     <header>
         <nav>
-            <div class="logo">
-                <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="Logo"> BESTON </a>
+            <div class="navbar">
+                <div class="logo">
+                    <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="Logo"> BESTON </a>
+                </div>
+                <ul class="links">
+                    <li><a href="event">Event</a></li>
+                    <li>
+                        <a href="category">Category</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Aerobic</a></li>
+                            <li><a href="#">Badminton</a></li>
+                            <li><a href="#">Basketball</a></li>
+                            <li><a href="#">Bicycle</a></li>
+                            <li><a href="#">Football</a></li>
+                            <li><a href="#">Futsal</a></li>
+                            <li><a href="#">Skateboard</a></li>
+                            <li><a href="#">Swimming</a></li>
+                            <li><a href="#">Volleyball</a></li>
+                            <li><a href="#">Other</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about_us">About Us</a></li>
+                    <partial name="_LoginPartial.cshtml" />
+                </ul>
+                <div class=toggle_btn>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
             </div>
-            <ul>
-                <li><a href="#" class="aj" id="event-link">Event</a></li>
-                <li><a href="#" class="aj" id="category-link">Category</a></li>
-                <li><a href="#" class="aj" id="aboutus-link">About Us</a></li>
-                <partial name="_LoginPartial.cshtml" />
-            </ul>
+
+            <div class="dropdown_menu open">
+                <li><a href="event">Event</a></li>
+                <li>
+                    <a href="category">Category</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Aerobic</a></li>
+                        <li><a href="#">Badminton</a></li>
+                        <li><a href="#">Basketball</a></li>
+                        <li><a href="#">Bicycle</a></li>
+                        <li><a href="#">Football</a></li>
+                        <li><a href="#">Futsal</a></li>
+                        <li><a href="#">Skateboard</a></li>
+                        <li><a href="#">Swimming</a></li>
+                        <li><a href="#">Volleyball</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </li>
+                <li><a href="about_us">About Us</a></li>
+                <li><a href="#" class="action-btn">Get Started</a></li>
+            </div>
             
         </nav>
 
@@ -80,6 +120,23 @@
                 });
             }
         });
+
+        const toggleBtn = document.querySelector('.toggle_btn')
+        const toggleBtnIcon = document.querySelector('.toggle_btn i')
+        const dropDownMenu = document.querySelector('.dropdown_menu')
+        let isOpen = false
+
+        toggleBtn.onclick = function () {
+            isOpen = !isOpen
+            isOpen == true
+                ? dropDownMenu.style.display = "block"
+                : dropDownMenu.style.display = "none"
+
+
+            toggleBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars'
+        };
     </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
