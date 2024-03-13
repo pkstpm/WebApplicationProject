@@ -48,13 +48,12 @@
 
                         if (Model.UserID == UserManager.GetUserId(User))
                         {
-                            <form asp-action="Edit" method="post">
-                                <input type="hidden" name="id" value="@Model.Id" />
+                            <a asp-action="Edit" asp-controller="Event" asp-route-Id="@Model.Id">
                                 <button class="edit">
                                     EDIT
                                     <i class="fa-solid fa-pen"></i>
                                 </button>
-                            </form>
+                            </a>
                         }
 
                         else if (!userIsMember)
