@@ -84,6 +84,7 @@
     border-top-width: 0px;
     border-left-width: 0px;
     border-right-width: 0px;
+    width : 120vh;
     
 }
 
@@ -235,7 +236,7 @@
 .detail-content {
     display: flex;
     align-items: center;
-    padding-bottom : 15px;
+    padding-bottom : 0px;
 }
 
 .detail-content i{
@@ -390,6 +391,10 @@ input {
             background-color: lightslategray;
         }
 
+        .w-50{
+            width : 35vw;
+        }
+
 .detail-submit {
     border-radius: 9999px;
     padding-top: 8px;
@@ -436,6 +441,7 @@ input {
     display: flex;
     align-items: center;
     padding-bottom: 50px;
+    
 }
 
 @media screen and (max-width:768px) {
