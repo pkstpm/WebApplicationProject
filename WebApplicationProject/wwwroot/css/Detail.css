@@ -5,7 +5,7 @@
 
 .modal {
    
-   
+   margin-bottom : 800px;
     
 }
 
@@ -71,9 +71,7 @@
         cursor: pointer;
     }
 
-.modal-card-detail p {
-    padding-left: 40px;
-}
+
 
 .flex {
     display: flex;
@@ -136,4 +134,43 @@ ul {
 
 ul li {
     padding-bottom : 20px;
+}
+
+.modal-card-detail-content{
+    display : flex;
+    justify-content : space-between;
+    align-items : center;
+}
+
+.modal-card-detail-container{
+    display : flex;
+    justify-content : space-between;
+}
+
+@media screen and (max-width:768px) {
+    .modal-content{
+        width : 680px;
+    }
+
+    
+
+    
+
+    .modal-card-detail-content {
+        display: flex;
+        justify-content : space-between;
+        width : 60%;
+        
+    }
+
+    .modal-card-detail-container{
+        display : flex;
+        flex-direction : column;
+
+    }
+
+    .modal-content{
+        top : 100%;
+        left : 50%;
+    }
 }
