@@ -16,6 +16,12 @@
     <link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
 }
 
+@if (ViewBag.AlertMessage != null)
+{
+    <div id="alertMessage" style="display: none;">
+        @ViewBag.AlertMessage
+    </div>
+}
 <div >
     <div class="mainevent-container">
         
@@ -339,7 +345,12 @@
 
 
     <script>
-            
+    document.addEventListener("DOMContentLoaded", function () {
+        var alertMessage = document.getElementById('alertMessage');
+        if (alertMessage != null) {
+            alert(alertMessage.innerText);
+        }
+    });
 
             document.getElementById("filter-container").addEventListener("mouseover", function () {
                 

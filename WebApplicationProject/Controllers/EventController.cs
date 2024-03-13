@@ -117,6 +117,10 @@ namespace WebApplicationProject.Controllers
             {
                 ViewBag.AlertMessage = TempData["JoinAlert"];
             }
+            else if (TempData["EditAlert"] != null)
+            {
+                ViewBag.AlertMessage = TempData["EditAlert"];
+            }
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
@@ -187,7 +191,7 @@ namespace WebApplicationProject.Controllers
 
                         _context.Events.Add(@event);
                         await _context.SaveChangesAsync();
-                        TempData["CreateAlert"] = "Success "+ @event.Title +" Create!!";
+                        TempData["CreateAlert"] = "You have create \""+ @event.Title + "\"!!";
 
                         return RedirectToAction(nameof(Detail), new { id = @event.Id });
                     }
@@ -506,7 +510,7 @@ namespace WebApplicationProject.Controllers
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Event", new { id = eventId });
+            return RedirectToAction("Detail", "Event", new { id = eventId });
         }
     }
 }
