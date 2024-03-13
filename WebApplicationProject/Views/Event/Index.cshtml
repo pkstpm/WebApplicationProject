@@ -16,13 +16,6 @@
     <link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
 }
 
-@if (ViewBag.AlertMessage != null)
-{
-    <div id="alertMessage" style="display: none;">
-        @ViewBag.AlertMessage
-    </div>
-}
-
 <div >
     <div class="mainevent-container">
         
@@ -194,8 +187,8 @@
                     <div class="userevent-card">
                         <div class="userevent-card-content">
                             <div class="userevent-card-subject">
-                            
-                                    <p>@item.Title</p>
+
+                                <p><a asp-action="Detail" asp-controller="Event" asp-route-Id="@item.Id">@item.Title</a></p>
                             
                                 <div class="flex items-center gap-4">
                                     <i class="fa-solid fa-user pad"></i>
@@ -329,14 +322,6 @@
                 document.getElementById('filter-content').style.display = 'none';
             });
 
-        }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        var alertMessage = document.getElementById('alertMessage');
-        if (alertMessage != null) {
-                alert(alertMessage.innerText);
-        }
-    });
 
     </script>
 
