@@ -171,8 +171,8 @@
                     <div class="userevent-card">
                         <div class="userevent-card-content">
                             <div class="userevent-card-subject">
-                            
-                                    <p>@item.Title</p>
+
+                                <p><a asp-action="Detail" asp-controller="Event" asp-route-Id="@item.Id">@item.Title</a></p>
                             
                                 <div class="flex items-center gap-4">
                                     <i class="fa-solid fa-user pad"></i>
@@ -302,7 +302,6 @@
                 document.getElementById('filter-content').style.display = 'none';
             });
 
-        }
 
     </script>
 
