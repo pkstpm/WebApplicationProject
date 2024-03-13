@@ -4,7 +4,7 @@
 }
 
 body {
-    width: 100vw;
+    width: 100%;
     height: fit-content;
     background-image: url("https://img.hotimg.com/Frame-16.png");
     background-size: cover;
@@ -21,6 +21,10 @@ body {
     background-color: white; 
     border-radius: 25px;
     background: rgba(255, 255, 255, 0.3);
+}
+.second-wrapper form{
+    position:absolute;
+    top:45rem;
 }
 i {
     position: absolute;
@@ -125,7 +129,7 @@ h1 {
     position: relative;
     top: 80px;
     margin-left: 150px;
-    left: -155px;
+    left: -200px;
     font-size: 20px;
     width: 40px;
     height: 40px;
@@ -142,7 +146,7 @@ h1 {
 
 .footer p {
     position: relative;
-    left: 260px;
+    left: 245px;
 }
 
 .btn {
