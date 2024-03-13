@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     margin-top: 30px;
-    
+    margin-bottom : 30px;
 }
 
 .profile-content {
@@ -85,6 +85,14 @@
     border-left-width: 0px;
     border-right-width: 0px;
     
+}
+
+.border-b {
+    border-style: solid;
+    border-bottom-width: 2px;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
 }
 
     .username button {
@@ -205,21 +213,21 @@
 .userevent-card-subject {
     display: flex;
     align-items: center;
-    padding-left: 40px;
+    padding-left: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
+    justify-content : space-between;
+    margin-right : 20px;
 }
 
-    .userevent-card-subject p {
-        padding-right: 110px;
-    }
+    
 
     .userevent-card-subject i {
         cursor: pointer;
     }
 
 .userevent-card-detail {
-    padding-left: 40px;
+    padding-left: 20px;
     border-top-width: 2px;
     border-color: rgb(0 0 0);
 }
@@ -247,4 +255,218 @@
 
 #joineventcard{
     display : none;
+}
+
+a {
+    text-decoration : none;
+    color : black;
+}
+
+.quit-button button {
+    border-radius: 9999px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 1rem; /* 20px */
+    line-height: 1rem; /* 28px */
+    background-color: rgb(239 68 68);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.event-closed button {
+    border-radius: 9999px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 1rem; /* 20px */
+    line-height: 1rem; /* 28px */
+    background-color: rgb(168 162 158);
+    color: white;
+    border: none;
+    
+    margin-bottom: 15px;
+}
+
+.items-center{
+    align-items : center;
+}
+
+.flex{
+    display : flex;
+}
+
+.gap-4{
+    gap : 4px;
+}
+
+input {
+    
+    padding: 8px;
+    border-radius: 2rem;
+    border: 1px solid #C4C4C4;
+}
+
+.edit-img-container {
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 50px;
+    position : relative;
+}
+
+.edit-img-container img {
+    border-radius: 9999px;
+    border-color: rgb(0 0 0);
+    border-style: solid;
+    border-width: 2px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.edit-img-button {
+    position: absolute;
+    top: -10%;
+    right: 15%;
+    border-radius: 2rem;
+    padding: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor : pointer;
+    border : none;
+    background : none;
+}
+
+.img-form {
+    display : none;
+}
+
+.img-form input {
+    position: absolute;
+    left: -5%;
+    bottom: -30%;
+    transition: 1s;
+    transition-duration: 700ms;
+    
+}
+
+    .img-form button {
+        position: absolute;
+        left: 19%;
+        bottom: -55%;
+        border-radius: 9999px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 14px;
+        padding-right: 14px;
+        font-size: 1rem; /* 20px */
+        line-height: 1rem; /* 28px */
+        background-color: rgb(74 222 128);
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+        .img-form button:hover {
+            background-color: lightslategray;
+        }
+
+.detail-submit {
+    border-radius: 9999px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 1rem; /* 20px */
+    line-height: 1rem; /* 28px */
+    background-color: rgb(74 222 128);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+    .detail-submit:hover {
+        background-color: lightslategray;
+    }
+
+.password-submit {
+    border-radius: 9999px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 1rem; /* 20px */
+    line-height: 1rem; /* 28px */
+    background-color: rgb(74 222 128);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+    .password-submit:hover {
+        background-color: lightslategray;
+    }
+
+    .detail-input input{
+        padding-right : 100px;
+    }
+
+.profile-detail {
+    display: flex;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+@media screen and (max-width:768px) {
+    .profile-content{
+        width : 100vh;
+    }
+
+    .profile-detail{
+        flex-direction : column;
+        justify-content : center;
+    }
+
+    #expireTime{
+        display : none;
+    }
+
+    #location{
+        display : none;
+    }
+
+    .userevent-card {
+        width: 210px;
+    }
+
+    .img-container{
+        padding-right : 0px;
+    }
+
+    .edit-img-container{
+        padding-right : 0px;
+    }
+
+    .edit-img-button{
+        right : -20%;
+    }
+
+    .img-form input{
+        left : 120%;
+        bottom : 50%;
+    }
+
+    .img-form button {
+        left: 150%;
+        bottom: 20%;
+    }
 }

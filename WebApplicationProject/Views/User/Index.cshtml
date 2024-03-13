@@ -13,7 +13,7 @@
 <div class="profile-container">
     <div class="profile-content">
        
-        <div class="flex  align-item-center  pad-b-15 ">
+        <div class="profile-detail ">
             <div class="img-container">
                 <img src="~/images/pon.jpg" />
             </div>
@@ -21,9 +21,12 @@
                 <div class="username flex justify-between align-item-center">
                     <h2 class="pad-b-5 ">Ponza</h2>
                     
-                        <button class="pad-b-5">
-                            Edit
-                            <i class="fa-solid fa-pen"></i>
+                        <button  class="pad-b-5">
+                            <a asp-controller="User" asp-action="Edit">
+                            Edit<i class="fa-solid fa-pen"></i>
+                            </a>
+                            
+                            
                         </button>
                     
                     
@@ -77,7 +80,8 @@
                 </button>
             </div>
             <div class="profile-myevent-content" id="myeventcard">
-                @foreach (var item in Model.JoinedEvents){
+                @foreach (var item in Model.MyEvents)
+                {
                 
                     <div class="userevent-card">
                         <div class="userevent-card-content">
@@ -95,17 +99,21 @@
 
                             </div>
                             <div class="userevent-card-detail">
-                                <div class="detail-content ">
+                                <div class="detail-content " >
                                     <i class="fa-solid fa-calendar-days"></i>
                                     <p>@item.ActivityTime</p>
                                 </div>
-                                <div class="detail-content ">
+                                <div class="detail-content " id="location">
                                     <i class="fa-solid fa-house-chimney"></i>
                                     <p>@item.Location</p>
                                 </div>
-                                <div class="detail-content ">
+                                <div class="detail-content " id="expireTime">
                                     <i class="fa-solid fa-clock"></i>
                                     <p>@item.ExpireTime</p>
+                                </div>
+                                <div class="detail-content ">
+                                    <i class="fa-solid fa-user pad"></i>
+                                    <p>@item.Amount / @item.Capacity</p>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +121,7 @@
                 }
             </div>
             <div class="profile-myevent-content" id="joineventcard">
-                @foreach (var item in Model.MyEvents)
+                @foreach (var item in Model.JoinedEvents)
                 {
                     <div class="userevent-card">
                         <div class="userevent-card-content">
@@ -123,8 +131,9 @@
                                     <p>@item.Title</p>
                                     </a>
                                 </div>
-                                <div>
-                                    <i class="fa-solid fa-pen"></i>
+                                <div class="flex items-center gap-4">
+                                    <i class="fa-solid fa-user pad"></i>
+                                    <p>@item.Amount / @item.Capacity</p>
                                 </div>
 
                             </div>
@@ -134,13 +143,34 @@
                                     <p>@item.ActivityTime</p>
                                 </div>
                                 <div class="detail-content ">
-                                    <i class="fa-solid fa-house-chimney"></i>
+                                    <i class="fa-solid fa-house-chimney" id="location"></i>
                                     <p>@item.Location</p>
                                 </div>
-                                <div class="detail-content ">
+                                <div class="detail-content " id="expireTime">
                                     <i class="fa-solid fa-clock"></i>
                                     <p>@item.ExpireTime</p>
                                 </div>
+                                
+                                @if(item.IsOpen){
+                                    <div class="quit-button">
+                                    <form>
+                                        <button>
+                                            Quit
+                                        </button>
+                                    </form>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="event-closed">
+                                        
+                                            <button>
+                                                Event Closed
+                                            </button>
+                                       
+                                    </div>
+                                }
+
                             </div>
 
                         </div>

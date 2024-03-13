@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
@@ -30,14 +31,16 @@ namespace WebApplicationProject.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var events = await _context.Events.Include(e => e.UserEvents).ToListAsync();
+
             if (!_signInManager.IsSignedIn(User))
             {
-                var viewModels = new AllEventViewModel
+                var viewmodel = new AllEventViewModel
                 {
-                    OtherEvents = await _context.Events.OrderByDescending(e => e.IsOpen).ToListAsync()
+                    OtherEvents = events.OrderByDescending(e => e.IsOpen).ThenBy(e => e.ExpireTime).ToList()
                 };
 
-                return View(viewModels);
+                return View(viewmodel);
             }
 
             var user = await _userManager.GetUserAsync(User);
@@ -46,15 +49,16 @@ namespace WebApplicationProject.Controllers
                 return BadRequest("User not found");
             }
 
-            var myEventsQuery = _context.Events.Where(e => e.UserID == user.Id).OrderByDescending(e => e.IsOpen);
-            var joinedEventsQuery = _context.Events.Where(e => e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin)).OrderByDescending(e => e.IsOpen);
-            var otherEventsQuery = _context.Events.Where(e => e.UserID != user.Id && !e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin)).OrderByDescending(e => e.IsOpen);
+            var myevents = events.Where(e => e.UserID == user.Id).OrderByDescending(e => e.IsOpen).ThenBy(e => e.ActivityTime).ToList();
+            var joinedevents = events.Where(e => e.UserEvents?.Any(ue => ue.UserID == user.Id && ue.IsJoin == true) == true).OrderByDescending(e => e.IsOpen).ThenBy(e => e.ActivityTime).ToList();
+
+            var otherevents = events.Except(myevents).Except(joinedevents).OrderByDescending(e => e.IsOpen).ThenBy(e => e.ExpireTime).ToList();
 
             var viewModel = new AllEventViewModel
             {
-                MyEvents = await myEventsQuery.ToListAsync(),
-                JoinedEvents = await joinedEventsQuery.ToListAsync(),
-                OtherEvents = await otherEventsQuery.ToListAsync()
+                MyEvents = myevents,
+                JoinedEvents = joinedevents,
+                OtherEvents = otherevents
             };
 
             return View(viewModel);
@@ -66,33 +70,41 @@ namespace WebApplicationProject.Controllers
             Category category;
             if (!Enum.TryParse(categoryName, true, out category))
             {
-
                 return BadRequest("Invalid category name");
             }
-            if (_signInManager.IsSignedIn(User))
-            {
-                var user = await _userManager.GetUserAsync(User);
-                if (user != null)
-                {
-                    var viewModel = new AllEventViewModel
-                    {
-                        MyEvents = [.. _context.Events.Where(e => e.Category == category).Where(e => e.UserID == user.Id).OrderByDescending(e => e.IsOpen)],
-                        JoinedEvents = [.. _context.Events.Where(e => e.Category == category).Where(e => e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin == true)).OrderByDescending(e => e.IsOpen)],
-                        OtherEvents = [.. _context.Events.Where(e => e.Category == category).Where(e => e.UserID != user.Id && !e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin == true)).OrderByDescending(e => e.IsOpen)]
-                    };
 
-                    return View("Index", viewModel);
-                }
-                throw new Exception("Can't find User");
+            var events = await _context.Events.Where(e => e.Category == category).Include(e => e.UserEvents).ToListAsync();
+
+            if (!_signInManager.IsSignedIn(User))
+            {
+                var viewmodel = new AllEventViewModel
+                {
+                    OtherEvents = events.OrderByDescending(e => e.IsOpen).ThenBy(e => e.ExpireTime).ToList()
+                };
+                return View("Index", viewmodel);
             }
 
-            var viewModels = new AllEventViewModel
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
             {
-                OtherEvents = [.. _context.Events.Where(e => e.Category == category).OrderByDescending(e => e.IsOpen)]
+                return BadRequest("User not found");
+            }
+
+            ViewBag.AlertMessage = TempData["JoinAlert"];
+            var myevents = events.Where(e => e.UserID == user.Id).OrderByDescending(e => e.IsOpen).ThenBy(e => e.ActivityTime).ToList();
+            var joinedevents = events.Where(e => e.UserEvents?.Any(ue => ue.UserID == user.Id && ue.IsJoin) == true).OrderByDescending(e => e.IsOpen).ThenBy(e => e.ActivityTime).ToList();
+            var otherevents = events.Except(myevents).Except(joinedevents).OrderByDescending(e => e.IsOpen).ThenBy(e => e.ExpireTime).ToList();
+
+            var viewModel = new AllEventViewModel
+            {
+                MyEvents = myevents,
+                JoinedEvents = joinedevents,
+                OtherEvents = otherevents
             };
 
-            return View("Index", viewModels);
+            return View("Index", viewModel);
         }
+
 
         public async Task<IActionResult> Detail(Guid Id)
         {
@@ -153,7 +165,7 @@ namespace WebApplicationProject.Controllers
                             Contact = model.Contact,
                             IsOpen = true,
                             Capacity = model.Capacity,
-                            Amount = 1,
+                            Amount = 0,
                             UserID = user.Id,
                             UserEvents = [],
                             Comments = []
@@ -196,6 +208,7 @@ namespace WebApplicationProject.Controllers
                         ActivityTime = @event.ActivityTime,
                         ExpireTime = @event.ExpireTime,
                         Capacity = @event.Capacity,
+                        Amount = @event.Amount,
                         IsOpen = @event.IsOpen
                     };
                     return View(model);
@@ -232,7 +245,7 @@ namespace WebApplicationProject.Controllers
                             await _context.SaveChangesAsync();
                             TempData["EditAlert"] = "Edit " + @event.Title + " Success!!";
 
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction(nameof(Detail), new { id = @event.Id });
                         }
                     }
                     throw new Exception("Can't find Event");
@@ -243,41 +256,79 @@ namespace WebApplicationProject.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Open(Guid id, bool isOpen)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            var @event = await _context.Events.SingleOrDefaultAsync(e => e.Id == id);
+            if (@event == null)
+            {
+                return NotFound("Event not found");
+            }
+
+            if (user.Id != @event.UserID)
+            {
+                return Forbid("You do not have permission to close this event");
+            }
+
+            if (@event.IsOpen == true)
+            {
+                return BadRequest("This event is already Opened");
+            }
+
+            if (@event.ExpireTime > DateTime.UtcNow)
+            {
+                @event.IsOpen = isOpen;
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Event", new { id });
+            }
+
+            return NotFound("You can't open this event");
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Close(Guid Id)
+        [Authorize]
+        public async Task<IActionResult> Close(Guid id, bool isOpen)
         {
-            if (_signInManager.IsSignedIn(User))
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
             {
-                var user = await _userManager.GetUserAsync(User);
-                if (user != null)
-                {
-                    var @event = await _context.Events.FindAsync(Id);
-                    if (@event != null)
-                    {
-                        if (user.Id == @event.UserID)
-                        {
-                            if (@event.IsOpen == true)
-                            { 
-                                @event.IsOpen = false;
-
-                                await _context.SaveChangesAsync();
-
-                                TempData["CloseAlert"] = "Close " + @event.Title + "Success!!";
-
-                                return RedirectToAction("Index", "Event", new { id = Id });
-                            }
-                            throw new Exception("This event is already close");
-                        }
-                        throw new Exception("This is not your event");
-                    }
-                    throw new Exception("Can't find Event");
-                }
-                throw new Exception("Can't find User");
+                return NotFound("User not found");
             }
-            return RedirectToPage("/Account/Login", new { area = "Identity" });
 
+            var @event = await _context.Events.SingleOrDefaultAsync(e => e.Id == id);
+
+            if (@event == null)
+            {
+                return NotFound("Event not found");
+            }
+
+            if (user.Id != @event.UserID)
+            {
+                return Forbid("You do not have permission to close this event");
+            }
+
+            if (@event.IsOpen == false)
+            {
+                return BadRequest("This event is already closed");
+            }
+
+            @event.IsOpen = isOpen;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Event", new { id });
         }
 
         [HttpPost]
@@ -292,8 +343,6 @@ namespace WebApplicationProject.Controllers
             if (userEvent != null && userEvent.EventID == @event.Id && @event.Capacity > @event.Amount)
             {
                 userEvent.IsJoin = true;
-
-                @event.Amount += 1;
 
                 _context.SaveChanges();
 
