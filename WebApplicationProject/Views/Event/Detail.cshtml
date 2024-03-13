@@ -1,8 +1,12 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using WebApplicationProject.Areas.Identity.Data
+@{
     ViewData["Title"] = "Eventdetail";
 }
 
 @model WebApplicationProject.Models.Event
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 <link rel="stylesheet" href="~/css/Detail.css" asp-append-version="true" />
 <link href="~/font-awesome/css/all.css" rel="stylesheet" />
@@ -26,18 +30,73 @@
                 <p id="amount">@Model.Amount/@Model.Capacity</p>
             </div>
             <div class="flex items-center">
-                <button >
-                    JOIN
-                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                </button>
-                <button class="quit">
-                    QUIT
-                    <i class="fa-regular fa-circle-xmark"></i>
-                </button>
-                <button class="edit">
-                    EDIT
-                    <i class="fa-solid fa-pen"></i>
-                </button>
+                @if (Model.ExpireTime > DateTime.Now)
+                {
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        bool userIsMember = false;
+
+
+                        foreach (var ue in Model.UserEvents)
+                        {
+                            if (ue.UserID == UserManager.GetUserId(User))
+                            {
+                                userIsMember = ue.IsJoin; // Check if user is a member
+                                break;
+                            }
+                        }
+
+                        if (Model.UserID == UserManager.GetUserId(User))
+                        {
+                            <form asp-action="Edit" method="post">
+                                <input type="hidden" name="id" value="@Model.Id" />
+                                <button class="edit">
+                                    EDIT
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </form>
+                        }
+
+                        else if (!userIsMember)
+                        {
+                            <div class="join-button">
+                                <form asp-action="Join" method="post">
+                                    <input type="hidden" name="id" value="@Model.Id" />
+                                    <button type="submit">JOIN
+                                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            
+                            <form asp-action="Quit" method="post">
+                            <input type="hidden" name="id" value="@Model.Id" />
+                                <button class="quit">
+                                    QUIT
+                                    <i class="fa-regular fa-circle-xmark"></i>
+                                </button>
+                            </form>
+                        }
+                    }
+                    else
+                    {
+                        <form asp-action="Join" method="post">
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <button type="submit">
+                                JOIN
+                                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            </button>
+                        </form>
+                    }
+                }
+                else
+                {
+                    <button class="edit">
+                        Event Closed
+                    </button>
+                }
                 <p>Create by @Model.User.UserName</p>
             </div>
 
