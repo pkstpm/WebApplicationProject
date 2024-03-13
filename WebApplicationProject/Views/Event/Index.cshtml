@@ -157,22 +157,42 @@
                                     </div>
                                     @if (item.IsOpen)
                                     {
-                                        <div class="open-button">
+                                        <div class="flex gap-4">
+                                            <div class="open-button">
 
-                                            <button>
-                                                Event Open
-                                            </button>
+                                                <button>
+                                                    Event Open
+                                                </button>
 
+                                            </div>
+
+                                            <div class="quit-button">
+                                                <button>
+                                                    Delete Event
+                                                </button>
+
+                                            </div>
                                         </div>
+
+                                        
                                     }
                                     else
                                     {
-                                        <div class="event-closed">
+                                        <div class="flex gap-4">
+                                            <div class="event-closed">
 
-                                            <button>
-                                                Event Closed
-                                            </button>
+                                                <button>
+                                                    Event Open
+                                                </button>
 
+                                            </div>
+
+                                            <div class="quit-button">
+                                                <button>
+                                                    Delete Event
+                                                </button>
+
+                                            </div>
                                         </div>
                                     }
 

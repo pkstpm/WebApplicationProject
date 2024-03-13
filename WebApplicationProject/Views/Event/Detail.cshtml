@@ -30,6 +30,7 @@
                 <p id="amount">@Model.Amount/@Model.Capacity</p>
             </div>
             <div class="flex items-center">
+
                 @if (Model.ExpireTime > DateTime.Now)
                 {
                     @if (SignInManager.IsSignedIn(User))
@@ -98,6 +99,7 @@
                     </button>
                 }
                 <p>Create by @Model.User.UserName</p>
+
             </div>
 
 
