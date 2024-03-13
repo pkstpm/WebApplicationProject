@@ -9,7 +9,8 @@
 <div class="almarai-bold wrapper">
         <form asp-action="Edit" method="post">
         @Html.HiddenFor(model => model.Id)
-        
+        @Html.HiddenFor(model => model.Amount)
+            <h1>@Model.IsOpen</h1>
             <button class="back-page">
                 <i class="fa-solid fa-chevron-left fa-2xl"></i>
             </button>
@@ -34,32 +35,68 @@
             </div>
             <div class="almarain-bold footer">
                 <p>Number of Opening</p>
-                <input asp-for="Capacity" class="show-box" id="people-count" value="1" />
+                <input asp-for="Capacity" class="show-box" id="people-count" value=@Model.Capacity readonly />
                 <input type="button" class="btn-num" id="btn-down" value="-" />
                 <input type="button" class="btn-num" id="btn-up" value="+" />
 
+           
+
                 <button type="submit" class="btn" id="btn-submit" name="submit" value="submit" >Submit</button>
-            @if (Model.IsOpen == true)
-            {
-                <form asp-action="Close" method="post">
-                    <input type="hidden" name="id" value="@Model.Id">
-                    <button type="submit" class="btn" id="btn-close" name="close" value="close">Close this Event</button>
-                </form>
-            }
-            else
-            {
-                <form asp-action="Open" method="post">
-                    <input type="hidden" name="id" value="@Model.Id">
-                    <button type="submit" class="btn" id="btn-close" name="open" value="open">Open this Event</button>
-                </form>
-            }
-            <form asp-action="Delete" method="post">
-                <input type="hidden" name="id" value="@Model.Id">
-                <button type="submit" class="btn" id="btn-delete" name="delete" value="delete">Delete this Event</button>
-            </form>
+            
+            
 
             </div>
         
         </form>
-       
+
+        @if (Model.IsOpen == true)
+        {
+            <form asp-action="Close" method="post">
+                <input type="hidden" name="id" value="@Model.Id">
+                <input type="hidden" name="isOpen" value="false">
+                <button type="submit" class="btn" id="btn-close" name="close" value="close">Close this Event</button>
+            </form>
+        }
+        else
+        {
+            <form asp-action="Open" method="post">
+                <input type="hidden" name="id" value="@Model.Id">
+                <input type="hidden" name="isOpen" value="true">
+                <button type="submit" class="btn" id="btn-close" name="open" value="open">Open this Event</button>
+            </form>
+        }
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" name="id" value="@Model.Id">
+            <button type="submit" class="btn" id="btn-delete" name="delete" value="delete">Delete this Event</button>
+        </form>
         </div>
+
+
+<script>
+    console.log('@Model.IsOpen')
+    const minimum = @Model.Amount
+    //createEvent part
+    const add = document.getElementById("btn-up");
+    const minus = document.getElementById("btn-down");
+    const count = document.getElementById("people-count");
+
+    if (add != null) {
+        add.addEventListener("click", function () {
+            count.value = parseInt(count.value) + 1;
+        });
+    }
+
+    if (minus != null) {
+        minus.addEventListener("click", function () {
+            const currentValue = parseInt(count.value);
+            if (currentValue > minimum) {
+                count.value = currentValue - 1;
+            }
+            else {
+                alert("You can't minus your Number of Opening")
+                count.value = minimum
+            }
+        });
+    }
+</script>

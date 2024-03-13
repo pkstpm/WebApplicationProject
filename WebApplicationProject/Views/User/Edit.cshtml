@@ -10,52 +10,83 @@
 <div class="profile-container">
     <div class="profile-content">
 
-        <div class="flex  align-item-center  pad-b-15 ">
-            <div class="img-container">
+        <div class="profile-detail ">
+            <div class="edit-img-container">
                 <img src="~/images/pon.jpg" />
+                <form class="img-form" id="imgInput">
+                    <input />
+                    <button>
+                        Submit
+                    </button>
+                </form>
+                <button type="submit" id="editImg" class="edit-img-button">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+                
             </div>
-            <div class="flex-col ">
+            <div class="flex-col w-100">
                 <div class="username flex justify-between align-item-center">
                     <h2 class="pad-b-5 ">Ponza</h2>
 
                     <button class="pad-b-5">
-                        Edit
-                        <i class="fa-solid fa-pen"></i>
+                        <a asp-controller="User" asp-action="Index">Profile<i class="fa-solid fa-user pad"></i></a>
+                        
+                        
                     </button>
 
 
                 </div>
 
 
-                <form method="post" asp-action="Edit">
-                    <div class="flex justify-between w-100 ">
+                <form method="post" asp-action="Edit" class="border-b pad-b-15">
+                    <div class="flex  w-100">
                         <div class="flex flex-col justify-between pad-t-15 pad-r-15">
-                            <div class=" ">
+                            <div class="detail-input">
                                 <h2>First name</h2>
-                                <input asp-for="FirstName" placeholder="@Model.FirstName" />
+                                <input asp-for="FirstName" placeholder="@Model.FirstName" maxlength="25"/>
                             </div>
-                            <div class="">
+                            <div class="detail-input">
                                 <h2>Tel</h2>
-                                <input asp-for="PhoneNumber" placeholder="@Model.PhoneNumber" />
+                                <input asp-for="PhoneNumber" placeholder="@Model.PhoneNumber" maxlength="25" />
                             </div>
 
                         </div>
                         <div class="flex flex-col pad-t-15 justify-between">
-                            <div class=" ">
+                            <div class="detail-input ">
                                 <h2>Last name</h2>
 
-                                <input asp-for="LastName" placeholder="@Model.LastName" />
+                                <input asp-for="LastName" placeholder="@Model.LastName" maxlength="50" />
                             </div>
-                            <div class=" ">
+                            <div class=" detail-input">
                                 <h2>Email</h2>
 
-                                <input asp-for="Email" placeholder="@Model.Email" />
+                                <input asp-for="Email" placeholder="@Model.Email" maxlength="50" />
                             </div>
                         </div>
                     </div>
-                    <button type="submit">Submit</button>
+                    <button type="submit" class="detail-submit">Submit</button>
                 </form>
-                
+                <form >
+                    <div class=" w-100 ">
+                        <div class="flex  pad-t-15  w-100 ">
+                            <div class="detail-input pad-r-15">
+                                <h2>New Password</h2>
+                                <input />
+                            </div>
+                            <div class="detail-input">
+                                <h2>Old Password</h2>
+                                <input />
+                            </div>
+
+                        </div>
+                        <div class="detail-input">
+                            <h2>Confirm Password</h2>
+                            <input />
+                        </div>
+                        
+                    </div>
+                    <button type="submit" class="password-submit">Submit</button>
+                </form>
 
 
 
@@ -70,16 +101,14 @@
 
 
 <script>
-    document.getElementById('joinevent').addEventListener('click', function () {
-        document.getElementById('myevent').style.color = 'dimgrey';
-        document.getElementById('joinevent').style.color = 'black';
-        document.getElementById('joineventcard').style.display = 'grid';
-        document.getElementById('myeventcard').style.display = 'none';
-    });
-    document.getElementById('myevent').addEventListener('click', function () {
-        document.getElementById('joinevent').style.color = 'dimgrey';
-        document.getElementById('myevent').style.color = 'black';
-        document.getElementById('joineventcard').style.display = 'none';
-        document.getElementById('myeventcard').style.display = 'grid';
+   
+    document.getElementById('editImg').addEventListener('click', function () {
+        var imgInput = document.getElementById('imgInput');
+
+        if (imgInput.style.display === 'block' || imgInput.style.display === '') {
+            imgInput.style.display = 'none';
+        } else {
+            imgInput.style.display = 'block';
+        }
     });
 </script>

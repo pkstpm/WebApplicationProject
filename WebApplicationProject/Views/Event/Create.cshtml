@@ -39,11 +39,11 @@
         </label>
         <div class="time-container">
             <label class="label-time" asp-for="ActivityTime">Activity Time</label>
-            <input type="datetime-local" class="time-box" asp-for="ActivityTime" required />
+            <input type="datetime-local" id="ActivityTime"class="time-box" asp-for="ActivityTime" required />
         </div>
         <div class="time-container">
-                <label class="label-time" asp-for="ExpireTime">Expire Time</label><link href="~/css/mainevent.css" rel="stylesheet" />
-            <input type="datetime-local" class="time-box" asp-for="ExpireTime" required />
+            <label class="label-time" asp-for="ExpireTime">Expire Time</label><link href="~/css/mainevent.css" rel="stylesheet" />
+            <input type="datetime-local" id="ExpiredTime"class="time-box" asp-for="ExpireTime" required />
         </div>
         <label asp-for="Location" class="location-label">Location</label>
         <input type="text" class="text-box" asp-for="Location" required/>
@@ -65,22 +65,39 @@
 </form>
 <script>
         //createEvent part
-const add = document.getElementById("btn-up");
-const minus = document.getElementById("btn-down");
-const count = document.getElementById("people-count");
+    const add = document.getElementById("btn-up");
+    const minus = document.getElementById("btn-down");
+    const count = document.getElementById("people-count");
 
-if (add != null) {
-    add.addEventListener("click", function () {
+    if (add != null) {
+        add.addEventListener("click", function () {
         count.value = parseInt(count.value) + 1; // Increment the value of the input field
-    });
-}
+        });
+    }
 
-if (minus != null) {
-    minus.addEventListener("click", function () {
-        const currentValue = parseInt(count.value);
-        if (currentValue > 1) {
-            count.value = currentValue - 1; // Decrement the value of the input field, ensuring it never goes below 1
+    if (minus != null) {
+        minus.addEventListener("click", function () {
+            const currentValue = parseInt(count.value);
+            if (currentValue > 1) {
+                count.value = currentValue - 1; // Decrement the value of the input field, ensuring it never goes below 1
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var activityTime = document.getElementById("ActivityTime");
+        var expiredTime = document.getElementById("ExpiredTime");
+
+        if (activityTime && expiredTime) {
+            var activityTimeValue = new Date(activityTime.value);
+            var expiredTimeValue = new Date(expiredTime.value);
+            var now = new Date();
+
+            if (activityTimeValue < now) {
+                alert("Invalid Activity time");
+            } else if (expiredTimeValue < now) {
+                alert("Invalid Expired time");
+            }
         }
     });
-}
 </script>

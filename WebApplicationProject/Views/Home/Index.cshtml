@@ -6,6 +6,13 @@ ViewData["Title"] = "Home Page";
 }
 
 
+@if (ViewBag.AlertMessage != null)
+{
+    <div id="alertMessage" style="display: none;">
+        @ViewBag.AlertMessage
+    </div>
+}
+
     <main>
     <section class="section1 box">
         <img id="img-firstPage" src="https://img.hotimg.com/371418579_240735351767786_5158566336021747775_n-1-removebg-preview-1.png"/>
@@ -105,6 +112,13 @@ ViewData["Title"] = "Home Page";
 </main>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var alertMessage = document.getElementById('alertMessage');
+        if (alertMessage != null) {
+            alert(alertMessage.innerText);
+        }
+    });
+
     function changeImage(num) {
     const image = document.getElementById("img-section2");
     const texts = ["AEROBIC", "BASKETBALL", "BADMINTON", "BICYCLE", "FOOTBALL", "VOLLEYBALL", "FUTSAL", "SKATEBOARD", "SWIMMING", "OTHER"];
@@ -176,6 +190,4 @@ ViewData["Title"] = "Home Page";
     }
 
     }
-
-</script>
 
