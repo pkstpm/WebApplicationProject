@@ -65,7 +65,7 @@
 
                     </div>
                         <div class="detail-container">
-                            <div class="detail-content pad-10">
+                            <div class="detail-content ">
                                 <i class="fa-solid fa-clock"></i>
                                 <p>@item.ExpireTime</p>
                             </div>
@@ -76,7 +76,7 @@
                     </div>
 
                     
-                        @if (SignInManager.IsSignedIn(User) && item.IsOpen)
+                        @if (SignInManager.IsSignedIn(User) && item.IsOpen && item.ExpireTime > DateTime.Now)
                         {
                            <div class="join-button">
                                 <form asp-action="Join" method="post">
@@ -93,9 +93,18 @@
                                         <button >Event Closed</button>
                                     
 
-                                </div>
+                            </div>
                         }
-                        
+                        else if (!item.IsOpen)
+                        {
+                            <div class="outofdate">
+
+                                <button>Event Closed</button>
+
+
+                            </div>
+                        }
+
                     </div>
                 </div>
                 
@@ -148,22 +157,42 @@
                                     </div>
                                     @if (item.IsOpen)
                                     {
-                                        <div class="open-button">
+                                        <div class="flex gap-4">
+                                            <div class="open-button">
 
-                                            <button>
-                                                Event Open
-                                            </button>
+                                                <button>
+                                                    Event Open
+                                                </button>
 
+                                            </div>
+
+                                            <div class="quit-button">
+                                                <button>
+                                                    Delete Event
+                                                </button>
+
+                                            </div>
                                         </div>
+
+                                        
                                     }
                                     else
                                     {
-                                        <div class="event-closed">
+                                        <div class="flex gap-4">
+                                            <div class="event-closed">
 
-                                            <button>
-                                                Event Closed
-                                            </button>
+                                                <button>
+                                                    Event Open
+                                                </button>
 
+                                            </div>
+
+                                            <div class="quit-button">
+                                                <button>
+                                                    Delete Event
+                                                </button>
+
+                                            </div>
                                         </div>
                                     }
 
@@ -211,12 +240,13 @@
                                     <i class="fa-solid fa-layer-group"></i>
                                     <p>@item.Category</p>
                                 </div>
-                                @if(item.IsOpen){
+                                @if(item.ExpireTime > DateTime.Now){
                                      <div class="quit-button">
-                                    
-                                        <button>
-                                            Quit
-                                        </button>
+
+                                        <form asp-action="Quit" method="post">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit">QUIT</button>
+                                        </form>
                                     
                                     </div>
                                 }
@@ -239,8 +269,6 @@
                 
             </div>
         </div>
-
-
         <div class="modal" id="myModal">
             <div class="overlay" id="close-by-overlay"></div>
             <div class="modal-content">

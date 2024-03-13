@@ -24,16 +24,16 @@
                     <li>
                         <a href="category">Category</a>
                         <ul class="dropdown">
-                            <li><a href="#">Aerobic</a></li>
-                            <li><a href="#">Badminton</a></li>
-                            <li><a href="#">Basketball</a></li>
-                            <li><a href="#">Bicycle</a></li>
-                            <li><a href="#">Football</a></li>
-                            <li><a href="#">Futsal</a></li>
-                            <li><a href="#">Skateboard</a></li>
-                            <li><a href="#">Swimming</a></li>
-                            <li><a href="#">Volleyball</a></li>
-                            <li><a href="#">Other</a></li>
+                            <li><a href="/event/category/Aerobic">Aerobic</a></li>
+                            <li><a href="/event/category/Badminton">Badminton</a></li>
+                            <li><a href="/event/category/Basketball">Basketball</a></li>
+                            <li><a href="/event/category/Bicycle">Bicycle</a></li>
+                            <li><a href="/event/category/Football">Football</a></li>
+                            <li><a href="/event/category/Futsal">Futsal</a></li>
+                            <li><a href="/event/category/Skateboard">Skateboard</a></li>
+                            <li><a href="/event/category/Swimming">Swimming</a></li>
+                            <li><a href="/event/category/Volleyball">Volleyball</a></li>
+                            <li><a href="/event/category/Other">Other</a></li>
                         </ul>
                     </li>
                     <li><a href="about_us">About Us</a></li>
@@ -49,16 +49,16 @@
                 <li>
                     <a href="category">Category</a>
                     <ul class="dropdown">
-                        <li><a href="#">Aerobic</a></li>
-                        <li><a href="#">Badminton</a></li>
-                        <li><a href="#">Basketball</a></li>
-                        <li><a href="#">Bicycle</a></li>
-                        <li><a href="#">Football</a></li>
-                        <li><a href="#">Futsal</a></li>
-                        <li><a href="#">Skateboard</a></li>
-                        <li><a href="#">Swimming</a></li>
-                        <li><a href="#">Volleyball</a></li>
-                        <li><a href="#">Other</a></li>
+                        <li><a href="/event/category/Aerobic">Aerobic</a></li>
+                        <li><a href="/event/category/Badminton">Badminton</a></li>
+                        <li><a href="/event/category/Basketball">Basketball</a></li>
+                        <li><a href="/event/category/Bicycle">Bicycle</a></li>
+                        <li><a href="/event/category/Football">Football</a></li>
+                        <li><a href="/event/category/Futsal">Futsal</a></li>
+                        <li><a href="/event/category/Skateboard">Skateboard</a></li>
+                        <li><a href="/event/category/Swimming">Swimming</a></li>
+                        <li><a href="/event/category/Volleyball">Volleyball</a></li>
+                        <li><a href="/event/category/Other">Other</a></li>
                     </ul>
                 </li>
                 <li><a asp-controller="Home" asp-action="Index">About Us</a></li>\
@@ -74,52 +74,7 @@
         </main>
     </div>
     <script>
-        /* $(document).ready(function () {
-            // Handle navigation links click event
-            $("nav ul li .aj").click(function (e) {
-                e.preventDefault(); // Prevent default link behavior
-
-                var linkId = $(this).attr('id'); // Get the ID of the clicked link
-
-                // Load content based on the clicked link
-                switch (linkId) {
-                    case 'event-link':
-                        loadNavigationBar('/Event/Index', 'page_event');
-                        break;
-                    case 'category-link':
-                        loadNavigationBar('/Category/Index', 'page_category');
-                        break;
-                    case 'aboutus-link':
-                        loadNavigationBar('/Home/Index', 'sub_aboutus');
-                        break;
-                    // Add more cases for other links as needed
-                }
-            });
-
-            // Function to load navigation bar
-            function loadNavigationBar(url, linkType) {
-                $.ajax({
-                    url: url,
-                    type: "GET",
-                    success: function (result) {
-                        if (linkType.substring(0, 3) === 'sub') {
-                            $("body").html(result);
-                            var targetId = linkType.substring(4);
-                            $('html, body').animate({
-                                scrollTop: $('#' + targetId).offset().top
-                            }, 10);
-                        } else {
-                            $("body").html(result);
-                        }
-                        
-                    },
-
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
-        });
+        
 
         const toggleBtn = document.querySelector('.toggle_btn')
         const toggleBtnIcon = document.querySelector('.toggle_btn i')
