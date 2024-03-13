@@ -10,7 +10,6 @@
         <form asp-action="Edit" method="post">
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.Amount)
-            <h1>@Model.IsOpen</h1>
             <button class="back-page">
                 <i class="fa-solid fa-chevron-left fa-2xl"></i>
             </button>
@@ -48,29 +47,30 @@
             </div>
         
         </form>
+        <div class="second-wrapper">
+            @if (Model.IsOpen == true)
+            {
+                <form asp-action="Close" method="post">
+                    <input type="hidden" name="id" value="@Model.Id">
+                    <input type="hidden" name="isOpen" value="false">
+                    <button type="submit" class="btn" id="btn-close" name="close" value="close">Close this Event</button>
+                </form>
+            }
+            else
+            {
+                <form asp-action="Open" method="post">
+                    <input type="hidden" name="id" value="@Model.Id">
+                    <input type="hidden" name="isOpen" value="true">
+                    <button type="submit" class="btn" id="btn-close" name="open" value="open">Open this Event</button>
+                </form>
+            }
 
-        @if (Model.IsOpen == true)
-        {
-            <form asp-action="Close" method="post">
+            <form asp-action="Delete" method="post">
                 <input type="hidden" name="id" value="@Model.Id">
-                <input type="hidden" name="isOpen" value="false">
-                <button type="submit" class="btn" id="btn-close" name="close" value="close">Close this Event</button>
+                <button type="submit" class="btn" id="btn-delete" name="delete" value="delete">Delete this Event</button>
             </form>
-        }
-        else
-        {
-            <form asp-action="Open" method="post">
-                <input type="hidden" name="id" value="@Model.Id">
-                <input type="hidden" name="isOpen" value="true">
-                <button type="submit" class="btn" id="btn-close" name="open" value="open">Open this Event</button>
-            </form>
-        }
-
-        <form asp-action="Delete" method="post">
-            <input type="hidden" name="id" value="@Model.Id">
-            <button type="submit" class="btn" id="btn-delete" name="delete" value="delete">Delete this Event</button>
-        </form>
         </div>
+</div>
 
 
 <script>
