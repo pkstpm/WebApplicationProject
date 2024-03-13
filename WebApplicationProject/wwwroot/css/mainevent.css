@@ -17,13 +17,16 @@
     text-decoration : underline;
 }
 #filter-content{
-    display : none;
+    z-index : 0;
+    display:none;
     flex-direction : column;
+    
 }
 
 .filter-container {
-    position: absolute;
-    right: 30%;
+    position : absolute;
+    top : 8.6%;
+    right : 0;
     background-color: rgb(107 114 128);
     border-radius: 1rem;
     display: flex;
@@ -39,7 +42,7 @@
 }
 
 .card-container {
-    padding-left: 100px;
+    padding-left: 170px;
     padding-top: 40px;
     scrollbar-width: thin;
     scrollbar-gutter: stable;
@@ -49,7 +52,7 @@
 }
 
 .card-container h1 {
-    padding-bottom : 20px;
+    
     color : white;
 }
 
@@ -63,16 +66,29 @@
     margin-bottom: 40px;
 }
 
+.card-close {
+    height: fit-content;
+    border-radius: 0.75rem; /* 12px */
+    background-color: white;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    transition: 1s;
+    margin-bottom: 40px;
+    opacity : 1;
+}
+
     
 
 .card-content{
     padding-left : 20px;
     padding-bottom : 20px;
+    margin-right : 20px;
 }
 
 .subject {
     display : flex;
     align-items : center;
+    justify-content : space-between;
+    padding-left : 10px;
     padding-top : 15px;
     padding-right : 15px;
 }
@@ -90,10 +106,14 @@
     cursor : pointer;
 }
 
-.pad {
-    padding-left:500px;
-    padding-right : 80px;
-}
+    .subject a {
+        font-size: 1.25rem; /* 20px */
+        line-height: 1.75rem; /* 28px */
+        font-weight: bold;
+        color : black;
+    }
+
+
 
 .detail-container{
     padding-top : 20px;
@@ -146,10 +166,12 @@
 .outofdate {
     padding-left: 550px;
     padding-bottom: 20px;
+    
 }
 
 .join-button {
     padding-left : 550px;
+    margin-right : 100px;
     padding-bottom : 20px;
 }
 
@@ -165,6 +187,7 @@
     position: sticky;
     top: 0px;
     overflow-y: scroll;
+    scrollbar-width : none;
     
 }
 
@@ -175,6 +198,7 @@
     border-color: black;
     overflow-y: auto;
     margin-bottom : 20px; 
+    
 }
 
     .userevent-content h1 {
@@ -205,12 +229,15 @@
     padding-bottom: 15px;
     padding-right : 15px;
     justify-content : space-between;
+    color : black;
 }
 
     .userevent-card-subject p {
-        padding-right : 110px;
+        
+        color : black;
 
     }
+
 
     .userevent-card-subject i {
         cursor : pointer;
@@ -222,9 +249,40 @@
     border-color: rgb(0 0 0);
 }
 
+.quit-button button {
+    border-radius: 9999px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 1rem; /* 20px */
+    line-height: 1rem; /* 28px */
+    background-color: rgb(239 68 68);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom : 15px;
+}
+
+.event-closed button {
+    border-radius: 9999px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 1rem; /* 20px */
+    line-height: 1rem; /* 28px */
+    background-color: rgb(168 162 158);
+    color: white;
+    border: none;
+    margin-bottom: 15px;
+}
+
 .pad-b-15{
     padding-bottom : 15px;
 }
+
+
 
 
 .modal, .overlay {
@@ -343,4 +401,72 @@
 
 .overflow-x-hidden {
     overflow-x: hidden;
+}
+
+a {
+    text-decoration : none;
+    color : black;
+}
+
+.create-event-container {
+    position : absolute;
+    right : 11%;
+    cursor : pointer;
+}
+
+    .create-event-container a {
+        display : flex;
+        align-items : center;
+        border-radius: 9999px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 14px;
+        padding-right: 14px;
+        font-size: 1rem; /* 20px */
+        line-height: 1rem; /* 28px */
+        background-color: rgba(155, 119, 236, 1);
+        color: white;
+        border: none;
+    }
+
+.width-full{
+    width:100%;
+}
+
+.gap-4{
+    gap : 4px;
+}
+
+.h-fit{
+    height : fit-content;
+}
+
+.relative{
+    position : relative;
+}
+
+@media screen and (max-width:768px){
+    .userevent-container{
+        display : none;
+    }
+
+    .card-container{
+        padding-left : 40px;
+    }
+
+    .card{
+        width : 700px;
+    }
+
+    .join-button{
+        margin-right : 0;
+    }
+
+    .create-event-container{
+        top : 8.6%;
+    }
+
+    .mainevent-container{
+        overflow-x : hidden;
+    }
 }

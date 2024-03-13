@@ -19,43 +19,59 @@
 
 <div >
     <div class="mainevent-container">
-        <div class="filter-container" id="filter-container">
-            <button id="filter-button">
-                FILTER
-            </button>
-            <div id="filter-content">
-                <button>
-                    Latest
-                </button>
-                <button>
-                    Oldest
-                </button>
-                <button>
-                    Maximum
-                </button>
-                <button>
-                    Minimum
-                </button>
-                <button>
-                    Date
-                </button>
+        
+        
+        <div class="card-container relative">
+            <div class="flex h-fit items-center justify-between">
+                <h1>
+                    EVENTS
+                </h1>
+                <div class="flex items-center gap-4 ">
+                    <div class="create-event-container">
+                        <a asp-controller="Event" asp-action="Create">Create Event</a>
+                    </div>
+                    <div class="filter-container " id="filter-container">
+                        <button id="filter-button">
+                            FILTER
+                        </button>
+                        <div id="filter-content">
+                            <button>
+                                Latest
+                            </button>
+                            <button>
+                                Oldest
+                            </button>
+                            <button>
+                                Maximum
+                            </button>
+                            <button>
+                                Minimum
+                            </button>
+                            <button>
+                                Date
+                            </button>
+                        </div>
+                    </div>
+                    
+                </div>
+                
             </div>
-        </div>
-        <div class="card-container">
-            <h1 >
-                EVENTS
-            </h1>
-            @if (Model.OtherEvents != null)
-            {
+            
+
                 @foreach (var item in Model.OtherEvents)
             {
-                <div class="card">
-                <div class="card-content">
+
+                    <div class="card">
+                <div class="card-content ">
                     <div class="subject">
-                        <a asp-action="Detail" asp-controller="Event" asp-route-Id="@item.Id">@item.Title</a>                      
-                        <i class="fa-solid fa-user"></i>
-                            <p>@item.Amount / @item.Capacity</p>
-                        <i class="fa-solid fa-address-card pad"></i>
+                        <a asp-action="Detail" asp-controller="Event" asp-route-Id="@item.Id">@item.Title</a>
+
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-user pad"></i>
+                                <p>@item.Amount / @item.Capacity</p>
+                                </div>
+
+                                
                     </div>
                     <div class="detail-container">
                         <div class="detail-content">
@@ -71,7 +87,7 @@
                     </div>
                     <div class="detail-content pad-10">
                         <i class="fa-solid fa-clock"></i>
-                        <p>19.00 - 21.00</p>
+                            <p>@item.ExpireTime</p>
                     </div>
                         @if (SignInManager.IsSignedIn(User) && item.IsOpen)
                         {
@@ -87,20 +103,18 @@
                         {
                                 <div class="outofdate">
                                     
-                                        <button >OUT OF DATE</button>
+                                        <button >Event Closed</button>
                                     
 
                                 </div>
                         }
                         
+                    </div>
                 </div>
-            </div>
-                }
+                
             }
-            else
-            {
-                <h1>No event Yet!</h1>
-            }
+           
+           
             
             
         </div>
@@ -155,29 +169,52 @@
                 @foreach (var item in Model.JoinedEvents)
                 {
                     <div class="userevent-card">
-                    <div class="userevent-card-content">
-                        <div class="userevent-card-subject">
-                            <div>
-                                    <p>@item.Title</p>
-                            </div>
+                        <div class="userevent-card-content">
+                            <div class="userevent-card-subject">
                             
+                                    <p>@item.Title</p>
+                            
+                                <div class="flex items-center gap-4">
+                                    <i class="fa-solid fa-user pad"></i>
+                                    <p >@item.Amount / @item.Capacity</p>
+                                </div>
 
-                        </div>
-                        <div class="userevent-card-detail">
-                            <div class="detail-content pad-b-15">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                    <p>@item.ActivityTime</p>
                             </div>
-                            <div class="detail-content pad-b-15">
+                            <div class="userevent-card-detail">
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <p>@item.ActivityTime</p>
+                                </div>
+                                <div class="detail-content pad-b-15">
                                 <i class="fa-solid fa-house-chimney"></i>
                                     <p>@item.Location</p>
-                            </div>
-                            <div class="detail-content pad-b-15">
+                                </div>
+                                <div class="detail-content pad-b-15">
                                 <i class="fa-solid fa-clock"></i>
-                                <p>19.00 - 21.00</p>
-                            </div>
-                        </div>
+                                <p>@item.ExpireTime</p>
+                                </div>
+                                @if(item.IsOpen){
+                                     <div class="quit-button">
+                                    <form>
+                                        <button>
+                                            Quit
+                                        </button>
+                                    </form>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="event-closed">
 
+                                        <button>
+                                            Event Closed
+                                        </button>
+
+                                    </div>
+                                }
+
+                            </div>
+                        
                     </div>
                 </div>
                 }
@@ -249,35 +286,20 @@
 </div>
 
 
+
+
     <script>
+            
 
-       
+            document.getElementById("filter-container").addEventListener("mouseover", function () {
+                
+                document.getElementById("filter-content").style.display = "flex";
 
-        function openModal(title) {
-            document.getElementById('onpenModal').addEventListener('click', function () {
-                document.getElementById('myModal').style.display = 'block';
-            });
-
-
-            document.getElementById('onpenModal').addEventListener('click', function () {
-                document.getElementById('myModal').style.display = 'block';
-            });
-
-            document.getElementById('closeModalButton').addEventListener('click', function () {
-                document.getElementById('myModal').style.display = 'none';
-            });
-
-            document.getElementById('close-by-overlay').addEventListener('click', function () {
-                document.getElementById('myModal').style.display = 'none';
-            });
-
-            document.getElementById('filter-container').addEventListener('mouseover', function () {
-                document.getElementById('filter-content').style.display = 'flex';
             });
 
             document.getElementById('filter-container').addEventListener('mouseleave', function () {
                 document.getElementById('filter-content').style.display = 'none';
             });
-        }
+        
     </script>
 
