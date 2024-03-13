@@ -10,12 +10,18 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<link rel="stylesheet" href="~/css/mainevent.css" asp-append-version="true" />
-<link href="~/font-awesome/css/all.css" rel="stylesheet" />
-<link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
+@section Styles{
+    <link rel="stylesheet" href="~/css/mainevent.css" asp-append-version="true" />
+    <link href="~/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
+}
 
-
-
+@if (ViewBag.AlertMessage != null)
+{
+    <div id="alertMessage" style="display: none;">
+        @ViewBag.AlertMessage
+    </div>
+}
 
 <div >
     <div class="mainevent-container">
@@ -57,6 +63,7 @@
                 
             </div>
             
+
 
                 @foreach (var item in Model.OtherEvents)
             {
@@ -288,6 +295,7 @@
 
 
 
+
     <script>
             
 
@@ -300,6 +308,15 @@
             document.getElementById('filter-container').addEventListener('mouseleave', function () {
                 document.getElementById('filter-content').style.display = 'none';
             });
-        
+
+        }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var alertMessage = document.getElementById('alertMessage');
+        if (alertMessage != null) {
+                alert(alertMessage.innerText);
+        }
+    });
+
     </script>
 

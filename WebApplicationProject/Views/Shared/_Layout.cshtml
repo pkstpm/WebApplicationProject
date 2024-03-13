@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
@@ -18,11 +19,12 @@
                 <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="Logo"> BESTON </a>
             </div>
             <ul>
-                <li><a href="#" id="event-link">Event</a></li>
-                <li><a href="#" id="category-link">Category</a></li>
-                <li><a href="#" id="aboutus-link">About Us</a></li>
+                <li><a href="#" class="aj" id="event-link">Event</a></li>
+                <li><a href="#" class="aj" id="category-link">Category</a></li>
+                <li><a href="#" class="aj" id="aboutus-link">About Us</a></li>
                 <partial name="_LoginPartial.cshtml" />
             </ul>
+            
         </nav>
 
     </header>
@@ -34,7 +36,7 @@
     <script>
         $(document).ready(function () {
             // Handle navigation links click event
-            $("nav ul li a").click(function (e) {
+            $("nav ul li .aj").click(function (e) {
                 e.preventDefault(); // Prevent default link behavior
 
                 var linkId = $(this).attr('id'); // Get the ID of the clicked link
@@ -42,28 +44,36 @@
                 // Load content based on the clicked link
                 switch (linkId) {
                     case 'event-link':
-                        loadNavigationBar('/Event/Index');
+                        loadNavigationBar('/Event/Index', 'page_event');
                         break;
                     case 'category-link':
-                        loadNavigationBar('/Category/Index');
+                        loadNavigationBar('/Category/Index', 'page_category');
                         break;
                     case 'aboutus-link':
-                        loadNavigationBar('/About/Index');
+                        loadNavigationBar('/Home/Index', 'sub_aboutus');
                         break;
-                    case 'Login':
-                        loadNavigationBar('/Identity/Account/Login');
                     // Add more cases for other links as needed
                 }
             });
 
             // Function to load navigation bar
-            function loadNavigationBar(url) {
+            function loadNavigationBar(url, linkType) {
                 $.ajax({
                     url: url,
                     type: "GET",
                     success: function (result) {
-                        $("body").html(result);
+                        if (linkType.substring(0, 3) === 'sub') {
+                            $("body").html(result);
+                            var targetId = linkType.substring(4);
+                            $('html, body').animate({
+                                scrollTop: $('#' + targetId).offset().top
+                            }, 10);
+                        } else {
+                            $("body").html(result);
+                        }
+                        
                     },
+
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
                     }

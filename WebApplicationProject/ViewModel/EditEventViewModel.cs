@@ -17,6 +17,8 @@
 
         public int Capacity { get; set; }
 
+        public int Amount { get; set; }
+
         public bool IsOpen { get; set; }
     }
 }
