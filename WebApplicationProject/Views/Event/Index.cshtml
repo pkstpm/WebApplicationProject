@@ -149,6 +149,27 @@
                                         <i class="fa-solid fa-layer-group"></i>
                                         <p>@item.Category</p>
                                     </div>
+                                    @if (item.IsOpen)
+                                    {
+                                        <div class="open-button">
+
+                                            <button>
+                                                Event Open
+                                            </button>
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="event-closed">
+
+                                            <button>
+                                                Event Closed
+                                            </button>
+
+                                        </div>
+                                    }
+
                         </div>
 
                     </div>
