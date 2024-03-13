@@ -23,7 +23,7 @@
 
 .modal-content {
     position: absolute;
-    top: 70%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
@@ -200,7 +200,7 @@ ul li {
     }
 
     .modal-content{
-        top : 100%;
+        
         left : 50%;
     }
 }
