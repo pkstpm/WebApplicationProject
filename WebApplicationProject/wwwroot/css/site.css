@@ -71,6 +71,7 @@ header {
     display: flex;
     gap: 4rem;
     align-items : center;
+    margin-right : 0px;
 }
 
 
@@ -116,6 +117,7 @@ header {
     font-size: 1.5rem;
     cursor: pointer;
     display: none;
+    margin-right : 0px;
 }
 
 /* Dropdown Category */
@@ -183,7 +185,7 @@ ul li:hover ul.dropdown {
 
 
     .dropdown_menu.open {
-        height: 220px;
+        height: fit-content;
     }
 
 
