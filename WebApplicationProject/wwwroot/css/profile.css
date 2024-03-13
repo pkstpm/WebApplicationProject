@@ -351,11 +351,18 @@ input {
 .img-form input {
     position: absolute;
     left: -5%;
-    bottom: -30%;
+    bottom: -50%;
     transition: 1s;
     transition-duration: 700ms;
     
 }
+
+    .img-form label {
+        position: absolute;
+        width: 150%;
+        left: -2%;
+        bottom: -25%;
+    }
 
 input {
     transition: 1s;
@@ -365,7 +372,7 @@ input {
     .img-form button {
         position: absolute;
         left: 19%;
-        bottom: -55%;
+        bottom: -75%;
         border-radius: 9999px;
         padding-top: 8px;
         padding-bottom: 8px;
