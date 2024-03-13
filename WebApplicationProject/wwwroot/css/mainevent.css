@@ -451,6 +451,10 @@ a {
     gap : 4px;
 }
 
+.gap-8{
+    gap : 8px;
+}
+
 .h-fit{
     height : fit-content;
 }
