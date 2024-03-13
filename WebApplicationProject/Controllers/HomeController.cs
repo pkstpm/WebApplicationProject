@@ -15,6 +15,18 @@ namespace WebApplicationProject.Controllers
 
         public IActionResult Index()
         {
+            if (TempData["JoinAlert"] != null)
+            {
+                ViewBag.AlertMessage = TempData["JoinAlert"];
+            }
+            else if (TempData["DeleteAlert"] != null)
+            {
+                ViewBag.AlertMessage = TempData["DeleteAlert"];
+            }
+            else if (TempData["EditAlert"] != null)
+            {
+                ViewBag.AlertMessage = TempData["EditAlert"];
+            }
             return View();
         }
 

@@ -46,7 +46,6 @@ namespace WebApplicationProject.Controllers
                 return BadRequest("User not found");
             }
 
-            ViewBag.AlertMessage = TempData["JoinAlert"];
             var myEventsQuery = _context.Events.Where(e => e.UserID == user.Id).OrderByDescending(e => e.IsOpen);
             var joinedEventsQuery = _context.Events.Where(e => e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin)).OrderByDescending(e => e.IsOpen);
             var otherEventsQuery = _context.Events.Where(e => e.UserID != user.Id && !e.UserEvents.Any(ue => ue.UserID == user.Id && ue.IsJoin)).OrderByDescending(e => e.IsOpen);
@@ -102,7 +101,7 @@ namespace WebApplicationProject.Controllers
                 ViewBag.AlertMessage = TempData["CreateAlert"];
 
             }
-            if (TempData["JoinAlert"] != null)
+            else if (TempData["JoinAlert"] != null)
             {
                 ViewBag.AlertMessage = TempData["JoinAlert"];
             }
@@ -168,8 +167,7 @@ namespace WebApplicationProject.Controllers
                     }
                     throw new Exception("Can't find User");
                 }
-
-                throw new Exception("Model is wrong");
+                return View(model);
             }
 
             return RedirectToPage("/Account/Login", new { area = "Identity" });
@@ -232,8 +230,9 @@ namespace WebApplicationProject.Controllers
                             @event.Capacity = viewmodel.Capacity;
 
                             await _context.SaveChangesAsync();
+                            TempData["EditAlert"] = "Edit " + @event.Title + " Success!!";
 
-                            return Content("555s");
+                            return RedirectToAction("Index", "Home");
                         }
                     }
                     throw new Exception("Can't find Event");
@@ -264,6 +263,8 @@ namespace WebApplicationProject.Controllers
                                 @event.IsOpen = false;
 
                                 await _context.SaveChangesAsync();
+
+                                TempData["CloseAlert"] = "Close " + @event.Title + "Success!!";
 
                                 return RedirectToAction("Index", "Event", new { id = Id });
                             }
@@ -363,6 +364,7 @@ namespace WebApplicationProject.Controllers
             var @event = await _context.Events.FindAsync(Id);
             if (user.Id == @event.UserID)
             {
+                TempData["DeleteAlert"] = "Delete " + @event.Title + " Success!!";
                 _context.Events.Remove(@event);
                 var userevents = await _context.UserEvents.Where(ue => ue.EventID == @event.Id).ToListAsync();
                 _context.UserEvents.RemoveRange(userevents);
