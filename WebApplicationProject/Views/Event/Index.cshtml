@@ -122,7 +122,7 @@
                 {
                     @foreach (var item in Model.MyEvents)
                 {
-                    <div class="userevent-card">
+                    <div id="card_@item.Id" class="userevent-card">
                         <div class="userevent-card-content">
                             <div class="userevent-card-subject">
                                 <div class="flex gap-8">
@@ -166,7 +166,7 @@
 
                                             </div>
 
-                                            <div class="quit-button">
+                                            <div class="quit-button" onclick="DeleteEvent('@item.Id')">
                                                 <button>
                                                     Delete Event
                                                 </button>
@@ -187,7 +187,7 @@
 
                                             </div>
 
-                                            <div class="quit-button">
+                                            <div class="quit-button" onclick="DeleteEvent('@item.Id')">
                                                 <button>
                                                     Delete Event
                                                 </button>
@@ -218,10 +218,9 @@
                             <div class="userevent-card-subject">
 
                                 <p><a asp-action="Detail" asp-controller="Event" asp-route-Id="@item.Id">@item.Title</a></p>
-                            
+
                                 <div class="flex items-center gap-4">
                                     <i class="fa-solid fa-user pad"></i>
-                                    <p >@item.Amount / @item.Capacity</p>
                                 </div>
 
                             </div>
@@ -231,25 +230,26 @@
                                     <p>@item.ActivityTime</p>
                                 </div>
                                 <div class="detail-content pad-b-15">
-                                <i class="fa-solid fa-house-chimney"></i>
+                                    <i class="fa-solid fa-house-chimney"></i>
                                     <p>@item.Location</p>
                                 </div>
                                 <div class="detail-content pad-b-15">
-                                <i class="fa-solid fa-clock"></i>
-                                <p>@item.ExpireTime</p>
+                                    <i class="fa-solid fa-clock"></i>
+                                    <p>@item.ExpireTime</p>
                                 </div>
                                 <div class="detail-content pad-b-15">
                                     <i class="fa-solid fa-layer-group"></i>
                                     <p>@item.Category</p>
                                 </div>
-                                @if(item.ExpireTime > DateTime.Now){
-                                     <div class="quit-button">
+                                @if (item.ExpireTime > DateTime.Now)
+                                {
+                                    <div class="quit-button">
 
                                         <form asp-action="Quit" method="post">
                                             <input type="hidden" name="id" value="@item.Id" />
                                             <button type="submit">QUIT</button>
                                         </form>
-                                    
+
                                     </div>
                                 }
                                 else
@@ -264,9 +264,10 @@
                                 }
 
                             </div>
-                        
+
+                        </div>
                     </div>
-                </div>
+                        
                 }
                 
             </div>
@@ -350,6 +351,26 @@
                 document.getElementById('filter-content').style.display = 'none';
             });
 
+    function DeleteEvent(eventId) {
+        console.log("Deleting post with ID:", eventId);
+        var obj = document.getElementById("card_" + eventId);
+        if (obj) {
+            console.log("Element found, removing:", obj);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/Event/Delete/" + eventId);
+            xmlhttp.setRequestHeader("RequestVerificationToken", document.getElementsByName("__RequestVerificationToken")[0].value);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    obj.remove();
+                    console.log("Post deleted successfully.");
+                    console.log(xmlhttp.responseText);
+                }
+            }
+            xmlhttp.send();
+        } else {
+            console.error("Element with ID 'card_" + eventId + "' not found.");
+        }
+    }
 
     </script>
 
