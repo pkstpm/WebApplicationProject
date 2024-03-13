@@ -184,7 +184,6 @@
                 <h1>Joined Event(s)</h1>
                 @foreach (var item in Model.JoinedEvents)
                 {
-                    <div class="userevent-card">
                         <div class="userevent-card-content">
                             <div class="userevent-card-subject">
 
@@ -192,7 +191,6 @@
                             
                                 <div class="flex items-center gap-4">
                                     <i class="fa-solid fa-user pad"></i>
-                                    <p >@item.Amount / @item.Capacity</p>
                                 </div>
 
                             </div>
@@ -322,6 +320,24 @@
                 document.getElementById('filter-content').style.display = 'none';
             });
 
-
+    function DeleteObj(eventId) {
+        console.log("Deleting post with ID:", eventId);
+        var obj = document.getElementById("card_" + eventId);
+        if (obj) {
+            console.log("Element found, removing:", obj);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "/Event/Delete/?id=" + eventId);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    obj.remove();
+                    console.log("Post deleted successfully.");
+                    console.log(xmlhttp.responseText);
+                }
+            }
+            xmlhttp.send();
+        } else {
+            console.error("Element with ID 'card_" + eventId + "' not found.");
+        }
+    }
     </script>
 

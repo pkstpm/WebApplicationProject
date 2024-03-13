@@ -20,7 +20,7 @@
                     <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="Logo"> BESTON </a>
                 </div>
                 <ul class="links">
-                    <li><a href="event">Event</a></li>
+                    <li><a asp-controller="Event" asp-action="Index">Event</a></li>
                     <li>
                         <a href="category">Category</a>
                         <ul class="dropdown">
@@ -61,15 +61,9 @@
                         <li><a href="#">Other</a></li>
                     </ul>
                 </li>
-                <li><a href="about_us">About Us</a></li>
+                <li><a asp-controller="Home" asp-action="Index">About Us</a></li>\
                 <li><a href="#" class="action-btn">Get Started</a></li>
             </div>
-            <ul>
-                <li><a asp-controller="Event" asp-action="Index">Event</a></li>
-                <li><a asp-controller="" asp-action="">Category</a></li>
-                <li><a asp-controller="Home" asp-action="Index">About Us</a></li>
-                <partial name="_LoginPartial.cshtml" />
-            </ul>
             
         </nav>
 
