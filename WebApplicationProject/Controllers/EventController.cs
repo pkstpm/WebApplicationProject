@@ -117,9 +117,23 @@ namespace WebApplicationProject.Controllers
             {
                 ViewBag.AlertMessage = TempData["JoinAlert"];
             }
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                var @events = await _context.Events.Include(e => e.User).Include(e => e.UserEvents.Where(ue => ue.UserID == user.Id)).ThenInclude(ue => ue.User).FirstOrDefaultAsync(e => e.Id == Id);
+                if(@events != null)
+            {
+                    @events.Comments = await _context.Comments
+                    .Where(c => c.EventId == Id)
+                    .Include(c => c.User)
+                    .OrderByDescending(c => c.CreatedAt)
+                    .ToListAsync();
 
+                    return View(@events);
+                }
+
+            }
             var @event = await _context.Events.Include(e => e.User).Include(e => e.UserEvents).ThenInclude(ue => ue.User).FirstOrDefaultAsync(e => e.Id == Id);
-
             if (@event != null)
             {
                 @event.Comments = await _context.Comments
@@ -351,6 +365,11 @@ namespace WebApplicationProject.Controllers
             var user = await _userManager.GetUserAsync(User);
             var @event = await _context.Events.FindAsync(Id);
 
+            if (user == null)
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
+
             if (@event.ExpireTime > DateTime.Now)
             {
                 var userEvent = _context.UserEvents.FirstOrDefault(ue => ue.UserID == user.Id && ue.EventID == @event.Id);
@@ -365,7 +384,7 @@ namespace WebApplicationProject.Controllers
 
                         _context.SaveChanges();
 
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction(nameof(Detail), new { id = @event.Id });
                     }
                     return BadRequest("You already Join");
                 }
@@ -399,7 +418,7 @@ namespace WebApplicationProject.Controllers
                         await _userManager.UpdateAsync(user);
                         TempData["JoinAlert"] = "Join " + @event.Title + " Success!!";
 
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction(nameof(Detail), new { id = @event.Id });
                     }
                     throw new Exception("This Event is full");
                 }
@@ -429,7 +448,7 @@ namespace WebApplicationProject.Controllers
 
                 _context.SaveChanges();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Detail), new { id = @event.Id });
             }
 
             throw new Exception("This Event is close");

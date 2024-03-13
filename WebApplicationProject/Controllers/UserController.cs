@@ -83,7 +83,7 @@ namespace WebApplicationProject.Controllers
 
                     await _userManager.UpdateAsync(user);
 
-                    return Content("check");
+                    return RedirectToAction("Index");
 
                 }
             }
@@ -106,10 +106,10 @@ namespace WebApplicationProject.Controllers
 
                     var changePasswordResult = await _userManager.ChangePasswordAsync(user, viewmodel.OldPassword, viewmodel.NewPassword);
 
-                    return Content("Success");
+                    return RedirectToAction("Index");
                 }
             }
-            return Content("Failed");
+            return RedirectToAction("Index");
         }
     }
 
