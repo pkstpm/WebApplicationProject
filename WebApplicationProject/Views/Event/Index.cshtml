@@ -36,28 +36,7 @@
                     <div class="create-event-container">
                         <a asp-controller="Event" asp-action="Create">Create Event</a>
                     </div>
-                    <div class="filter-container " id="filter-container">
-                        <button id="filter-button">
-                            FILTER
-                        </button>
-                        <div id="filter-content">
-                            <button>
-                                Latest
-                            </button>
-                            <button>
-                                Oldest
-                            </button>
-                            <button>
-                                Maximum
-                            </button>
-                            <button>
-                                Minimum
-                            </button>
-                            <button>
-                                Date
-                            </button>
-                        </div>
-                    </div>
+                    
                     
                 </div>
                 
@@ -92,10 +71,18 @@
 
 
                     </div>
-                    <div class="detail-content pad-10">
-                        <i class="fa-solid fa-clock"></i>
-                            <p>@item.ExpireTime</p>
+                        <div class="detail-container">
+                            <div class="detail-content pad-10">
+                                <i class="fa-solid fa-clock"></i>
+                                <p>@item.ExpireTime</p>
+                            </div>
+                            <div class="detail-content">
+                                <i class="fa-solid fa-layer-group"></i>
+                                <p>@item.Category</p>
+                            </div>
                     </div>
+
+                    
                         @if (SignInManager.IsSignedIn(User) && item.IsOpen)
                         {
                            <div class="join-button">
@@ -158,6 +145,10 @@
                                 <i class="fa-solid fa-clock"></i>
                                 <p>@item.ActivityTime</p>
                             </div>
+                                    <div class="detail-content">
+                                        <i class="fa-solid fa-layer-group"></i>
+                                        <p>@item.Category</p>
+                                    </div>
                         </div>
 
                     </div>
@@ -200,13 +191,17 @@
                                 <i class="fa-solid fa-clock"></i>
                                 <p>@item.ExpireTime</p>
                                 </div>
+                                <div class="detail-content pad-b-15">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                    <p>@item.Category</p>
+                                </div>
                                 @if(item.IsOpen){
                                      <div class="quit-button">
-                                    <form>
+                                    
                                         <button>
                                             Quit
                                         </button>
-                                    </form>
+                                    
                                     </div>
                                 }
                                 else
