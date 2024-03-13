@@ -241,7 +241,14 @@ namespace WebApplicationProject.Controllers
                             @event.Location = viewmodel.Location;
                             @event.ActivityTime = viewmodel.ActivityTime;
                             @event.ExpireTime = viewmodel.ExpireTime;
+
+                            if (@event.Capacity < viewmodel.Capacity)
+                            {
+                                @event.IsOpen = true;
+                            }
+
                             @event.Capacity = viewmodel.Capacity;
+
 
                             await _context.SaveChangesAsync();
                             TempData["EditAlert"] = "Edit " + @event.Title + " Success!!";

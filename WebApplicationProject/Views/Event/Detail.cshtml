@@ -26,8 +26,17 @@
                 <p id="amount">@Model.Amount/@Model.Capacity</p>
             </div>
             <div class="flex items-center">
-                <button>
+                <button >
                     JOIN
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                </button>
+                <button class="quit">
+                    QUIT
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </button>
+                <button class="edit">
+                    EDIT
+                    <i class="fa-solid fa-pen"></i>
                 </button>
                 <p>Create by @Model.User.UserName</p>
             </div>
@@ -35,26 +44,32 @@
 
         </div>
         <div class="modal-card-detail">
-            <div class="flex justify-between">
-                <div>
-                    <div class="detail-content pad-b-15">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        <p>@Model.ActivityTime</p>
+            <div class="modal-card-detail-container ">
+                <div >
+                    <div class="modal-card-detail-content">
+                        <div class="detail-content pad-b-15">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <p>@Model.ActivityTime</p>
+                        </div>
+                        <div class="detail-content pad-b-15">
+                            <i class="fa-solid fa-house-chimney"></i>
+                            <p>@Model.Location</p>
+                        </div>
                     </div>
-                    <div class="detail-content pad-b-15">
-                        <i class="fa-solid fa-house-chimney"></i>
-                        <p>@Model.Location</p>
-                    </div>
-                    <div class="detail-content pad-b-15">
-                        <i class="fa-solid fa-clock"></i>
-                        <p>@Model.ExpireTime</p>
-                    </div>
-                    <div class="detail-content pad-b-15 pad-b-50">
-                        <i class="fa-solid fa-phone"></i>
-                        <p>@Model.Contact</p>
-                    </div>
+                    <div class ="modal-card-detail-content">
+                        <div class="detail-content pad-b-15">
+                            <i class="fa-solid fa-clock"></i>
+                            <p>@Model.ExpireTime</p>
+                        </div>
+                        <div class="detail-content pad-b-15 ">
+                            <i class="fa-solid fa-phone"></i>
+                            <p>@Model.Contact</p>
+                        </div>
+                   </div >
+                   
+                   
                 </div>
-                <div class="pad-b-15 "><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.8110131521726!2d100.77565737485553!3d13.72988888665966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d664988a1bedf%3A0xcc678f180e221cd0!2z4Liq4LiW4Liy4Lia4Lix4LiZ4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14Lie4Lij4Liw4LiI4Lit4Lih4LmA4LiB4Lil4LmJ4Liy4LmA4LiI4LmJ4Liy4LiE4Li44LiT4LiX4Lir4Liy4Lij4Lil4Liy4LiU4LiB4Lij4Liw4Lia4Lix4LiH!5e0!3m2!1sth!2sth!4v1709573033701!5m2!1sth!2sth" width="600" height="132" style="border-width: 2px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); border-radius: 0.75rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                <div class="pad-b-15 map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.8110131521726!2d100.77565737485553!3d13.72988888665966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d664988a1bedf%3A0xcc678f180e221cd0!2z4Liq4LiW4Liy4Lia4Lix4LiZ4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14Lie4Lij4Liw4LiI4Lit4Lih4LmA4LiB4Lil4LmJ4Liy4LmA4LiI4LmJ4Liy4LiE4Li44LiT4LiX4Lir4Liy4Lij4Lil4Liy4LiU4LiB4Lij4Liw4Lia4Lix4LiH!5e0!3m2!1sth!2sth!4v1709573033701!5m2!1sth!2sth" width="600" height="132" style="border-width: 2px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); border-radius: 0.75rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
             </div>
 
 

@@ -84,7 +84,17 @@
     border-top-width: 0px;
     border-left-width: 0px;
     border-right-width: 0px;
+    width : 120vh;
     
+}
+
+.username-in-edit-profile {
+    border-style: solid;
+    border-bottom-width: 2px;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+  
 }
 
 .border-b {
@@ -107,6 +117,17 @@
         border-radius : 0.5rem;
         cursor: pointer;
     }
+.username-in-edit-profile button {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 1rem; /* 20px */
+    line-height: 1rem; /* 28px */
+    background: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
 
     .username button:hover {
         
@@ -114,12 +135,19 @@
         
     }
 
+.username-in-edit-profile button:hover {
+    background-color: lightslategray;
+}
+
     .username button i  {
         
         
         padding-left : 6px;
         
     }
+.username-in-edit-profile button i {
+    padding-left: 6px;
+}
 
 .pad-t-15 {
     padding-top: 15px;
@@ -235,7 +263,7 @@
 .detail-content {
     display: flex;
     align-items: center;
-    padding-bottom : 15px;
+    padding-bottom : 0px;
 }
 
 .detail-content i{
@@ -351,16 +379,28 @@ input {
 .img-form input {
     position: absolute;
     left: -5%;
-    bottom: -30%;
+    bottom: -50%;
     transition: 1s;
     transition-duration: 700ms;
     
 }
 
+    .img-form label {
+        position: absolute;
+        width: 150%;
+        left: -2%;
+        bottom: -25%;
+    }
+
+input {
+    transition: 1s;
+    transition-duration: 700ms;
+}
+
     .img-form button {
         position: absolute;
         left: 19%;
-        bottom: -55%;
+        bottom: -75%;
         border-radius: 9999px;
         padding-top: 8px;
         padding-bottom: 8px;
@@ -376,6 +416,10 @@ input {
 
         .img-form button:hover {
             background-color: lightslategray;
+        }
+
+        .w-50{
+            width : 35vw;
         }
 
 .detail-submit {
@@ -424,6 +468,13 @@ input {
     display: flex;
     align-items: center;
     padding-bottom: 50px;
+    
+}
+
+.profile-detail-container {
+    display : flex;
+    justify-content : space-between; 
+    width : 35vw;
 }
 
 @media screen and (max-width:768px) {
@@ -468,5 +519,20 @@ input {
     .img-form button {
         left: 150%;
         bottom: 20%;
+    }
+
+    .img-form label {
+        position: absolute;
+        width: 120%;
+        left: 122%;
+        bottom: 80%;
+    }
+
+    .username{
+        width : 100vh;
+    }
+
+    .profile-detail-container{
+        width : 80vw;
     }
 }
