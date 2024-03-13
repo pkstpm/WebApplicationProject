@@ -10,9 +10,11 @@
         <form asp-action="Edit" method="post">
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.Amount)
-            <button class="back-page">
+        <a asp-action="Detail" asp-controller="Event" asp-route-Id="@Model.Id" class="back-page">
+                
                 <i class="fa-solid fa-chevron-left fa-2xl"></i>
-            </button>
+                
+            </a>
             <h1>Edit Your Event</h1>
             <div class="text-container">
                 <label asp-for="Title" for="Title">Title</label>
@@ -74,8 +76,7 @@
 
 
 <script>
-    console.log('@Model.IsOpen')
-    const minimum = @Model.Amount
+    const minimum = @Model.Amount;
     //createEvent part
     const add = document.getElementById("btn-up");
     const minus = document.getElementById("btn-down");
@@ -89,8 +90,9 @@
 
     if (minus != null) {
         minus.addEventListener("click", function () {
+            console.log(minimum)
             const currentValue = parseInt(count.value);
-            if (currentValue > minimum) {
+            if (currentValue > minimum && currentValue != 1) {
                 count.value = currentValue - 1;
             }
             else {
@@ -98,5 +100,9 @@
                 count.value = minimum
             }
         });
+    }
+
+    function goBack() {
+        window.history.back();
     }
 </script>
