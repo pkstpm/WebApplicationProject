@@ -27,7 +27,7 @@
             </div>
             <div class="flex-col w-100">
                 <div class="username-in-edit-profile flex justify-between align-item-center">
-                    <h2 class="">Ponza</h2>
+                    <h2 class="">@Model.FirstName</h2>
 
                     <button class="pad-b-5">
                         <a asp-controller="User" asp-action="Index">Profile<i class="fa-solid fa-user pad"></i></a>
@@ -67,28 +67,24 @@
                     </div>
                     <button type="submit" class="detail-submit">Submit</button>
                 </form>
-                <form >
-                    <div class=" w-100 ">
-                        <div class="flex  pad-t-15  w-100 ">
-                            <div class="detail-input pad-r-15">
-                                <h2>New Password</h2>
-                                <input />
-                            </div>
+                <form method="post" asp-action="ChangePassword">
+                    <div class="w-100">
+                        <div class="flex pad-t-15 w-100">
                             <div class="detail-input">
                                 <h2>Old Password</h2>
-                                <input />
-                            </div>
+                                <input type="password" name="OldPassword" />
 
+                            </div>
+                            <div class="detail-input pad-r-15">
+                                <h2>New Password</h2>
+                                <input type="password" name="NewPassword" />
+                               
+                            </div>
+                           
                         </div>
-                        <div class="detail-input">
-                            <h2>Confirm Password</h2>
-                            <input />
-                        </div>
-                        
                     </div>
                     <button type="submit" class="password-submit">Submit</button>
                 </form>
-
 
 
 

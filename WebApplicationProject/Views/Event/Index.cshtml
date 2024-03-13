@@ -65,7 +65,7 @@
 
                     </div>
                         <div class="detail-container">
-                            <div class="detail-content pad-10">
+                            <div class="detail-content ">
                                 <i class="fa-solid fa-clock"></i>
                                 <p>@item.ExpireTime</p>
                             </div>
@@ -76,7 +76,7 @@
                     </div>
 
                     
-                        @if (SignInManager.IsSignedIn(User) && item.IsOpen)
+                        @if (SignInManager.IsSignedIn(User) && item.IsOpen && item.ExpireTime > DateTime.Now)
                         {
                            <div class="join-button">
                                 <form asp-action="Join" method="post">
@@ -93,9 +93,18 @@
                                         <button >Event Closed</button>
                                     
 
-                                </div>
+                            </div>
                         }
-                        
+                        else if (!item.IsOpen)
+                        {
+                            <div class="outofdate">
+
+                                <button>Event Closed</button>
+
+
+                            </div>
+                        }
+
                     </div>
                 </div>
                 
@@ -113,7 +122,7 @@
                 {
                     @foreach (var item in Model.MyEvents)
                 {
-                    <div class="userevent-card">
+                    <div id="card_@item.Id" class="userevent-card">
                         <div class="userevent-card-content">
                             <div class="userevent-card-subject">
                                 <div class="flex gap-8">
@@ -148,22 +157,42 @@
                                     </div>
                                     @if (item.IsOpen)
                                     {
-                                        <div class="open-button">
+                                        <div class="flex gap-4">
+                                            <div class="open-button">
 
-                                            <button>
-                                                Event Open
-                                            </button>
+                                                <button>
+                                                    Event Open
+                                                </button>
 
+                                            </div>
+
+                                            <div class="quit-button" onclick="DeleteEvent('@item.Id')">
+                                                <button>
+                                                    Delete Event
+                                                </button>
+
+                                            </div>
                                         </div>
+
+                                        
                                     }
                                     else
                                     {
-                                        <div class="event-closed">
+                                        <div class="flex gap-4">
+                                            <div class="event-closed">
 
-                                            <button>
-                                                Event Closed
-                                            </button>
+                                                <button>
+                                                    Event Open
+                                                </button>
 
+                                            </div>
+
+                                            <div class="quit-button" onclick="DeleteEvent('@item.Id')">
+                                                <button>
+                                                    Delete Event
+                                                </button>
+
+                                            </div>
                                         </div>
                                     }
 
@@ -189,10 +218,9 @@
                             <div class="userevent-card-subject">
 
                                 <p><a asp-action="Detail" asp-controller="Event" asp-route-Id="@item.Id">@item.Title</a></p>
-                            
+
                                 <div class="flex items-center gap-4">
                                     <i class="fa-solid fa-user pad"></i>
-                                    <p >@item.Amount / @item.Capacity</p>
                                 </div>
 
                             </div>
@@ -202,24 +230,26 @@
                                     <p>@item.ActivityTime</p>
                                 </div>
                                 <div class="detail-content pad-b-15">
-                                <i class="fa-solid fa-house-chimney"></i>
+                                    <i class="fa-solid fa-house-chimney"></i>
                                     <p>@item.Location</p>
                                 </div>
                                 <div class="detail-content pad-b-15">
-                                <i class="fa-solid fa-clock"></i>
-                                <p>@item.ExpireTime</p>
+                                    <i class="fa-solid fa-clock"></i>
+                                    <p>@item.ExpireTime</p>
                                 </div>
                                 <div class="detail-content pad-b-15">
                                     <i class="fa-solid fa-layer-group"></i>
                                     <p>@item.Category</p>
                                 </div>
-                                @if(item.IsOpen){
-                                     <div class="quit-button">
-                                    
-                                        <button>
-                                            Quit
-                                        </button>
-                                    
+                                @if (item.ExpireTime > DateTime.Now)
+                                {
+                                    <div class="quit-button">
+
+                                        <form asp-action="Quit" method="post">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit">QUIT</button>
+                                        </form>
+
                                     </div>
                                 }
                                 else
@@ -234,15 +264,14 @@
                                 }
 
                             </div>
-                        
+
+                        </div>
                     </div>
-                </div>
+                        
                 }
                 
             </div>
         </div>
-
-
         <div class="modal" id="myModal">
             <div class="overlay" id="close-by-overlay"></div>
             <div class="modal-content">
@@ -322,6 +351,26 @@
                 document.getElementById('filter-content').style.display = 'none';
             });
 
+    function DeleteEvent(eventId) {
+        console.log("Deleting post with ID:", eventId);
+        var obj = document.getElementById("card_" + eventId);
+        if (obj) {
+            console.log("Element found, removing:", obj);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/Event/Delete/" + eventId);
+            xmlhttp.setRequestHeader("RequestVerificationToken", document.getElementsByName("__RequestVerificationToken")[0].value);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    obj.remove();
+                    console.log("Post deleted successfully.");
+                    console.log(xmlhttp.responseText);
+                }
+            }
+            xmlhttp.send();
+        } else {
+            console.error("Element with ID 'card_" + eventId + "' not found.");
+        }
+    }
 
     </script>
 

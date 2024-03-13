@@ -48,7 +48,7 @@
         
         </form>
         <div class="second-wrapper">
-            @if (Model.IsOpen == true)
+        @if (Model.IsOpen == true && Model.ExpireTime > DateTime.Now)
             {
                 <form asp-action="Close" method="post">
                     <input type="hidden" name="id" value="@Model.Id">
@@ -56,7 +56,7 @@
                     <button type="submit" class="btn" id="btn-close" name="close" value="close">Close this Event</button>
                 </form>
             }
-            else
+            else if (Model.IsOpen == false && Model.ExpireTime > DateTime.Now)
             {
                 <form asp-action="Open" method="post">
                     <input type="hidden" name="id" value="@Model.Id">
