@@ -117,6 +117,18 @@ namespace WebApplicationProject.Controllers
             {
                 ViewBag.AlertMessage = TempData["JoinAlert"];
             }
+            else if (TempData["EditAlert"] != null)
+            {
+                ViewBag.AlertMessage = TempData["EditAlert"];
+            }
+            else if (TempData["JoinAlert"] != null)
+            {
+                ViewBag.AlertMessage = TempData["JoinAlert"];
+            }
+            else if (TempData["QuitAlert"] != null)
+            {
+                ViewBag.AlertMessage = TempData["QuitAlert"];
+            }
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
@@ -187,7 +199,7 @@ namespace WebApplicationProject.Controllers
 
                         _context.Events.Add(@event);
                         await _context.SaveChangesAsync();
-                        TempData["CreateAlert"] = "Success "+ @event.Title +" Create!!";
+                        TempData["CreateAlert"] = "You have create \""+ @event.Title + "\"!!";
 
                         return RedirectToAction(nameof(Detail), new { id = @event.Id });
                     }
@@ -383,6 +395,7 @@ namespace WebApplicationProject.Controllers
                         @event.Amount += 1;
 
                         _context.SaveChanges();
+                        TempData["JoinAlert"] = "Join \"" + @event.Title + "\" Success!!";
 
                         return RedirectToAction(nameof(Detail), new { id = @event.Id });
                     }
@@ -416,7 +429,8 @@ namespace WebApplicationProject.Controllers
 
                         user.UserEvents.Add(userevent);
                         await _userManager.UpdateAsync(user);
-                        TempData["JoinAlert"] = "Join " + @event.Title + " Success!!";
+
+                        TempData["JoinAlert"] = "Join \"" + @event.Title + "\" Success!!";
 
                         return RedirectToAction(nameof(Detail), new { id = @event.Id });
                     }
@@ -447,6 +461,7 @@ namespace WebApplicationProject.Controllers
                 }
 
                 _context.SaveChanges();
+                TempData["QuitAlert"] = "Quit \"" + @event.Title + "\" Success!!";
 
                 return RedirectToAction(nameof(Detail), new { id = @event.Id });
             }
@@ -462,7 +477,7 @@ namespace WebApplicationProject.Controllers
             var @event = await _context.Events.FindAsync(Id);
             if (user.Id == @event.UserID)
             {
-                TempData["DeleteAlert"] = "Delete " + @event.Title + " Success!!";
+                TempData["DeleteAlert"] = "deleted successfully.";
                 _context.Events.Remove(@event);
                 var userevents = await _context.UserEvents.Where(ue => ue.EventID == @event.Id).ToListAsync();
                 _context.UserEvents.RemoveRange(userevents);
@@ -482,10 +497,14 @@ namespace WebApplicationProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddComment(Guid eventId, string detail)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             var @event = await _context.Events.Include(e => e.User).Include(e => e.UserEvents).ThenInclude(ue => ue.User).FirstOrDefaultAsync(e => e.Id == eventId);
             var user = await _userManager.GetUserAsync(User);
 
-            if (@event == null || user == null)
+            if (@event == null)
             {
                 return NotFound();
             }
@@ -495,18 +514,20 @@ namespace WebApplicationProject.Controllers
                 return RedirectToAction("Index", "Event", new { id = eventId });
             }
 
-            var comment = new Comment
-            {
-                UserID = user.Id,
-                EventId = eventId,
-                Detail = detail,
-                CreatedAt = DateTime.UtcNow
-            };
+            
+                var comment = new Comment
+                {
+                    UserID = user.Id,
+                    EventId = eventId,
+                    Detail = detail,
+                    CreatedAt = DateTime.UtcNow
+                };
+                _context.Comments.Add(comment);
+                await _context.SaveChangesAsync();
 
-            _context.Comments.Add(comment);
-            await _context.SaveChangesAsync();
+                return RedirectToAction("Detail", "Event", new { id = eventId });
+            
 
-            return RedirectToAction("Index", "Event", new { id = eventId });
         }
     }
 }

@@ -22,7 +22,7 @@
                 <ul class="links">
                     <li><a asp-controller="Event" asp-action="Index">Event</a></li>
                     <li>
-                        <a href="category">Category</a>
+                        <a href="">Category</a>
                         <ul class="dropdown">
                             <li><a href="/event/category/Aerobic">Aerobic</a></li>
                             <li><a href="/event/category/Badminton">Badminton</a></li>
@@ -36,7 +36,7 @@
                             <li><a href="/event/category/Other">Other</a></li>
                         </ul>
                     </li>
-                    <li><a href="about_us">About Us</a></li>
+                    <li><a href="#aboutus" onclick="scrollToAboutUs()">About Us</a></li>
                     <partial name="_LoginPartial.cshtml" />
                 </ul>
                 <div class=toggle_btn>
@@ -45,9 +45,9 @@
             </div>
 
             <div class="dropdown_menu open">
-                <li><a href="event">Event</a></li>
+                <li><a asp-controller="Event" asp-action="Index">Event</a></li>
                 <li>
-                    <a href="category">Category</a>
+                    <a href="">Category</a>
                     <ul class="dropdown">
                         <li><a href="/event/category/Aerobic">Aerobic</a></li>
                         <li><a href="/event/category/Badminton">Badminton</a></li>
@@ -61,8 +61,8 @@
                         <li><a href="/event/category/Other">Other</a></li>
                     </ul>
                 </li>
-                <li><a href="about_us">About Us</a></li>
-                <li><a href="#" class="action-btn">Get Started</a></li>
+                <li><a href="#aboutus" onclick="scrollToAboutUs()">About Us</a></li>
+                <partial name="_LoginPartial.cshtml" />
             </div>
             
         </nav>
@@ -74,24 +74,29 @@
         </main>
     </div>
     <script>
-        
+        const toggleBtn = document.querySelector('.toggle_btn');
+        const toggleBtnIcon = document.querySelector('.toggle_btn i');
+        const dropDownMenu = document.querySelector('.dropdown_menu');
+        let isOpen = false;
 
-        const toggleBtn = document.querySelector('.toggle_btn')
-        const toggleBtnIcon = document.querySelector('.toggle_btn i')
-        const dropDownMenu = document.querySelector('.dropdown_menu')
-        let isOpen = false
+        function toggleMenu() {
+            isOpen = !isOpen;
+            dropDownMenu.style.display = isOpen ? "block" : "none";
+            toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+        }
+        function handleResize() {
+            if (window.innerWidth > 728) {
+                dropDownMenu.style.display = "none";
+                isOpen = false;
+                toggleBtnIcon.classList = 'fa-solid fa-bars';
+            }
+        }
+        toggleBtn.onclick = toggleMenu;
+        window.addEventListener('resize', handleResize);
 
-        toggleBtn.onclick = function () {
-            isOpen = !isOpen
-            isOpen == true
-                ? dropDownMenu.style.display = "block"
-                : dropDownMenu.style.display = "none"
-
-
-            toggleBtnIcon.classList = isOpen
-                ? 'fa-solid fa-xmark'
-                : 'fa-solid fa-bars'
-        };
+        function scrollToAboutUs() {
+            window.location.href = '/home/index#aboutus';
+        }
     </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

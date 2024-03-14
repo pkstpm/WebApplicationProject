@@ -49,13 +49,12 @@
 
                         if (Model.UserID == UserManager.GetUserId(User))
                         {
-                            <form asp-action="Edit" method="post">
-                                <input type="hidden" name="id" value="@Model.Id" />
+                            <a asp-action="Edit" asp-controller="Event" asp-route-Id="@Model.Id">
                                 <button class="edit">
                                     EDIT
                                     <i class="fa-solid fa-pen"></i>
                                 </button>
-                            </form>
+                            </a>
                         }
 
                         else if (!userIsMember)
@@ -172,18 +171,10 @@
 </div>
 
 <script>
-    // Wait for the document to be fully loaded
     document.addEventListener("DOMContentLoaded", function () {
-        // Get the iframe element
-        var iframe = document.querySelector('iframe');
-
-        // Add event listener for the iframe load event
-        iframe.onload = function () {
-            // Show the alert message after the iframe has loaded
-            var alertMessage = document.getElementById('alertMessage');
-            if (alertMessage != null) {
-                alert(alertMessage.innerText);
-            }
-        };
+        var alertMessage = document.getElementById('alertMessage');
+        if (alertMessage != null) {
+            alert(alertMessage.innerText);
+        }
     });
 </script>
