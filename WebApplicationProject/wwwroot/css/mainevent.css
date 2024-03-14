@@ -121,7 +121,6 @@
     padding-bottom : 20px;
     display : flex;
     width : 500px;
-    justify-content : space-between;
 
 }
 
@@ -129,6 +128,10 @@
     display : flex;
     align-items : center;
     gap : 10px;
+}
+
+.m-px{
+    margin-left : 200px;
 }
 
 .pad-10 {
