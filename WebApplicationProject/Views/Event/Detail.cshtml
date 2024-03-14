@@ -171,18 +171,10 @@
 </div>
 
 <script>
-    // Wait for the document to be fully loaded
     document.addEventListener("DOMContentLoaded", function () {
-        // Get the iframe element
-        var iframe = document.querySelector('iframe');
-
-        // Add event listener for the iframe load event
-        iframe.onload = function () {
-            // Show the alert message after the iframe has loaded
-            var alertMessage = document.getElementById('alertMessage');
-            if (alertMessage != null) {
-                alert(alertMessage.innerText);
-            }
-        };
+        var alertMessage = document.getElementById('alertMessage');
+        if (alertMessage != null) {
+            alert(alertMessage.innerText);
+        }
     });
 </script>
